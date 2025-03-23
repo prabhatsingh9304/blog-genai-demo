@@ -10,3 +10,4 @@ pytrends==4.9.2
 googlesearch-python==1.2.3
 numpy==1.24.3
 tiktoken==0.5.2
+playwright
