@@ -1,7 +1,7 @@
 #RAG
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.docstore.document import Document
 import os
@@ -10,52 +10,6 @@ import warnings
 
 # Suppress UserWarnings
 warnings.filterwarnings("ignore", category=UserWarning)
-
-# **Moved `SafeHuggingFaceEmbeddings` above `RAGSystem`**
-class SafeHuggingFaceEmbeddings:
-    """Wrapper around HuggingFaceEmbeddings to handle compatibility issues between versions"""
-    
-    def __init__(self, model_name="sentence-transformers/all-MiniLM-L6-v2"):
-        self.model_name = model_name
-        try:
-            # Try different initialization methods
-            try:
-                # First try with encode_kwargs
-                self.embeddings = HuggingFaceEmbeddings(
-                    model_name=model_name,
-                    encode_kwargs={"normalize_embeddings": True}
-                )
-                setattr(self.embeddings, 'show_progress', False)  # Disable progress bar
-            except (TypeError, AttributeError):
-                # If that fails, try without extra params
-                self.embeddings = HuggingFaceEmbeddings(
-                    model_name=model_name
-                )
-                setattr(self.embeddings, 'show_progress', False)  
-        except Exception as e:
-            print(f"Error initializing embeddings: {e}")
-            # Fall back to a minimal initialization
-            from sentence_transformers import SentenceTransformer
-            self.model = SentenceTransformer(model_name)
-            # Manually add a dummy attribute to mimic show_progress
-            self.model.show_progress = False
-            self.embeddings = self  # Use self as fallback
-            
-    def embed_documents(self, texts):
-        """Embed documents using the underlying model"""
-        try:
-            return self.embeddings.embed_documents(texts)
-        except AttributeError:
-            # If the langchain wrapper fails, use sentence_transformers directly
-            return [self.model.encode(text) for text in texts]
-            
-    def embed_query(self, text):
-        """Embed a query using the underlying model"""
-        try:
-            return self.embeddings.embed_query(text)
-        except AttributeError:
-            # If the langchain wrapper fails, use sentence_transformers directly
-            return self.model.encode(text)
 
 # Define RAGSystem class
 class RAGSystem:
@@ -113,14 +67,38 @@ class RAGSystem:
             chunk_overlap (int): Overlap between chunks
             auto_initialize (bool): Whether to automatically initialize the system
         """
-        # Use local embeddings instead of OpenAI
-        if embedding_model:
-            self.embeddings = embedding_model
-        else:
-            # Use our safe wrapper
-            self.embeddings = SafeHuggingFaceEmbeddings(
-                model_name="sentence-transformers/all-MiniLM-L6-v2"
-            )
+        # Get API key - support both OpenAI and OpenRouter
+        api_key = os.getenv("OPENAI_API_KEY") or os.getenv("OPENROUTER_API_KEY")
+        if not api_key:
+            raise ValueError("Either OPENAI_API_KEY or OPENROUTER_API_KEY environment variable is required")
+            
+        try:
+            # Initialize OpenAI embeddings with config
+            if embedding_model:
+                self.embeddings = embedding_model
+            elif os.getenv("OPENAI_API_KEY"):
+                # Using OpenAI directly with explicit model name
+                self.embeddings = OpenAIEmbeddings(
+                    model="text-embedding-ada-002"  # Valid model name
+                )
+            elif os.getenv("OPENROUTER_API_KEY"):
+                # Using OpenRouter for embeddings
+                self.embeddings = OpenAIEmbeddings(
+                    model="text-embedding-ada-002",  # OpenRouter compatible model
+                    openai_api_key=api_key,
+                    openai_api_base="https://openrouter.ai/api/v1",
+                    default_headers={
+                        "HTTP-Referer": "https://blog-generation-app.com",
+                        "X-Title": "Blog Generation with RAG"
+                    }
+                )
+            else:
+                raise ValueError("No API keys available")
+        except Exception as e:
+            print(f"Warning: Error initializing embeddings: {e}")
+            print("Using fallback default content instead of vector search")
+            # Create a simple dictionary-based fallback
+            self.use_fallback = True
         self.db_path = db_path
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
@@ -241,13 +219,33 @@ class RAGSystem:
         Returns:
             str: Formatted content from relevant documents
         """
-        # Get similar documents
-        relevant_docs = self.similarity_search(query, k=k)
+        # Check if we're using fallback mode
+        if hasattr(self, 'use_fallback') and self.use_fallback:
+            # Simple keyword matching as fallback
+            query_terms = set(query.lower().split())
+            matched_content = []
+            
+            for content in self.DEFAULT_CONTENT:
+                content_terms = set(content.lower().split())
+                if any(term in content_terms for term in query_terms):
+                    matched_content.append(content)
+            
+            # If no matches, return all default content
+            if not matched_content:
+                matched_content = self.DEFAULT_CONTENT
+                
+            return "\n\n".join(matched_content[:k])
         
-        # Format the content for inclusion in the prompt
-        formatted_content = "\n\n".join([doc.page_content for doc in relevant_docs])
-        
-        return formatted_content
+        try:
+            # Standard vector search if embeddings are working
+            relevant_docs = self.similarity_search(query, k=k)
+            formatted_content = "\n\n".join([doc.page_content for doc in relevant_docs])
+            return formatted_content
+        except Exception as e:
+            print(f"Error during vector search: {e}")
+            print("Falling back to default content")
+            # Return default content if vector search fails
+            return "\n\n".join(self.DEFAULT_CONTENT[:k])
 
 # Instantiate a global instance for backward compatibility
 _default_rag_system = RAGSystem()

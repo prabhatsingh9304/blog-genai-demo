@@ -30,13 +30,10 @@ def main():
     # Initialize the tools
     tools = BlogTools(default_output_dir=args.output_dir)
     
-    # Determine whether to use OpenRouter or OpenAI directly
-    use_openrouter = not args.openai
-    
     # List trending keywords if requested
     if args.list_keywords:
         # Create agent to access keywords
-        agent = BlogAgent(model_name=args.model, use_openrouter=use_openrouter, temperature=args.temperature)
+        agent = BlogAgent(model_name=args.model, temperature=args.temperature)
         keywords = agent.get_trending_keywords()
         print("Available trending keywords:")
         for i, keyword in enumerate(keywords, 1):
@@ -64,7 +61,7 @@ def main():
         return
     
     print(f"Generating blog post on topic: {args.topic}")
-    print(f"Using model: {args.model} via {'OpenRouter' if use_openrouter else 'OpenAI'}")
+    print(f"Using model: {args.model}")
     print(f"Temperature: {args.temperature}")
     print("This might take a minute or two...")
     
@@ -75,7 +72,6 @@ def main():
     agent = BlogAgent(
         model_name=args.model, 
         rag_system=rag_system, 
-        use_openrouter=use_openrouter,
         temperature=args.temperature
     )
     

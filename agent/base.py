@@ -10,43 +10,36 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from rag.rag import RAGSystem
 
 class BlogAgent:
-    def __init__(self, model_name="gpt-4o", rag_system=None, use_openrouter=True, temperature=0.7):
+    def __init__(self, model_name="gpt-4", rag_system=None, temperature=0.7):
         """
-        Initialize the BlogAgent with a language model and RAG system
-        
-        Args:
-            model_name (str): The model to use (default: "gpt-4o")
-            rag_system (RAGSystem): An instance of the RAG system
-            use_openrouter (bool): Whether to use OpenRouter API for accessing models
-            temperature (float): Temperature for generation (default: 0.7)
+        Initialize with OpenAI API
         """
-        self.rag_system = rag_system or RAGSystem()
+        # Get API key - support both OpenAI and OpenRouter
+        api_key = os.getenv("OPENAI_API_KEY") or os.getenv("OPENROUTER_API_KEY")
+        if not api_key:
+            raise ValueError("Either OPENAI_API_KEY or OPENROUTER_API_KEY environment variable is required")
         
-        # Configure LLM with OpenRouter or OpenAI
-        if use_openrouter:
-            openrouter_api_key = os.getenv("OPENROUTER_API_KEY")
-            
-            if not openrouter_api_key:
-                raise ValueError("OPENROUTER_API_KEY environment variable is required")
-            
-            # Define client parameters once
-            client_params = {
-                "openai_api_key": openrouter_api_key,
-                "openai_api_base": "https://openrouter.ai/api/v1",
-                "default_headers": {
-                    "HTTP-Referer": "https://blog-generation-app.com",
-                    "X-Title": "Blog Generation with RAG"
-                }
-            }
-            
+        # Check if using OpenRouter
+        if os.getenv("OPENROUTER_API_KEY") and not os.getenv("OPENAI_API_KEY"):
+            # Using OpenRouter
             self.llm = ChatOpenAI(
                 model_name=model_name,
                 temperature=temperature,
-                **client_params
+                openai_api_key=api_key,
+                openai_api_base="https://openrouter.ai/api/v1",
+                default_headers={
+                    "HTTP-Referer": "https://blog-generation-app.com",
+                    "X-Title": "Blog Generation with RAG"
+                }
             )
         else:
-            # Standard OpenAI configuration
-            self.llm = ChatOpenAI(model_name=model_name, temperature=temperature)
+            # Using OpenAI directly
+            self.llm = ChatOpenAI(
+                model_name=model_name,
+                temperature=temperature
+            )
+        
+        self.rag_system = rag_system or RAGSystem()
         
         # Make a list of trending keywords
         self.trending_keywords = [
@@ -173,7 +166,7 @@ class BlogAgent:
         }
 
 # Instantiate a default agent for backward compatibility with OpenRouter
-default_agent = BlogAgent(use_openrouter=True, temperature=0.7)
+default_agent = BlogAgent(temperature=0.7)
 
 # For backward compatibility - these functions call the default agent's methods
 def find_relevant_keyword(topic):
