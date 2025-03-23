@@ -177,9 +177,9 @@ class BlogAgent:
             topic (str): The topic to generate a blog about
             
         Returns:
-            dict: A dictionary containing the topic, relevant keyword, and generated content
+            dict: A dictionary containing the topic and generated content
         """
-        # Find the most relevant trending keyword
+        # Find the most relevant keyword from the topic itself
         relevant_keyword = self.find_relevant_keyword(topic)
         
         # Create system message with RAG content
@@ -193,7 +193,6 @@ class BlogAgent:
         
         return {
             "topic": topic,
-            "relevant_keyword": relevant_keyword,
             "content": blog_content.content
         }
 

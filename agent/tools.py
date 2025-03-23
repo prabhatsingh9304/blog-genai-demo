@@ -49,7 +49,6 @@ class BlogTools:
         # Add metadata to the blog content
         blog_content = f"""# {blog_data['topic']}
 
-*Related to: {blog_data['relevant_keyword']}*
 *Generated on: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}*
 
 {blog_data['content']}
@@ -62,7 +61,6 @@ class BlogTools:
         # Save metadata separately
         metadata = {
             "topic": blog_data["topic"],
-            "relevant_keyword": blog_data["relevant_keyword"],
             "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "filename": filename
         }
