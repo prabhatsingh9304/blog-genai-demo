@@ -14,40 +14,53 @@ class BlogAgent:
         """
         Initialize with OpenAI API
         """
-        # Get API key - support both OpenAI and OpenRouter
-        api_key = os.getenv("OPENAI_API_KEY") or os.getenv("OPENROUTER_API_KEY")
-        if not api_key:
-            raise ValueError("Either OPENAI_API_KEY or OPENROUTER_API_KEY environment variable is required")
+        # Get API key 
+        api_key = os.getenv("OPENAI_API_KEY", "").strip()
         
-        # Check if using OpenRouter
-        if os.getenv("OPENROUTER_API_KEY") and not os.getenv("OPENAI_API_KEY"):
-            # Using OpenRouter
+        if not api_key:
+            print("WARNING: No API key found. Using demo mode with mock responses.")
+            from langchain.llms.fake import FakeListLLM
+            responses = [
+                "Artificial Intelligence",
+                "This is a sample blog post about the topic. AI has transformed many industries including healthcare, finance, and education. It continues to evolve rapidly with new developments in machine learning and neural networks.",
+                "Machine Learning"
+            ]
+            self.llm = FakeListLLM(responses=responses)
+            
+        # Check if this is an OpenRouter API key
+        elif api_key.startswith("sk-or-v1-"):
+            print("Using OpenRouter API")
+            # Initialize LLM with OpenRouter API
             self.llm = ChatOpenAI(
                 model_name=model_name,
                 temperature=temperature,
                 openai_api_key=api_key,
-                openai_api_base="https://openrouter.ai/api/v1",
-                default_headers={
-                    "HTTP-Referer": "https://blog-generation-app.com",
-                    "X-Title": "Blog Generation with RAG"
-                }
+                openai_api_base="https://openrouter.ai/api/v1"
             )
         else:
-            # Using OpenAI directly
+            print("Using OpenAI API")
+            # Initialize LLM with OpenAI API
             self.llm = ChatOpenAI(
                 model_name=model_name,
-                temperature=temperature
+                temperature=temperature,
+                openai_api_key=api_key
             )
         
         self.rag_system = rag_system or RAGSystem()
         
-        # Make a list of trending keywords
-        self.trending_keywords = [
-            "Artificial Intelligence", "Machine Learning", "LLM Applications",
-            "ChatGPT", "Generative AI", "Neural Networks", "Natural Language Processing",
-            "Computer Vision", "Reinforcement Learning", "AI Ethics", "Data Science",
-            "Transformer Models", "Deep Learning", "Prompt Engineering", "RAG Systems"
-        ]
+        # Start with an empty list of trending keywords that will be populated dynamically
+        self.trending_keywords = []
+        
+        # Try to load trending keywords from blog/trends.py
+        try:
+            from blog.trends import get_trending_topics
+            self.trending_keywords = get_trending_topics(limit=15)
+            if not self.trending_keywords:  # If still empty, add a minimal set
+                self.trending_keywords = ["Technology", "Innovation", "Digital Transformation"]
+        except Exception as e:
+            print(f"Note: Could not load trending topics: {e}")
+            # Minimal fallback list if needed
+            self.trending_keywords = ["Technology", "Innovation", "Digital Transformation"]
         
         # Create a prompt template to find one relevant keyword
         self.keyword_prompt_template = PromptTemplate(
@@ -101,13 +114,28 @@ class BlogAgent:
             topic (str): The topic to find a relevant keyword for
             
         Returns:
-            str: The most relevant keyword from the trending keywords list
+            str: The most relevant keyword from the trending keywords list or derived from the topic
         """
-        response = self.keyword_chain.invoke({
-            "topic": topic,
-            "trending_keywords": self.trending_keywords
-        })
-        return response["text"].strip()
+        # If we have trending keywords, use the chain to find the most relevant
+        if self.trending_keywords:
+            response = self.keyword_chain.invoke({
+                "topic": topic,
+                "trending_keywords": self.trending_keywords
+            })
+            return response["text"].strip()
+        
+        # If no trending keywords are available, extract a keyword from the topic itself
+        # Try to get related topics from content analyzer
+        try:
+            from blog.content_analyzer import get_related_topics
+            related = get_related_topics(topic, limit=1)
+            if related:
+                return related[0]
+        except:
+            pass
+            
+        # If all else fails, use the topic as the keyword
+        return topic.strip()
 
     def create_system_message(self, topic, relevant_keyword):
         """
@@ -124,15 +152,19 @@ class BlogAgent:
         
         system_message = f"""
         You are an expert blog writer specializing in {relevant_keyword}.
-        Use the following reference information to create a concise blog post:
+        Use the following reference information to create a comprehensive blog post:
         
         {rag_content}
         
-        Write in a conversational tone. Structure with:
-        - Brief introduction (1 paragraph)
-        - 2-3 key points (1 paragraph each)
-        - Short conclusion (1 paragraph)
-        Keep total length under 500 words. Avoid technical jargon.
+        Write in a conversational yet authoritative tone. Structure with:
+        - Engaging introduction (1-2 paragraphs)
+        - 4-6 substantial key points with detailed explanations (2-3 paragraphs each)
+        - Examples, case studies, or data points to support your arguments
+        - Actionable insights or takeaways for the reader
+        - Strong conclusion summarizing the main points (1-2 paragraphs)
+        
+        Ensure the blog is AT LEAST 1,000 words. Use headings to organize content.
+        Balance depth with readability, using industry terminology appropriately.
         """
         
         return SystemMessage(content=system_message)

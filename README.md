@@ -163,3 +163,26 @@ print(f"Blog saved to: {filepath}")
 - Add blog formatting options or templates for different styles
 - Create custom embedding models and pass them to the `RAGSystem` constructor
 - Try different models available through OpenRouter
+
+## Trending Topics Analysis
+
+The system can use trending topics to make the blog content more relevant. It currently supports:
+
+1. **External APIs** - If you have API keys for NewsAPI or GNews, the system can fetch real trending topics:
+   - Set `NEWSAPI_KEY` and/or `GNEWS_API_KEY` environment variables
+
+2. **Local Content Analysis** - No API keys required, uses content-based analysis:
+   - Add the `--local-trends` flag to use this feature
+   - Works by analyzing semantic relevance to common topics in technology, business, health, and society
+
+### Using Local Trend Analysis
+
+```bash
+# Use local trend analysis (no external APIs)
+python example.py --topic "Artificial Intelligence" --local-trends
+
+# View trending topics from local analysis
+python example.py --list-keywords --local-trends
+```
+
+This feature replaces the previous dependency on Google Trends (pytrends) with a more robust solution that doesn't require external API keys.
