@@ -39,7 +39,8 @@ class RAGSystem:
         """
         # Get API key
         api_key = os.getenv("OPENAI_API_KEY", "").strip()
-        print(f"API Key: {api_key}")
+        # Don't print the actual API key for security reasons
+        print(f"API Key: {'*' * 8}...{api_key[-4:] if api_key else 'Not Set'}")
         
         # Set default to use fallback unless we confirm a working setup
         self.use_fallback = True

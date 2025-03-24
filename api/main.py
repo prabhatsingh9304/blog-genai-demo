@@ -57,7 +57,7 @@ class BlogResponse(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to Blog Generation API. Use /generate endpoint to create a blog."}
+    return {"message": "Welcome to Blog Generation"}
 
 @app.post("/generate", response_model=BlogResponse)
 async def generate_blog(request: BlogRequest):
@@ -120,7 +120,9 @@ if __name__ == "__main__":
         print("Warning: OPENAI_API_KEY environment variable is not set.")
         print("Using fallback content generation mode.")
     else:
+        # Don't print the actual API key - only that it's available
+        print(f"OpenAI API Key detected: {'*' * 8}...{api_key[-4:] if api_key else 'Not Set'}")
         print("Using OpenAI API key for both LLM responses and embeddings.")
     
-    # Run the API server
-    uvicorn.run("api.main:app", host="0.0.0.0", port=8000, reload=True)
+    # Run the API server with correct module path
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

@@ -11,7 +11,7 @@ import json
 load_dotenv()
 
 class BlogAgent:
-    def __init__(self, model_name="gpt-3.5-turbo", rag_system=None, temperature=0.7):
+    def __init__(self, model_name="gpt-4", rag_system=None, temperature=0.7):
         """
         Initialize with OpenAI API
         """

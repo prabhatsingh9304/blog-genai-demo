@@ -34,20 +34,6 @@ Or manually update the `.env` file:
 OPENAI_API_KEY=your-new-api-key-here
 ```
 
-### 4. Verify Your API Key and Access
-
-Check if your API key has GPT-4o access and sufficient quota:
-
-```bash
-python setup_api.py
-```
-
-Test the embedding API specifically:
-
-```bash
-python setup_api.py --test-embedding
-```
-
 ## Installation and Setup
 
 1. Clone the repository
