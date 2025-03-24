@@ -39,18 +39,13 @@ class RAGSystem:
         """
         # Get API key
         api_key = os.getenv("OPENAI_API_KEY", "").strip()
+        print(f"API Key: {api_key}")
         
         # Set default to use fallback unless we confirm a working setup
         self.use_fallback = True
         
-        if not api_key:
-            print("RAG System: No API key found")
-            print("Using fallback content matching instead of vector search")
-        # Check if using OpenRouter API key and use fallback mode since we don't support OpenRouter embeddings
-        elif api_key.startswith("sk-or-v1-"):
-            print("RAG System: OpenRouter API key detected")
-            print("NOTE: OpenRouter API keys can only be used for LLM calls, not for embeddings")
-            print("Using fallback content pattern matching instead of vector search")
+        if not api_key and not embedding_model:
+            print("RAG System: No API key found, using fallback content matching")
             self.use_fallback = True
         else:
             try:
@@ -58,14 +53,22 @@ class RAGSystem:
                 if embedding_model:
                     self.embeddings = embedding_model
                 else:
-                    # Using OpenAI embeddings
+                    # Use OpenAI embeddings if API key is available
                     print("RAG System: Using OpenAI for embeddings")
-                    self.embeddings = OpenAIEmbeddings(
-                        model="text-embedding-3-small",
-                        openai_api_key=api_key,
-                        dimensions=1536,  # Match ada-002 dimensions for backward compatibility
-                        headers={"Content-Type": "application/json"}
-                    )
+                    try:
+                        self.embeddings = OpenAIEmbeddings(
+                            model="text-embedding-3-small",
+                            openai_api_key=api_key,
+                            dimensions=1536,  # Match ada-002 dimensions for backward compatibility
+                            headers={"Content-Type": "application/json"}
+                        )
+                    except Exception as quota_error:
+                        if "quota" in str(quota_error).lower() or "429" in str(quota_error):
+                            print(f"Warning: OpenAI API quota exceeded. Using fallback mode.")
+                            self.use_fallback = True
+                            return
+                        else:
+                            raise
                     
                 # Test the embeddings to ensure they work
                 try:
@@ -78,9 +81,13 @@ class RAGSystem:
                         # If we got here without exception, disable fallback
                         self.use_fallback = False
                 except Exception as e:
-                    print(f"Warning: Error testing embeddings: {e}")
-                    print("Using fallback content matching instead of vector search")
-                    self.use_fallback = True
+                    if "quota" in str(e).lower() or "429" in str(e):
+                        print(f"Warning: OpenAI API quota exceeded. Using fallback mode.")
+                        self.use_fallback = True
+                    else:
+                        print(f"Warning: Error testing embeddings: {e}")
+                        print("Using fallback content matching instead of vector search")
+                        self.use_fallback = True
             except Exception as e:
                 print(f"Warning: Error initializing embeddings: {e}")
                 print("Using fallback content matching instead of vector search")
