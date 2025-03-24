@@ -1,188 +1,81 @@
-# Blog Generation with RAG
+# Blog Generation API with OpenAI
 
-This project demonstrates a blog generation system that uses Retrieval-Augmented Generation (RAG) to create informative blog posts on various topics.
+This project is a FastAPI-based blog generation system that uses OpenAI's GPT-4 model and embeddings for creating high-quality, relevant blog content.
 
-## Features
+## Resolving OpenAI API Quota Issues
 
-- Topic-based blog generation using LangChain and OpenAI/OpenRouter
-- Support for GPT-4o and other models via OpenRouter
-- Trending keyword identification to match user topics with relevant keywords
-- RAG implementation for retrieving relevant content from a knowledge base
-- Formatted blog output with metadata
-- Class-based architecture for better modularity and extensibility
+If you encounter an `insufficient_quota` error or API rate limits, follow these steps:
 
-## Project Structure
+### 1. Check Your OpenAI Account
 
-- `agent/`: Contains the main agent functionality
-  - `base.py`: Core `BlogAgent` class for blog generation
-  - `tools.py`: `BlogTools` class with utility functions for saving blogs and managing keywords
-- `rag/`: Contains RAG implementation
-  - `rag.py`: `RAGSystem` class that manages document processing, embedding, and retrieval
-- `blog/generated/`: Default output directory for generated blogs
-- `example.py`: Example script to demonstrate the system
+1. Go to [OpenAI Platform Billing](https://platform.openai.com/account/billing/overview)
+2. Verify you have billing information added and sufficient credits
+3. For GPT-4 access, ensure you have a paid plan with access to GPT-4
 
-## Requirements
+### 2. Generate a New API Key
 
-- Python 3.8+
-- OpenAI API key or OpenRouter API key
-- Dependencies: langchain, openai, faiss-cpu, python-dotenv
+1. Go to [OpenAI API Keys](https://platform.openai.com/api-keys)
+2. Create a new API key
+3. Copy the new key (you won't be able to see it again)
 
-## Setup
+### 3. Update Your API Key
+
+Use the included setup script to update your API key:
+
+```bash
+cd /path/to/blog-genai-demo
+source venv/bin/activate  # Activate your virtual environment if using one
+python setup_api.py --update --key "your-new-api-key-here"
+```
+
+Or manually update the `.env` file:
+
+```
+OPENAI_API_KEY=your-new-api-key-here
+```
+
+## Installation and Setup
 
 1. Clone the repository
-2. Install dependencies:
+2. Create a virtual environment
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Unix/Mac
+   # or
+   .\venv\Scripts\activate   # Windows
    ```
-   pip install langchain openai faiss-cpu python-dotenv
+3. Install dependencies
+   ```bash
+   pip install -r requirements.txt
    ```
-3. Create a `.env` file in the project root with your API key:
-   
-   For OpenRouter (recommended for GPT-4o access):
+4. Setup API key (as described above)
+5. Run the server
+   ```bash
+   python api/main.py
    ```
-   OPENROUTER_API_KEY=your-openrouter-api-key-here
-   ```
-   
-   For OpenAI:
-   ```
-   OPENAI_API_KEY=your-openai-api-key-here
+   or
+   ```bash
+   uvicorn api.main:app --reload
    ```
 
-## Using OpenRouter vs OpenAI
+## Using the API
 
-This project supports both OpenRouter and OpenAI APIs:
-
-- **OpenRouter**: Provides access to a wide range of models including GPT-4o, Claude, and more. Using OpenRouter is the default.
-- **OpenAI**: Direct access to OpenAI models if you have an OpenAI API key.
-
-To use OpenRouter, get an API key from [https://openrouter.ai](https://openrouter.ai) and set it as `OPENROUTER_API_KEY` in your `.env` file.
-
-## Usage
-
-### Command Line Interface
-
-Generate a blog post on a specific topic using GPT-4o via OpenRouter (default):
+### Generate a Blog
 
 ```bash
-python example.py --topic "The future of artificial intelligence in healthcare"
+curl -X POST "http://localhost:8000/generate" \
+     -H "Content-Type: application/json" \
+     -d '{"topic": "The impact of artificial intelligence in healthcare", "model": "gpt-4"}'
 ```
 
-Use a different model:
+### List Generated Blogs
 
 ```bash
-python example.py --topic "Climate change solutions" --model "anthropic/claude-3-opus"
+curl "http://localhost:8000/list-blogs"
 ```
 
-Use OpenAI API directly instead of OpenRouter:
+## API Documentation
 
-```bash
-python example.py --topic "Web development trends" --model "gpt-4" --openai
-```
-
-Adjust the temperature for more creative outputs:
-
-```bash
-python example.py --topic "Space exploration" --temperature 0.7
-```
-
-List available trending keywords:
-
-```bash
-python example.py --list-keywords
-```
-
-List previously generated blogs:
-
-```bash
-python example.py --list-blogs
-```
-
-Specify a custom output directory:
-
-```bash
-python example.py --topic "Quantum computing" --output-dir "my_blogs"
-```
-
-### Using as a Library
-
-You can also use the project as a library in your own code:
-
-```python
-from agent.base import BlogAgent
-from agent.tools import BlogTools
-from rag.rag import RAGSystem
-
-# Initialize components
-rag_system = RAGSystem()
-
-# Use GPT-4o via OpenRouter (default)
-agent = BlogAgent(model_name="gpt-4o", use_openrouter=True, temperature=0)
-
-# Or use OpenAI directly
-# agent = BlogAgent(model_name="gpt-4", use_openrouter=False, temperature=0.3)
-
-tools = BlogTools()
-
-# Generate a blog
-blog_data = agent.generate_blog("Quantum computing applications")
-
-# Save the blog
-filepath = tools.save_blog(blog_data)
-print(f"Blog saved to: {filepath}")
-```
-
-## How It Works
-
-1. The system takes a user-provided topic
-2. It identifies the most relevant keyword from a list of trending keywords
-3. It retrieves relevant content chunks from the RAG system
-4. The retrieved content is used to create a context-rich system message
-5. The LLM generates a comprehensive blog post using the context and user's topic
-6. The generated blog is saved to a file with metadata
-
-## Class Architecture
-
-- **BlogAgent**: Manages the blog generation process, including:
-  - Finding relevant keywords
-  - Creating system messages with RAG context
-  - Generating blog content
-  
-- **RAGSystem**: Handles the retrieval-augmented generation:
-  - Processing and chunking documents
-  - Creating and managing embeddings
-  - Performing similarity searches
-  
-- **BlogTools**: Provides utility functions:
-  - Saving generated blogs with metadata
-  - Managing trending keywords
-  - Listing previously generated blogs
-
-## Extending the System
-
-- Add new trending keywords by updating the `trending_keywords` list or using the `add_trending_keywords` method
-- Add more crawled content by extending the `DEFAULT_CONTENT` list in the `RAGSystem` class
-- Implement web crawling to gather real-time content using the `add_documents` method
-- Add blog formatting options or templates for different styles
-- Create custom embedding models and pass them to the `RAGSystem` constructor
-- Try different models available through OpenRouter
-
-## Trending Topics Analysis
-
-The system can use trending topics to make the blog content more relevant. It currently supports:
-
-1. **External APIs** - If you have API keys for NewsAPI or GNews, the system can fetch real trending topics:
-   - Set `NEWSAPI_KEY` and/or `GNEWS_API_KEY` environment variables
-
-2. **Local Content Analysis** - No API keys required, uses content-based analysis:
-   - Add the `--local-trends` flag to use this feature
-   - Works by analyzing semantic relevance to common topics in technology, business, health, and society
-
-### Using Local Trend Analysis
-
-```bash
-# Use local trend analysis (no external APIs)
-python example.py --topic "Artificial Intelligence" --local-trends
-
-# View trending topics from local analysis
-python example.py --list-keywords --local-trends
-```
-
-This feature replaces the previous dependency on Google Trends (pytrends) with a more robust solution that doesn't require external API keys.
+Once the server is running, visit:
+- API Documentation: http://localhost:8000/docs
+- Alternative Documentation: http://localhost:8000/redoc

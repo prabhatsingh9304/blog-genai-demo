@@ -39,36 +39,37 @@ class RAGSystem:
         """
         # Get API key
         api_key = os.getenv("OPENAI_API_KEY", "").strip()
+        # Don't print the actual API key for security reasons
+        print(f"API Key: {'*' * 8}...{api_key[-4:] if api_key else 'Not Set'}")
         
         # Set default to use fallback unless we confirm a working setup
         self.use_fallback = True
         
-        if not api_key:
-            print("RAG System: No API key found")
-            print("Using fallback content matching instead of vector search")
+        if not api_key and not embedding_model:
+            print("RAG System: No API key found, using fallback content matching")
+            self.use_fallback = True
         else:
             try:
                 # Initialize embeddings based on key type
                 if embedding_model:
                     self.embeddings = embedding_model
-                elif api_key.startswith("sk-or-v1-"):
-                    # Using OpenRouter embeddings
-                    print("RAG System: Using OpenRouter for embeddings")
-                    self.embeddings = OpenAIEmbeddings(
-                        model="text-embedding-3-small",
-                        openai_api_key=api_key,
-                        openai_api_base="https://openrouter.ai/api/v1",
-                        headers={"Content-Type": "application/json"}
-                    )
                 else:
-                    # Using OpenAI embeddings
+                    # Use OpenAI embeddings if API key is available
                     print("RAG System: Using OpenAI for embeddings")
-                    self.embeddings = OpenAIEmbeddings(
-                        model="text-embedding-3-small",
-                        openai_api_key=api_key,
-                        dimensions=1536,  # Match ada-002 dimensions for backward compatibility
-                        headers={"Content-Type": "application/json"}
-                    )
+                    try:
+                        self.embeddings = OpenAIEmbeddings(
+                            model="text-embedding-3-small",
+                            openai_api_key=api_key,
+                            dimensions=1536,  # Match ada-002 dimensions for backward compatibility
+                            headers={"Content-Type": "application/json"}
+                        )
+                    except Exception as quota_error:
+                        if "quota" in str(quota_error).lower() or "429" in str(quota_error):
+                            print(f"Warning: OpenAI API quota exceeded. Using fallback mode.")
+                            self.use_fallback = True
+                            return
+                        else:
+                            raise
                     
                 # Test the embeddings to ensure they work
                 try:
@@ -81,9 +82,13 @@ class RAGSystem:
                         # If we got here without exception, disable fallback
                         self.use_fallback = False
                 except Exception as e:
-                    print(f"Warning: Error testing embeddings: {e}")
-                    print("Using fallback content matching instead of vector search")
-                    self.use_fallback = True
+                    if "quota" in str(e).lower() or "429" in str(e):
+                        print(f"Warning: OpenAI API quota exceeded. Using fallback mode.")
+                        self.use_fallback = True
+                    else:
+                        print(f"Warning: Error testing embeddings: {e}")
+                        print("Using fallback content matching instead of vector search")
+                        self.use_fallback = True
             except Exception as e:
                 print(f"Warning: Error initializing embeddings: {e}")
                 print("Using fallback content matching instead of vector search")
@@ -276,60 +281,112 @@ class RAGSystem:
         """
         # If in fallback mode, provide better fallback content
         if self.use_fallback:
-            print("NOTICE: Using fallback content mode instead of vector search.")
+            print("NOTICE: Using content pattern matching mode")
             
-            # Create a more helpful fallback response for personal loans if that's the topic
-            if "loan" in query.lower() or "personal loan" in query.lower() or "finance" in query.lower():
+            # Enhanced fallback for loan/finance topics
+            if any(term in query.lower() for term in ["loan", "finance", "banking", "credit", "mortgage"]):
                 return """
-                When writing about personal loans, consider including:
-                
-                # Key Trends in Personal Loans
+                # Key Trends in Personal Finance & Loans
                 
                 ## Digital Transformation
                 - Online application processes and instant approvals
                 - Mobile apps for loan management and repayment
                 - AI-powered credit scoring models beyond traditional FICO scores
                 
-                ## Fintech Revolution
+                ## Fintech Innovation
                 - Peer-to-peer lending platforms connecting borrowers directly to investors
                 - Buy Now Pay Later (BNPL) services as alternatives to traditional loans
                 - Blockchain and cryptocurrency-backed loans
+                - Digital banks offering competitive rates and streamlined experiences
                 
-                ## Personalization
+                ## Personalization & Flexibility
                 - Risk-based pricing models tailored to individual profiles
                 - Flexible repayment schedules and options
                 - Specialized loan products for specific needs (debt consolidation, home improvement)
+                - Early payoff options with reduced or no penalties
                 
                 ## Regulatory Environment
                 - Open banking initiatives improving access to financial data
                 - Consumer protection regulations affecting loan terms
                 - Responsible lending practices and transparency requirements
+                - Impact of interest rate policies on loan availability and terms
                 
                 ## Economic Factors
                 - Interest rate trends and Federal Reserve policies
                 - Inflation's impact on borrowing and repayment
                 - Post-pandemic recovery effects on loan availability
+                - Housing market trends affecting mortgage and home equity loans
                 """
             
-            # Simple keyword matching as fallback for other topics
-            try:
-                from blog.content_analyzer import get_related_content
-                fallback_content = get_related_content(query)
-                if fallback_content:
-                    return fallback_content
-            except Exception:
-                pass
+            # Technology topics
+            elif any(term in query.lower() for term in ["tech", "ai", "software", "digital", "app", "internet", "web", "mobile"]):
+                return """
+                # Key Elements for Technology Content
                 
-            # If content analyzer also fails, return minimal content
+                ## Current Industry Trends
+                - AI and machine learning integration across sectors
+                - Edge computing and distributed infrastructure
+                - Digital transformation acceleration post-pandemic
+                - Cybersecurity in an increasingly vulnerable landscape
+                
+                ## Technological Innovation
+                - Advances in natural language processing and computer vision
+                - Quantum computing developments and practical applications
+                - Internet of Things (IoT) ecosystem expansion
+                - Blockchain beyond cryptocurrency: supply chain, healthcare, legal
+                
+                ## User Experience & Design
+                - Human-centered design principles
+                - Accessibility and inclusive design practices
+                - Voice and multimodal interfaces
+                - Personalization through data-driven insights
+                
+                ## Business Impact
+                - Subscription-based models and recurring revenue
+                - Cloud migration and infrastructure modernization
+                - Remote work technologies and distributed teams
+                - Data privacy regulations and compliance challenges
+                
+                ## Future Outlook
+                - Emerging technologies to watch
+                - Sustainability and green tech initiatives
+                - Digital ethics and responsible innovation
+                - Skills and workforce transformation
+                """
+            
+            # Generic structure for other topics
             return f"""
-            When writing about {query}, consider including:
-            - Introduction explaining key concepts and relevance
-            - Current trends and innovations in the field
-            - Benefits and advantages for users/consumers
-            - Challenges and potential solutions
-            - Real-world applications and case studies
-            - Best practices and recommendations
-            - Future outlook and predictions
+            # Content Structure for "{query}"
+            
+            ## Introduction
+            - Core concepts and definitions
+            - Historical context and evolution
+            - Current relevance and importance
+            - Main challenges and opportunities
+            
+            ## Key Developments
+            - Recent innovations and breakthroughs
+            - Statistical trends and data points
+            - Industry standards and best practices
+            - Comparative analysis of different approaches
+            
+            ## Practical Applications
+            - Real-world use cases and examples
+            - Implementation strategies
+            - Benefits and limitations
+            - Cost-benefit considerations
+            
+            ## Future Outlook
+            - Emerging trends and predictions
+            - Potential challenges and solutions
+            - Research directions and opportunities
+            - Long-term impact and significance
+            
+            ## Recommendations
+            - Strategic advice for stakeholders
+            - Action steps for implementation
+            - Resources for further learning
+            - Evaluation metrics for success
             """
         
         try:
