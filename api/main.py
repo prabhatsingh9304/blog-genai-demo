@@ -7,6 +7,7 @@ import sys
 import time
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
+from ..blog.process import process
 
 # Add project root to path to import modules
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,6 +76,7 @@ async def generate_blog(request: BlogRequest):
         )
         
         # Generate the blog
+        # 
         blog_data = agent.generate_blog(request.topic)
         
         # Calculate generation time
