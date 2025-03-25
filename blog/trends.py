@@ -72,7 +72,7 @@ class GoogleTrendsScraper:
 
     def _generate_embed_url(self) -> str:
         payload = {
-            "comparisonItem": [{"keyword": self.keyword, "geo": "IN", "time": "now 7-d"}],
+            "comparisonItem": [{"keyword": self.keyword, "geo": "IN", "time": "today 12-m"}],
             "category": 0,
             "property": ""
         }
@@ -108,7 +108,7 @@ class GoogleTrendsScraper:
 
 async def main():
     keyword = "hacking"
-    scraper = GoogleTrendsScraper(keyword, headless=True)
+    scraper = GoogleTrendsScraper(keyword, headless=False)
     await scraper.run()
 
 if __name__ == "__main__":

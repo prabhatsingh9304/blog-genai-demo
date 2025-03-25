@@ -7,6 +7,7 @@ import sys
 from rag.rag import RAGSystem
 from dotenv import load_dotenv
 import json
+from ..blog.process import Process
 
 load_dotenv()
 
@@ -81,6 +82,7 @@ class BlogAgent:
                     self.llm = FakeListLLM(responses=responses)
         
         self.rag_system = rag_system or RAGSystem()
+        
 
     def find_relevant_keyword(self, topic):
         """
@@ -94,10 +96,11 @@ class BlogAgent:
         """
         # Simply use the topic as the keyword or extract the main subject
         # Split by common separators and take the first meaningful word
-        words = topic.split()
-        if words:
-            return words[0].strip()
-        return topic.strip()
+        
+        # topic is a list of topics... make llm call and retrieve relavent topic
+        #find link
+        relevant_topic = "test"
+        blog_content = Process(relevant_topic).fetch_blog_content()
 
     def create_system_prompt(self, topic, relevant_keyword):
         """
@@ -142,7 +145,8 @@ class BlogAgent:
             dict: A dictionary containing the topic and generated content
         """
         # Extract a simple keyword from the topic
-        relevant_keyword = self.find_relevant_keyword(topic)
+        top_related_topics = Process(topic).find_top_queries()
+        relevant_keyword = self.find_relevant_keyword(top_related_topics)
         
         # Create system message with RAG content
         system_prompt = self.create_system_prompt(topic, relevant_keyword)
