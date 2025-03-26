@@ -1,4 +1,5 @@
-#crawl linksimport requests
+#crawl links
+import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import re
@@ -115,7 +116,7 @@ if __name__ == '__main__':
     if content:
         print("\nExtracted Content:")
         print("-" * 80)
-        print(content[:500] + "..." if len(content) > 500 else content)
+        print(content)
         print("-" * 80)
         print(f"Total content length: {len(content)} characters")
     else:
