@@ -1,0 +1,347 @@
+{
+    "rising": [
+        {
+            "topic": {
+                "value": "/m/01vk_m",
+                "title": "Espresso machine",
+                "type": "Topic"
+            },
+            "value": "+90%",
+            "extracted_value": 90,
+            "link": "https://trends.google.com/trends/explore?q=/m/01vk_m&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01vk_m&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11sk8c743q",
+                "title": "ZUS",
+                "type": "Topic"
+            },
+            "value": "+90%",
+            "extracted_value": 90,
+            "link": "https://trends.google.com/trends/explore?q=/g/11sk8c743q&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11sk8c743q&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11cn94hrv_",
+                "title": "Caribou Coffee",
+                "type": "Topic"
+            },
+            "value": "+80%",
+            "extracted_value": 80,
+            "link": "https://trends.google.com/trends/explore?q=/g/11cn94hrv_&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11cn94hrv_&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/03x42",
+                "title": "Irish",
+                "type": "Spoken language"
+            },
+            "value": "+80%",
+            "extracted_value": 80,
+            "link": "https://trends.google.com/trends/explore?q=/m/03x42&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03x42&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11fkyy8bzw",
+                "title": "7 Brew Coffee",
+                "type": "Topic"
+            },
+            "value": "+80%",
+            "extracted_value": 80,
+            "link": "https://trends.google.com/trends/explore?q=/g/11fkyy8bzw&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11fkyy8bzw&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/06c60c",
+                "title": "Matcha",
+                "type": "Tea"
+            },
+            "value": "+50%",
+            "extracted_value": 50,
+            "link": "https://trends.google.com/trends/explore?q=/m/06c60c&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06c60c&tz=420"
+        }
+    ],
+    "top": [
+        {
+            "topic": {
+                "value": "/m/02vqfm",
+                "title": "Coffee",
+                "type": "Beverage"
+            },
+            "value": "100",
+            "extracted_value": 100,
+            "link": "https://trends.google.com/trends/explore?q=/m/02vqfm&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02vqfm&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/020fb2",
+                "title": "Cafe",
+                "type": "Topic"
+            },
+            "value": "10",
+            "extracted_value": 10,
+            "link": "https://trends.google.com/trends/explore?q=/m/020fb2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F020fb2&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/07xyvk",
+                "title": "Coffeemaker",
+                "type": "Topic"
+            },
+            "value": "8",
+            "extracted_value": 8,
+            "link": "https://trends.google.com/trends/explore?q=/m/07xyvk&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07xyvk&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/04bcr3",
+                "title": "Table",
+                "type": "Furniture"
+            },
+            "value": "5",
+            "extracted_value": 5,
+            "link": "https://trends.google.com/trends/explore?q=/m/04bcr3&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F04bcr3&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/078n6m",
+                "title": "Coffee table",
+                "type": "Topic"
+            },
+            "value": "5",
+            "extracted_value": 5,
+            "link": "https://trends.google.com/trends/explore?q=/m/078n6m&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F078n6m&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0_ftdcx",
+                "title": "Cup",
+                "type": "Topic"
+            },
+            "value": "4",
+            "extracted_value": 4,
+            "link": "https://trends.google.com/trends/explore?q=/m/0_ftdcx&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0_ftdcx&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0dkw5",
+                "title": "Machine",
+                "type": "Topic"
+            },
+            "value": "4",
+            "extracted_value": 4,
+            "link": "https://trends.google.com/trends/explore?q=/m/0dkw5&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0dkw5&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/122fpn6r",
+                "title": "Drink",
+                "type": "Type of dish"
+            },
+            "value": "3",
+            "extracted_value": 3,
+            "link": "https://trends.google.com/trends/explore?q=/g/122fpn6r&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F122fpn6r&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/05kbv1",
+                "title": "Iced coffee",
+                "type": "Coffee"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/05kbv1&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05kbv1&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01_7l",
+                "title": "Caffeine",
+                "type": "Pill"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/01_7l&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01_7l&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01fp9",
+                "title": "Bean",
+                "type": "Legume"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/01fp9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01fp9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/05bzrs",
+                "title": "Coffee bean",
+                "type": "Topic"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/05bzrs&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05bzrs&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/1hdyx4rvg",
+                "title": "Starbucks",
+                "type": "Topic"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/g/1hdyx4rvg&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F1hdyx4rvg&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/018c_r",
+                "title": "Starbucks",
+                "type": "Coffeehouse company"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/018c_r&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F018c_r&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/02p5f1q",
+                "title": "Coffee cup",
+                "type": "Topic"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/02p5f1q&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02p5f1q&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/02jvh9",
+                "title": "Mug",
+                "type": "Topic"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/02jvh9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02jvh9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0ctfk",
+                "title": "Espresso",
+                "type": "Coffee"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/0ctfk&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0ctfk&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01vk_m",
+                "title": "Espresso machine",
+                "type": "Topic"
+            },
+            "value": "1",
+            "extracted_value": 1,
+            "link": "https://trends.google.com/trends/explore?q=/m/01vk_m&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01vk_m&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/121sl6sf",
+                "title": "Used coffee grounds",
+                "type": "Topic"
+            },
+            "value": "1",
+            "extracted_value": 1,
+            "link": "https://trends.google.com/trends/explore?q=/g/121sl6sf&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121sl6sf&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0cpb06",
+                "title": "Non-dairy creamer",
+                "type": "Dairy product"
+            },
+            "value": "1",
+            "extracted_value": 1,
+            "link": "https://trends.google.com/trends/explore?q=/m/0cpb06&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0cpb06&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/03j691",
+                "title": "Decaffeination",
+                "type": "Topic"
+            },
+            "value": "1",
+            "extracted_value": 1,
+            "link": "https://trends.google.com/trends/explore?q=/m/03j691&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03j691&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/05_746",
+                "title": "The Coffee Bean & Tea Leaf",
+                "type": "Tea company"
+            },
+            "value": "1",
+            "extracted_value": 1,
+            "link": "https://trends.google.com/trends/explore?q=/m/05_746&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05_746&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/05lvsg",
+                "title": "Coffee grinder",
+                "type": "Kitchenware"
+            },
+            "value": "1",
+            "extracted_value": 1,
+            "link": "https://trends.google.com/trends/explore?q=/m/05lvsg&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05lvsg&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/052sf",
+                "title": "Mushroom",
+                "type": "Food"
+            },
+            "value": "1",
+            "extracted_value": 1,
+            "link": "https://trends.google.com/trends/explore?q=/m/052sf&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F052sf&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bx9mb52d",
+                "title": "Ninja",
+                "type": "Topic"
+            },
+            "value": "1",
+            "extracted_value": 1,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bx9mb52d&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bx9mb52d&tz=420"
+        }
+    ]
+}

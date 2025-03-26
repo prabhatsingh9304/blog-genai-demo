@@ -1,26 +1,38 @@
-from pytrends.request import TrendReq
-import time
+import os
+import json
+from dotenv import dotenv_values
+from serpapi import GoogleSearch
 
+class GoogleTrendsScraper:
+    def __init__(self):
+        env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
+        self.env_vars = dotenv_values(env_path)
+        self.api_key = self.env_vars.get("SERPAPI_KEY")
 
+        if not self.api_key:
+            raise ValueError("❌ SERPAPI_KEY is missing in .env file!")
 
-# Initialize pytrends
-pytrends = TrendReq(hl="en-US", tz=360)
+    def fetch_related_topics(self, query):
+        params = {
+            "engine": "google_trends",
+            "q": query,
+            "data_type": "RELATED_TOPICS",
+            "api_key": self.api_key
+        }
 
-# Define the keyword
-keyword = "coffee"
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        related_topics = results.get("related_topics", [])
 
-# Fetch related queries
-pytrends.build_payload(["Bitcoin"], timeframe="today 5-y", geo="IN")
-time.sleep(5) 
-related_queries = pytrends.related_queries()
+        # Save results to JSON
+        self._save_to_json(related_topics)
 
-# Extract rising and top queries
-rising = related_queries[keyword]["rising"]
-top = related_queries[keyword]["top"]
+        print(f"✅ Saved {len(related_topics)} related topics to related_topics.json")
 
-# Print results
-print("Rising Queries:")
-print(rising)
+    def _save_to_json(self, data):
+        with open("related_topics.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
 
-print("\nTop Queries:")
-print(top)
+# if __name__ == "__main__":
+#     scraper = GoogleTrendsScraper()
+#     scraper.fetch_related_topics("coffee")
