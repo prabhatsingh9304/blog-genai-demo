@@ -107,7 +107,7 @@ class GoogleTrendsScraper:
 
 
 async def main():
-    keyword = "hacking"
+    keyword = "personal loan"
     scraper = GoogleTrendsScraper(keyword, headless=False)
     await scraper.run()
 

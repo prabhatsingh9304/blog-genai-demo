@@ -84,12 +84,17 @@ class BlogAgent:
         self.rag_system = rag_system or RAGSystem()
         
 
-    def find_relevant_keyword(self, topic):
+    def extract_blog_content():
+        blog_content = Process(relevant_topic).fetch_blog_content()
+        
+        return blog_content
+        
+    def find_relevant_keyword(self, top_related_topics):
         """
-        Extract a keyword from the topic itself
+        Extract a keyword from the top_related_topics itself
         
         Args:
-            topic (str): The topic to find a relevant keyword for
+            top_related_topics (list): The list of keyword to find a relevant keyword for
             
         Returns:
             str: A keyword derived from the topic
@@ -100,7 +105,9 @@ class BlogAgent:
         # topic is a list of topics... make llm call and retrieve relavent topic
         #find link
         relevant_topic = "test"
-        blog_content = Process(relevant_topic).fetch_blog_content()
+        return relevant_topic
+
+        
 
     def create_system_prompt(self, topic, relevant_keyword):
         """

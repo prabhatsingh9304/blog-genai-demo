@@ -1,10 +1,12 @@
 from get_topic import TopTopics
 from get_link import BlogLinkFetcher
+from get_topic_v2 import GoogleTrendsScraper
+from get_topic_v2 import TopicExtractor
+
 
 class Process:
     def __init__(self, blog_topic):
         self.topic = blog_topic
-        
         
     def fetch_blog_content(self,query):  
         #Fetching Link
@@ -21,16 +23,15 @@ class Process:
         
     def find_top_queries(self):
         #Import and call trend.py
+        #Keep it commented to save api call limit
+        # scraper = GoogleTrendsScraper()
+        # scraper.fetch_related_topics(self.topic)
         
         #Fetchin top 10 topics
-        queries = TopTopics().read_related_queries("related_searches.json")
-        print("Top Queries:", queries)
-        return queries
+        # queries = TopTopics().read_related_queries("related_topics.json")
+        # print("Top Queries:", queries)
         
+        extractor = TopicExtractor("related_topics.json")
+        top_topics = extractor.get_top_topics()
+        return top_topics
         
-
-        
-        
-        
-
-
