@@ -1,7 +1,7 @@
 import os
 import json
 from dotenv import dotenv_values
-from serpapi import GoogleSearch
+from serpapi.google_search import GoogleSearch
 
 class GoogleTrendsScraper:
     def __init__(self):
@@ -30,9 +30,9 @@ class GoogleTrendsScraper:
         print(f"✅ Saved {len(related_topics)} related topics to related_topics.json")
 
     def _save_to_json(self, data):
-        with open("related_topics.json", "w", encoding="utf-8") as f:
+        with open("./blog/related_topics.json", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
-# if __name__ == "__main__":
-#     scraper = GoogleTrendsScraper()
-#     scraper.fetch_related_topics("coffee")
+if __name__ == "__main__":
+    scraper = GoogleTrendsScraper()
+    scraper.fetch_related_topics("personal loan")
