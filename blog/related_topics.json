@@ -2,346 +2,412 @@
     "rising": [
         {
             "topic": {
-                "value": "/m/01vk_m",
-                "title": "Espresso machine",
+                "value": "/g/121s4jy4",
+                "title": "Car loans",
                 "type": "Topic"
             },
-            "value": "+90%",
-            "extracted_value": 90,
-            "link": "https://trends.google.com/trends/explore?q=/m/01vk_m&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01vk_m&tz=420"
+            "value": "Breakout",
+            "extracted_value": 54150,
+            "link": "https://trends.google.com/trends/explore?q=/g/121s4jy4&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121s4jy4&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11sk8c743q",
-                "title": "ZUS",
+                "value": "/g/11y5z628m9",
+                "title": "disappearance of Loan Peña",
+                "type": "Event"
+            },
+            "value": "Breakout",
+            "extracted_value": 34050,
+            "link": "https://trends.google.com/trends/explore?q=/g/11y5z628m9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11y5z628m9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11k322h2wn",
+                "title": "Loan Calculator",
+                "type": "Software"
+            },
+            "value": "+1,300%",
+            "extracted_value": 1300,
+            "link": "https://trends.google.com/trends/explore?q=/g/11k322h2wn&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11k322h2wn&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bwdsd9zl",
+                "title": "Pradhan Mantri Mudra Yojana",
                 "type": "Topic"
             },
-            "value": "+90%",
-            "extracted_value": 90,
-            "link": "https://trends.google.com/trends/explore?q=/g/11sk8c743q&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11sk8c743q&tz=420"
+            "value": "+800%",
+            "extracted_value": 800,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bwdsd9zl&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bwdsd9zl&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11cn94hrv_",
-                "title": "Caribou Coffee",
+                "value": "/g/121bdfn8",
+                "title": "Personal loan",
                 "type": "Topic"
             },
-            "value": "+80%",
-            "extracted_value": 80,
-            "link": "https://trends.google.com/trends/explore?q=/g/11cn94hrv_&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11cn94hrv_&tz=420"
+            "value": "+650%",
+            "extracted_value": 650,
+            "link": "https://trends.google.com/trends/explore?q=/g/121bdfn8&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121bdfn8&tz=420"
         },
         {
             "topic": {
-                "value": "/m/03x42",
-                "title": "Irish",
-                "type": "Spoken language"
+                "value": "/g/11bxf3qc1w",
+                "title": "Jio",
+                "type": "Telecommunications company"
             },
-            "value": "+80%",
-            "extracted_value": 80,
-            "link": "https://trends.google.com/trends/explore?q=/m/03x42&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03x42&tz=420"
+            "value": "+250%",
+            "extracted_value": 250,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bxf3qc1w&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bxf3qc1w&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11fkyy8bzw",
-                "title": "7 Brew Coffee",
+                "value": "/g/11bc6tzqgp",
+                "title": "Airtel",
                 "type": "Topic"
             },
-            "value": "+80%",
-            "extracted_value": 80,
-            "link": "https://trends.google.com/trends/explore?q=/g/11fkyy8bzw&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11fkyy8bzw&tz=420"
+            "value": "+250%",
+            "extracted_value": 250,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc6tzqgp&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc6tzqgp&tz=420"
         },
         {
             "topic": {
-                "value": "/m/06c60c",
-                "title": "Matcha",
-                "type": "Tea"
+                "value": "/g/11cs5fkw1p",
+                "title": "Jio Store",
+                "type": "Topic"
+            },
+            "value": "+250%",
+            "extracted_value": 250,
+            "link": "https://trends.google.com/trends/explore?q=/g/11cs5fkw1p&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11cs5fkw1p&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0kqh5s",
+                "title": "Bharti Airtel",
+                "type": "Telecommunications company"
+            },
+            "value": "+200%",
+            "extracted_value": 200,
+            "link": "https://trends.google.com/trends/explore?q=/m/0kqh5s&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0kqh5s&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11c2l1c_c9",
+                "title": "Bajaj Finance",
+                "type": "Non-banking financial company company"
+            },
+            "value": "+180%",
+            "extracted_value": 180,
+            "link": "https://trends.google.com/trends/explore?q=/g/11c2l1c_c9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c2l1c_c9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0dfm1w",
+                "title": "Mortgage calculator",
+                "type": "Topic"
+            },
+            "value": "+70%",
+            "extracted_value": 70,
+            "link": "https://trends.google.com/trends/explore?q=/m/0dfm1w&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0dfm1w&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01hlwv",
+                "title": "JPMorgan Chase & Co",
+                "type": "Financial services company"
             },
             "value": "+50%",
             "extracted_value": 50,
-            "link": "https://trends.google.com/trends/explore?q=/m/06c60c&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06c60c&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/01hlwv&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01hlwv&tz=420"
         }
     ],
     "top": [
         {
             "topic": {
-                "value": "/m/02vqfm",
-                "title": "Coffee",
-                "type": "Beverage"
+                "value": "/m/01dnzs",
+                "title": "Loan",
+                "type": "Topic"
             },
             "value": "100",
             "extracted_value": 100,
-            "link": "https://trends.google.com/trends/explore?q=/m/02vqfm&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02vqfm&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/01dnzs&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01dnzs&tz=420"
         },
         {
             "topic": {
-                "value": "/m/020fb2",
-                "title": "Cafe",
+                "value": "/m/0273t5w",
+                "title": "Mortgage loan",
+                "type": "Topic"
+            },
+            "value": "13",
+            "extracted_value": 13,
+            "link": "https://trends.google.com/trends/explore?q=/m/0273t5w&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0273t5w&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/024d2",
+                "title": "Calculator",
+                "type": "Topic"
+            },
+            "value": "13",
+            "extracted_value": 13,
+            "link": "https://trends.google.com/trends/explore?q=/m/024d2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F024d2&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/012qn2",
+                "title": "Interest",
                 "type": "Topic"
             },
             "value": "10",
             "extracted_value": 10,
-            "link": "https://trends.google.com/trends/explore?q=/m/020fb2&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F020fb2&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/012qn2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F012qn2&tz=420"
         },
         {
             "topic": {
-                "value": "/m/07xyvk",
-                "title": "Coffeemaker",
+                "value": "/m/0cc6w26",
+                "title": "Car finance",
+                "type": "Topic"
+            },
+            "value": "10",
+            "extracted_value": 10,
+            "link": "https://trends.google.com/trends/explore?q=/m/0cc6w26&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0cc6w26&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01x1q9",
+                "title": "Rate",
+                "type": "Mathematics"
+            },
+            "value": "9",
+            "extracted_value": 9,
+            "link": "https://trends.google.com/trends/explore?q=/m/01x1q9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01x1q9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/017ql",
+                "title": "Bank",
+                "type": "Building function"
+            },
+            "value": "9",
+            "extracted_value": 9,
+            "link": "https://trends.google.com/trends/explore?q=/m/017ql&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F017ql&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/121bdfn8",
+                "title": "Personal loan",
                 "type": "Topic"
             },
             "value": "8",
             "extracted_value": 8,
-            "link": "https://trends.google.com/trends/explore?q=/m/07xyvk&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07xyvk&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/g/121bdfn8&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121bdfn8&tz=420"
         },
         {
             "topic": {
-                "value": "/m/04bcr3",
-                "title": "Table",
-                "type": "Furniture"
-            },
-            "value": "5",
-            "extracted_value": 5,
-            "link": "https://trends.google.com/trends/explore?q=/m/04bcr3&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F04bcr3&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/078n6m",
-                "title": "Coffee table",
+                "value": "/m/05p8s2",
+                "title": "Credit",
                 "type": "Topic"
             },
-            "value": "5",
-            "extracted_value": 5,
-            "link": "https://trends.google.com/trends/explore?q=/m/078n6m&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F078n6m&tz=420"
+            "value": "7",
+            "extracted_value": 7,
+            "link": "https://trends.google.com/trends/explore?q=/m/05p8s2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05p8s2&tz=420"
         },
         {
             "topic": {
-                "value": "/m/0_ftdcx",
-                "title": "Cup",
+                "value": "/m/014cnc",
+                "title": "Student",
+                "type": "Topic"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/m/014cnc&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F014cnc&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/02crs_",
+                "title": "Student loan",
+                "type": "Topic"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/m/02crs_&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02crs_&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/09s5j9",
+                "title": "Payment",
+                "type": "Topic"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/m/09s5j9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F09s5j9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/04n7dpf",
+                "title": "Interest rate",
+                "type": "Topic"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/m/04n7dpf&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F04n7dpf&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/03vks",
+                "title": "Incest",
                 "type": "Topic"
             },
             "value": "4",
             "extracted_value": 4,
-            "link": "https://trends.google.com/trends/explore?q=/m/0_ftdcx&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0_ftdcx&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/03vks&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03vks&tz=420"
         },
         {
             "topic": {
-                "value": "/m/0dkw5",
-                "title": "Machine",
-                "type": "Topic"
-            },
-            "value": "4",
-            "extracted_value": 4,
-            "link": "https://trends.google.com/trends/explore?q=/m/0dkw5&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0dkw5&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/122fpn6r",
-                "title": "Drink",
-                "type": "Type of dish"
+                "value": "/m/02_7t",
+                "title": "Finance",
+                "type": "Discipline"
             },
             "value": "3",
             "extracted_value": 3,
-            "link": "https://trends.google.com/trends/explore?q=/g/122fpn6r&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F122fpn6r&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/02_7t&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02_7t&tz=420"
         },
         {
             "topic": {
-                "value": "/m/05kbv1",
-                "title": "Iced coffee",
-                "type": "Coffee"
+                "value": "/g/121s4jy4",
+                "title": "Car loans",
+                "type": "Topic"
             },
-            "value": "2",
-            "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/05kbv1&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05kbv1&tz=420"
+            "value": "3",
+            "extracted_value": 3,
+            "link": "https://trends.google.com/trends/explore?q=/g/121s4jy4&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121s4jy4&tz=420"
         },
         {
             "topic": {
-                "value": "/m/01_7l",
-                "title": "Caffeine",
-                "type": "Pill"
+                "value": "/m/0m0ps97",
+                "title": "Equated monthly installment",
+                "type": "Topic"
             },
-            "value": "2",
-            "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/01_7l&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01_7l&tz=420"
+            "value": "3",
+            "extracted_value": 3,
+            "link": "https://trends.google.com/trends/explore?q=/m/0m0ps97&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0m0ps97&tz=420"
         },
         {
             "topic": {
-                "value": "/m/01fp9",
-                "title": "Bean",
-                "type": "Legume"
-            },
-            "value": "2",
-            "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/01fp9&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01fp9&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/05bzrs",
-                "title": "Coffee bean",
+                "value": "/g/11c3ptzpxy",
+                "title": "State Bank of India",
                 "type": "Topic"
             },
             "value": "2",
             "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/05bzrs&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05bzrs&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/g/11c3ptzpxy&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c3ptzpxy&tz=420"
         },
         {
             "topic": {
-                "value": "/g/1hdyx4rvg",
-                "title": "Starbucks",
+                "value": "/m/025tzgk",
+                "title": "HDFC Bank",
+                "type": "Financial services company"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/025tzgk&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F025tzgk&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0242kb",
+                "title": "State Bank of India",
+                "type": "Financial services company"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/0242kb&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0242kb&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11b7rxl53t",
+                "title": "HDFC Bank",
                 "type": "Topic"
             },
             "value": "2",
             "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/g/1hdyx4rvg&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F1hdyx4rvg&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/g/11b7rxl53t&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11b7rxl53t&tz=420"
         },
         {
             "topic": {
-                "value": "/m/018c_r",
-                "title": "Starbucks",
-                "type": "Coffeehouse company"
-            },
-            "value": "2",
-            "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/018c_r&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F018c_r&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/02p5f1q",
-                "title": "Coffee cup",
+                "value": "/m/02p7q_9",
+                "title": "Credit score",
                 "type": "Topic"
             },
             "value": "2",
             "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/02p5f1q&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02p5f1q&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/02p7q_9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02p7q_9&tz=420"
         },
         {
             "topic": {
-                "value": "/m/02jvh9",
-                "title": "Mug",
+                "value": "/m/06f32",
+                "title": "Taiwan",
                 "type": "Topic"
             },
             "value": "2",
             "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/02jvh9&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02jvh9&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/06f32&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06f32&tz=420"
         },
         {
             "topic": {
-                "value": "/m/0ctfk",
-                "title": "Espresso",
-                "type": "Coffee"
+                "value": "/m/013y7y",
+                "title": "Debt",
+                "type": "Topic"
             },
             "value": "2",
             "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/0ctfk&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0ctfk&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/013y7y&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F013y7y&tz=420"
         },
         {
             "topic": {
-                "value": "/m/01vk_m",
-                "title": "Espresso machine",
+                "value": "/g/11bc8lgh_8",
+                "title": "Business loan",
                 "type": "Topic"
             },
-            "value": "1",
-            "extracted_value": 1,
-            "link": "https://trends.google.com/trends/explore?q=/m/01vk_m&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01vk_m&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/121sl6sf",
-                "title": "Used coffee grounds",
-                "type": "Topic"
-            },
-            "value": "1",
-            "extracted_value": 1,
-            "link": "https://trends.google.com/trends/explore?q=/g/121sl6sf&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121sl6sf&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/0cpb06",
-                "title": "Non-dairy creamer",
-                "type": "Dairy product"
-            },
-            "value": "1",
-            "extracted_value": 1,
-            "link": "https://trends.google.com/trends/explore?q=/m/0cpb06&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0cpb06&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/03j691",
-                "title": "Decaffeination",
-                "type": "Topic"
-            },
-            "value": "1",
-            "extracted_value": 1,
-            "link": "https://trends.google.com/trends/explore?q=/m/03j691&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03j691&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/05_746",
-                "title": "The Coffee Bean & Tea Leaf",
-                "type": "Tea company"
-            },
-            "value": "1",
-            "extracted_value": 1,
-            "link": "https://trends.google.com/trends/explore?q=/m/05_746&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05_746&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/05lvsg",
-                "title": "Coffee grinder",
-                "type": "Kitchenware"
-            },
-            "value": "1",
-            "extracted_value": 1,
-            "link": "https://trends.google.com/trends/explore?q=/m/05lvsg&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05lvsg&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/052sf",
-                "title": "Mushroom",
-                "type": "Food"
-            },
-            "value": "1",
-            "extracted_value": 1,
-            "link": "https://trends.google.com/trends/explore?q=/m/052sf&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F052sf&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11bx9mb52d",
-                "title": "Ninja",
-                "type": "Topic"
-            },
-            "value": "1",
-            "extracted_value": 1,
-            "link": "https://trends.google.com/trends/explore?q=/g/11bx9mb52d&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bx9mb52d&tz=420"
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc8lgh_8&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc8lgh_8&tz=420"
         }
     ]
 }

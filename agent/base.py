@@ -4,195 +4,322 @@ from langchain_community.llms.fake import FakeListLLM
 from langchain_core.messages import HumanMessage, SystemMessage
 import os
 import sys
+import time
+import logging
 from rag.rag import RAGSystem
 from dotenv import load_dotenv
 import json
-from ..blog.process import Process
+from blog.process import Process
 
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger('blog_agent')
+
+# Load environment variables
 load_dotenv()
 
 class BlogAgent:
+    """
+    Agent for generating blog content using LLMs and RAG.
+    """
     def __init__(self, model_name="gpt-4", rag_system=None, temperature=0.7):
         """
-        Initialize with OpenAI API
+        Initialize the blog agent.
+        
+        Args:
+            model_name: LLM model to use
+            rag_system: Optional RAG system instance
+            temperature: Temperature for LLM responses
         """
-        # Get API key 
-        api_key = os.getenv("OPENAI_API_KEY", "").strip()
-        
-        if not api_key:
-            print("WARNING: No API key found. Using demo mode with mock responses.")
-            responses = [
-                "Artificial Intelligence",
-                "This is a sample blog post about the topic. AI has transformed many industries including healthcare, finance, and education. It continues to evolve rapidly with new developments in machine learning and neural networks.",
-                "Machine Learning"
-            ]
-            self.llm = FakeListLLM(responses=responses)
-        else:
-            print(f"Using OpenAI API with model: {model_name}")
-            # Initialize LLM with OpenAI API
-            try:
-                self.llm = ChatOpenAI(
-                    model_name=model_name,
-                    temperature=temperature,
-                    openai_api_key=api_key
-                )
-                # Test the model to ensure it works - using a simple string instead of a message
-                test_result = self.llm.invoke("Write one sentence about AI.")
-                print(f"LLM test successful: Model {model_name} is working")
-            except Exception as e:
-                error_msg = str(e)
-                print(f"WARNING: Error initializing OpenAI ChatModel: {error_msg}")
-                
-                # Check if this is a model access error
-                if "does not exist" in error_msg or "not found" in error_msg:
-                    print(f"Model {model_name} not found, falling back to gpt-3.5-turbo")
-                    try:
-                        self.llm = ChatOpenAI(
-                            model_name="gpt-3.5-turbo",
-                            temperature=temperature,
-                            openai_api_key=api_key
-                        )
-                        print("Successfully initialized fallback model gpt-3.5-turbo")
-                    except Exception as fallback_error:
-                        print(f"ERROR: Could not initialize fallback model: {fallback_error}")
-                        print("Using demo mode with mock responses")
-                        responses = [
-                            "Artificial Intelligence",
-                            "This is a sample blog post about the topic. AI has transformed many industries including healthcare, finance, and education.",
-                            "Machine Learning"
-                        ]
-                        self.llm = FakeListLLM(responses=responses)
-                # Check if this is a quota error
-                elif "quota" in error_msg.lower() or "429" in error_msg:
-                    print("WARNING: OpenAI API quota exceeded.")
-                    print("Using demo mode with mock responses until quota is restored")
-                    responses = [
-                        "Artificial Intelligence",
-                        "This is a sample blog post about the topic. AI has transformed many industries including healthcare, finance, and education.",
-                        "Machine Learning"
-                    ]
-                    self.llm = FakeListLLM(responses=responses)
-                else:
-                    print("Using demo mode with mock responses")
-                    responses = [
-                        "Artificial Intelligence",
-                        "This is a sample blog post about the topic. AI has transformed many industries including healthcare, finance, and education.",
-                        "Machine Learning"
-                    ]
-                    self.llm = FakeListLLM(responses=responses)
-        
+        self.model_name = model_name
+        self.temperature = temperature
         self.rag_system = rag_system or RAGSystem()
         
+        # Initialize LLM
+        api_key = os.getenv("OPENAI_API_KEY", "").strip()
+        self._initialize_llm(api_key)
+        
+    def _initialize_llm(self, api_key):
+        """Initialize the LLM with appropriate fallbacks."""
+        if not api_key:
+            logger.warning("No API key found. Using demo mode with mock responses")
+            self._use_mock_llm()
+            return
+            
+        logger.info(f"Using OpenAI API with model: {self.model_name}")
+        
+        try:
+            self.llm = ChatOpenAI(
+                model_name=self.model_name,
+                temperature=self.temperature,
+                openai_api_key=api_key
+            )
+            
+            # Test the model
+            test_result = self.llm.invoke("Write one sentence about AI.")
+            logger.info(f"LLM test successful: Model {self.model_name} is working")
+            
+        except Exception as e:
+            error_msg = str(e)
+            logger.error(f"Error initializing OpenAI ChatModel: {error_msg}")
+            
+            # Analyze the error and respond appropriately
+            if self._is_model_access_error(error_msg):
+                self._try_fallback_model(api_key)
+            elif self._is_quota_error(error_msg):
+                logger.warning("OpenAI API quota exceeded.")
+                self._use_mock_llm()
+            else:
+                logger.warning(f"Unknown error: {error_msg}")
+                self._use_mock_llm()
+    
+    def _is_model_access_error(self, error_msg):
+        """Check if error is related to model access."""
+        return any(phrase in error_msg for phrase in ["does not exist", "not found", "not available"])
+    
+    def _is_quota_error(self, error_msg):
+        """Check if error is related to quota limits."""
+        return any(phrase in error_msg.lower() for phrase in ["quota", "rate limit", "429"])
+    
+    def _try_fallback_model(self, api_key):
+        """Try to use a fallback model."""
+        fallback_model = "gpt-3.5-turbo"
+        logger.info(f"Model {self.model_name} not found, falling back to {fallback_model}")
+        
+        try:
+            self.llm = ChatOpenAI(
+                model_name=fallback_model,
+                temperature=self.temperature,
+                openai_api_key=api_key
+            )
+            logger.info(f"Successfully initialized fallback model {fallback_model}")
+        except Exception as fallback_error:
+            logger.error(f"Could not initialize fallback model: {fallback_error}")
+            self._use_mock_llm()
+    
+    def _use_mock_llm(self):
+        """Use a fake LLM for demo mode."""
+        logger.info("Using demo mode with mock responses")
+        responses = [
+            "Artificial Intelligence",
+            "This is a sample blog post about the topic. AI has transformed many industries including healthcare, finance, and education.",
+            "Machine Learning"
+        ]
+        self.llm = FakeListLLM(responses=responses)
 
-    def extract_blog_content():
-        blog_content = Process(relevant_topic).fetch_blog_content()
-        
-        return blog_content
-        
-    def find_relevant_keyword(self, top_related_topics):
+    def User_input(self, user_input):
         """
-        Extract a keyword from the top_related_topics itself
+        Process user input to extract a blog topic using LLM.
         
         Args:
-            top_related_topics (list): The list of keyword to find a relevant keyword for
+            user_input: User input string containing blog topic ideas
             
         Returns:
-            str: A keyword derived from the topic
+            str: Extracted blog topic from user input
         """
-        # Simply use the topic as the keyword or extract the main subject
-        # Split by common separators and take the first meaningful word
-        
-        # topic is a list of topics... make llm call and retrieve relavent topic
-        #find link
-        relevant_topic = "test"
-        return relevant_topic
-
-        
-
-    def create_system_prompt(self, topic, relevant_keyword):
+        try:
+            prompt = f"""
+            Based on the following user input, identify and extract the main blog topic:
+            "{user_input}"
+            
+            Return only the extracted topic name, nothing else.
+            """
+            
+            topic = self.llm.predict(prompt).strip()
+            logger.info(f"Extracted topic from user input: {topic}")
+            return topic
+        except Exception as e:
+            logger.error(f"Error extracting topic from user input: {e}")
+            # Return original input as fallback
+            return user_input
+    
+    def find_relevant_keyword(self, top_related_topics):
         """
-        Create a system prompt with RAG content for the blog generation
+        Extract the most relevant keyword from a list of topics.
         
         Args:
-            topic (str): The blog topic
-            relevant_keyword (str): The identified relevant keyword
+            top_related_topics: List of potential topics
+            
+        Returns:
+            str: The most relevant keyword
+        """
+        if not top_related_topics or len(top_related_topics) == 0:
+            logger.warning("No topics provided, using 'general' as fallback")
+            return "general"
+            
+        try:
+            # Use LLM to select the most relevant topic
+            prompt = f"""
+            Given these trending topics: {', '.join(top_related_topics)},
+            which ONE would be the most relevant and engaging for a blog post?
+            Return only the selected topic name, nothing else.
+            """
+            
+            response = self.llm.predict(prompt)
+            relevant_topic = response.strip()
+            
+            # Validate the response
+            if relevant_topic not in top_related_topics:
+                logger.warning(f"LLM returned '{relevant_topic}' which is not in the provided topics. Using first topic instead.")
+                relevant_topic = top_related_topics[0]
+                
+            logger.info(f"Selected relevant topic: {relevant_topic}")
+            return relevant_topic
+            
+        except Exception as e:
+            logger.error(f"Error selecting relevant topic: {e}")
+            # Fallback to first topic
+            fallback = top_related_topics[0] if top_related_topics else "general"
+            logger.info(f"Using fallback topic: {fallback}")
+            return fallback
+
+    def create_system_prompt(self, topic, crawled_content=None):
+        """
+        Create a system prompt with RAG content for blog generation.
+        
+        Args:
+            topic: The main blog topic
+            crawled_content: Optional crawled content to add to RAG
             
         Returns:
             str: A system prompt for the LLM
         """
+        start_time = time.time()
+        
+        # Add crawled content to RAG if provided
+        if crawled_content and crawled_content.strip():
+            logger.info(f"Adding {len(crawled_content)} chars of crawled content to RAG")
+            self.rag_system.add_documents(crawled_content)
+        
+        # Retrieve relevant content for the topic
+        logger.info(f"Retrieving content relevant to: {topic}")
         rag_content = self.rag_system.retrieve_relevant_content(topic)
         
+        # Build the prompt
         system_prompt = f"""
-        You are an expert blog writer specializing in {relevant_keyword}.
-        Use the following reference information to create a comprehensive blog post:
+        You are a world-class blog writer with deep expertise in {topic}. Your mission is to craft an exceptional, share-worthy blog post that readers can't help but bookmark and share.
+        
+        Use these valuable research insights to enrich your content:
         
         {rag_content}
         
-        Write in a conversational yet authoritative tone. Structure with:
-        - Engaging introduction (1-2 paragraphs)
-        - 4-6 substantial key points with detailed explanations (2-3 paragraphs each)
-        - Examples, case studies, or data points to support your arguments
-        - Actionable insights or takeaways for the reader
-        - Strong conclusion summarizing the main points (1-2 paragraphs)
+        Captivate your audience with:
+        - A magnetic introduction that hooks readers instantly and establishes your authority (1-2 punchy paragraphs)
+        - 4-6 compelling key sections with rich, nuanced explanations that demonstrate genuine expertise (2-3 paragraphs each)
+        - Vivid real-world examples, fascinating case studies, or surprising data points that bring your arguments to life
+        - Game-changing actionable insights that readers can implement immediately for tangible results
+        - A powerful conclusion that reinforces your main points and leaves readers feeling enlightened (1-2 impactful paragraphs)
         
-        Ensure the blog is AT LEAST 1,000 words. Use headings to organize content.
-        Balance depth with readability, using industry terminology appropriately.
+        Create a substantial piece of AT LEAST 1,000 words. Use strategic headings and subheadings to guide readers through your narrative.
+        
+        Strike the perfect balance between intellectual depth and conversational accessibility. Use industry terminology naturally to demonstrate expertise without alienating newcomers to the topic.
+        
+        Remember: Your goal is to create content so valuable that readers consider it the definitive resource on {topic}.
         """
         
+        logger.info(f"System prompt created in {time.time() - start_time:.2f}s")
         return system_prompt
 
-    def generate_blog(self, topic):
+    def generate_blog(self, topic, user_input):
         """
-        Generate a blog based on the given topic
+        Generate a blog based on the given topic.
         
         Args:
-            topic (str): The topic to generate a blog about
+            topic: The topic to generate a blog about
             
         Returns:
             dict: A dictionary containing the topic and generated content
         """
-        # Extract a simple keyword from the topic
-        top_related_topics = Process(topic).find_top_queries()
-        relevant_keyword = self.find_relevant_keyword(top_related_topics)
+        start_time = time.time()
+        logger.info(f"Generating blog on topic: {topic}")
         
-        # Create system message with RAG content
-        system_prompt = self.create_system_prompt(topic, relevant_keyword)
-        
-        # Generate blog using LLM with newer format
         try:
-            # Create proper SystemMessage and HumanMessage objects
-            system_message = SystemMessage(content=system_prompt)
-            human_message = HumanMessage(content=f"Write a comprehensive blog post about {topic}.")
+            # Process the topic to find related queries
+            process = Process(topic)
+            top_related_topics = process.find_top_queries()
+            logger.info(f"Found {len(top_related_topics)} related topics")
             
-            # Invoke the LLM with proper message objects
+            # Find the most relevant keyword
+            relevant_keyword = self.find_relevant_keyword(top_related_topics)
+            logger.info(f"Selected relevant keyword: {relevant_keyword}")
+            
+            # Fetch blog content using the relevant keyword
+            logger.info(f"Fetching content for keyword: {relevant_keyword}")
+            crawled_content = process.fetch_blog_content(relevant_keyword)
+            logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
+            
+            # Create system prompt with RAG content
+            system_prompt = self.create_system_prompt(topic, crawled_content)
+            
+            # Generate blog using LLM
+            blog_content = self._generate_blog_content(topic, system_prompt, user_input)
+            
+            generation_time = time.time() - start_time
+            logger.info(f"Blog generated in {generation_time:.2f}s")
+            
+            return {
+                "topic": topic,
+                "content": blog_content,
+                "generation_time": generation_time
+            }
+            
+        except Exception as e:
+            logger.error(f"Error generating blog: {e}")
+            return {
+                "topic": topic,
+                "content": f"Error generating blog: {str(e)}",
+                "error": True
+            }
+            
+    def _generate_blog_content(self, topic, system_prompt, user_input):
+        """Generate blog content using the LLM."""
+        try:
+            logger.info("Generating blog with LLM")
+            
+            # Create message objects
+            system_message = SystemMessage(content=system_prompt)
+            human_message = HumanMessage(content=user_input)
+            
+            # Invoke the LLM
             result = self.llm.invoke([system_message, human_message])
             
-            # Extract the content from the result
+            # Extract content from result
             if hasattr(result, 'content'):
                 blog_content = result.content
             elif isinstance(result, str):
                 blog_content = result
             else:
-                # Try to get the content from the last message
+                # Try to get content from messages
                 blog_content = result.messages[-1].content if hasattr(result, 'messages') else str(result)
+                
+            logger.info(f"Generated blog with {len(blog_content)} chars")
+            return blog_content
             
         except Exception as e:
-            print(f"Error generating blog: {e}")
-            # Fallback to a simpler string prompt
-            try:
-                simple_prompt = f"Write a comprehensive blog post about {topic}. " + system_prompt
-                result = self.llm.invoke(simple_prompt)
-                if hasattr(result, 'content'):
-                    blog_content = result.content
-                else:
-                    blog_content = str(result)
-            except Exception as fallback_error:
-                print(f"Fallback error: {fallback_error}")
-                # Last resort - return mock content
-                blog_content = f"""# {topic}
+            logger.error(f"Error in primary generation: {e}")
+            return self._fallback_generation(topic, system_prompt)
+    
+    def _fallback_generation(self, topic, system_prompt):
+        """Fallback generation method."""
+        try:
+            logger.info("Using fallback generation method")
+            simple_prompt = f"Write a comprehensive blog post about {topic}. " + system_prompt
+            
+            result = self.llm.invoke(simple_prompt)
+            
+            if hasattr(result, 'content'):
+                return result.content
+            else:
+                return str(result)
+                
+        except Exception as fallback_error:
+            logger.error(f"Fallback generation failed: {fallback_error}")
+            
+            # Last resort - return mock content
+            return f"""# {topic}
 
 ## Introduction
-This is a sample blog post about {topic}. Due to API limitations, we're providing this placeholder content.
+This is a sample blog post about {topic}. Due to technical limitations, we're providing this placeholder content.
 
 ## Key Points
 - {topic} is an important area with significant developments
@@ -200,13 +327,8 @@ This is a sample blog post about {topic}. Due to API limitations, we're providin
 - Many experts believe {topic} will continue to evolve in coming years
 
 ## Conclusion
-As we've seen, {topic} presents both challenges and opportunities. This placeholder content is provided because your OpenAI API quota has been exceeded.
+As we've seen, {topic} presents both challenges and opportunities. This placeholder content is provided because of a technical error during content generation.
 """
-        
-        return {
-            "topic": topic,
-            "content": blog_content
-        }
 
 # Instantiate a default agent for backward compatibility
 default_agent = BlogAgent(temperature=0.7)
@@ -215,8 +337,8 @@ default_agent = BlogAgent(temperature=0.7)
 def find_relevant_keyword(topic):
     return default_agent.find_relevant_keyword(topic)
 
-def create_system_message(topic, relevant_keyword):
-    return default_agent.create_system_prompt(topic, relevant_keyword)
+def create_system_message(topic, relevant_keyword=None):
+    return default_agent.create_system_prompt(topic)
 
 def generate_blog(topic):
     return default_agent.generate_blog(topic)

@@ -30,12 +30,10 @@ class BlogLinkFetcher:
             print(f"Failed for query: {query} | Status Code: {response.status_code}")
             return []
 
-    def fetch_all_blogs(self, queries):
-        blogs = {}
-        for query in queries:
-            results = self.search_blogs(query)
-            blogs[query] = results 
-        return blogs
+    def fetch_all_blogs(self, query):
+        
+        results = self.search_blogs(query)
+        return results
     
     def save_results(self, data, output_file):
         with open(output_file, 'w') as f:
