@@ -1,0 +1,556 @@
+{
+    "rising": [
+        {
+            "topic": {
+                "value": "/g/11j6347l_t",
+                "title": "Utkarsh Small Finance Bank",
+                "type": "Topic"
+            },
+            "value": "Breakout",
+            "extracted_value": 143950,
+            "link": "https://trends.google.com/trends/explore?q=/g/11j6347l_t&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11j6347l_t&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11f014tcq6",
+                "title": "Bajaj Housing Finance Ltd",
+                "type": "Topic"
+            },
+            "value": "Breakout",
+            "extracted_value": 65550,
+            "link": "https://trends.google.com/trends/explore?q=/g/11f014tcq6&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11f014tcq6&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11fxx49rr1",
+                "title": "L&T Finance",
+                "type": "Finance service company"
+            },
+            "value": "Breakout",
+            "extracted_value": 63000,
+            "link": "https://trends.google.com/trends/explore?q=/g/11fxx49rr1&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11fxx49rr1&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11kh_w0vhp",
+                "title": "North East Small Finance Bank",
+                "type": "Topic"
+            },
+            "value": "Breakout",
+            "extracted_value": 56750,
+            "link": "https://trends.google.com/trends/explore?q=/g/11kh_w0vhp&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11kh_w0vhp&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11gk7413sp",
+                "title": "Bajaj Housing Finance Ltd",
+                "type": "Finance service company"
+            },
+            "value": "Breakout",
+            "extracted_value": 7450,
+            "link": "https://trends.google.com/trends/explore?q=/g/11gk7413sp&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11gk7413sp&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11f01gwxng",
+                "title": "Aadhar Housing Finance Ltd",
+                "type": "Finance service company"
+            },
+            "value": "+2,050%",
+            "extracted_value": 2050,
+            "link": "https://trends.google.com/trends/explore?q=/g/11f01gwxng&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11f01gwxng&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/1dtyv4rz",
+                "title": "NSE:BEL",
+                "type": "Topic"
+            },
+            "value": "+550%",
+            "extracted_value": 550,
+            "link": "https://trends.google.com/trends/explore?q=/g/1dtyv4rz&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F1dtyv4rz&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bc5ls_c7",
+                "title": "Ujjivan Financial Services",
+                "type": "Topic"
+            },
+            "value": "+550%",
+            "extracted_value": 550,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc5ls_c7&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc5ls_c7&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/121bdfn8",
+                "title": "Personal loan",
+                "type": "Topic"
+            },
+            "value": "+500%",
+            "extracted_value": 500,
+            "link": "https://trends.google.com/trends/explore?q=/g/121bdfn8&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121bdfn8&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0jt5888",
+                "title": "Ujjivan Financial Services",
+                "type": "Company"
+            },
+            "value": "+500%",
+            "extracted_value": 500,
+            "link": "https://trends.google.com/trends/explore?q=/m/0jt5888&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0jt5888&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/1hbvjbvf9",
+                "title": "NSE:IDEA",
+                "type": "Topic"
+            },
+            "value": "+400%",
+            "extracted_value": 400,
+            "link": "https://trends.google.com/trends/explore?q=/g/1hbvjbvf9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F1hbvjbvf9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11f00thlb_",
+                "title": "Jio Financial Services",
+                "type": "Financial services company"
+            },
+            "value": "+180%",
+            "extracted_value": 180,
+            "link": "https://trends.google.com/trends/explore?q=/g/11f00thlb_&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11f00thlb_&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0by4tc",
+                "title": "NTPC Limited",
+                "type": "Public sector undertaking"
+            },
+            "value": "+170%",
+            "extracted_value": 170,
+            "link": "https://trends.google.com/trends/explore?q=/m/0by4tc&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0by4tc&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0ddfqs6",
+                "title": "IRB Infrastructure",
+                "type": "Construction engineering company"
+            },
+            "value": "+150%",
+            "extracted_value": 150,
+            "link": "https://trends.google.com/trends/explore?q=/m/0ddfqs6&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0ddfqs6&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bc5k9ys2",
+                "title": "NTPC",
+                "type": "Topic"
+            },
+            "value": "+130%",
+            "extracted_value": 130,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc5k9ys2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc5k9ys2&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/1hbvx3d5n",
+                "title": "NSE:IRB",
+                "type": "Topic"
+            },
+            "value": "+120%",
+            "extracted_value": 120,
+            "link": "https://trends.google.com/trends/explore?q=/g/1hbvx3d5n&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F1hbvx3d5n&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0gfczpl",
+                "title": "Central Depository Services Limited",
+                "type": "Topic"
+            },
+            "value": "+120%",
+            "extracted_value": 120,
+            "link": "https://trends.google.com/trends/explore?q=/m/0gfczpl&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0gfczpl&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11t5rh9f3v",
+                "title": "Indian Renewable Energy Development Agency",
+                "type": "Financial services company"
+            },
+            "value": "+110%",
+            "extracted_value": 110,
+            "link": "https://trends.google.com/trends/explore?q=/g/11t5rh9f3v&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11t5rh9f3v&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bc6qkr00",
+                "title": "Vodafone Idea",
+                "type": "Topic"
+            },
+            "value": "+110%",
+            "extracted_value": 110,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc6qkr00&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc6qkr00&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0d2mqb",
+                "title": "Vodafone Idea Limited",
+                "type": "Telecommunications company"
+            },
+            "value": "+100%",
+            "extracted_value": 100,
+            "link": "https://trends.google.com/trends/explore?q=/m/0d2mqb&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0d2mqb&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11ry335jqh",
+                "title": "Unity Small Finance Bank Limited",
+                "type": "Bank"
+            },
+            "value": "+100%",
+            "extracted_value": 100,
+            "link": "https://trends.google.com/trends/explore?q=/g/11ry335jqh&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11ry335jqh&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11dylwpbbv",
+                "title": "Shriram Finance",
+                "type": "Insurance commercial company"
+            },
+            "value": "+100%",
+            "extracted_value": 100,
+            "link": "https://trends.google.com/trends/explore?q=/g/11dylwpbbv&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11dylwpbbv&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bc5mn6c_",
+                "title": "Tata Technologies",
+                "type": "Topic"
+            },
+            "value": "+90%",
+            "extracted_value": 90,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc5mn6c_&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc5mn6c_&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bc8ckty6",
+                "title": "NHPC",
+                "type": "Topic"
+            },
+            "value": "+90%",
+            "extracted_value": 90,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc8ckty6&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc8ckty6&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/026prsb",
+                "title": "Oil and Natural Gas Corporation",
+                "type": "Crude oil industry company"
+            },
+            "value": "+90%",
+            "extracted_value": 90,
+            "link": "https://trends.google.com/trends/explore?q=/m/026prsb&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F026prsb&tz=420"
+        }
+    ],
+    "top": [
+        {
+            "topic": {
+                "value": "/m/02_7t",
+                "title": "Finance",
+                "type": "Discipline"
+            },
+            "value": "100",
+            "extracted_value": 100,
+            "link": "https://trends.google.com/trends/explore?q=/m/02_7t&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02_7t&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/017ql",
+                "title": "Bank",
+                "type": "Building function"
+            },
+            "value": "98",
+            "extracted_value": 98,
+            "link": "https://trends.google.com/trends/explore?q=/m/017ql&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F017ql&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/03jzl9",
+                "title": "Share",
+                "type": "Finance"
+            },
+            "value": "37",
+            "extracted_value": 37,
+            "link": "https://trends.google.com/trends/explore?q=/m/03jzl9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03jzl9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01d_1l",
+                "title": "Price",
+                "type": "Topic"
+            },
+            "value": "36",
+            "extracted_value": 36,
+            "link": "https://trends.google.com/trends/explore?q=/m/01d_1l&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01d_1l&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01xm4b",
+                "title": "Share price",
+                "type": "Topic"
+            },
+            "value": "34",
+            "extracted_value": 34,
+            "link": "https://trends.google.com/trends/explore?q=/m/01xm4b&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01xm4b&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11fz9ztd_v",
+                "title": "Ujjivan Small Finance Bank",
+                "type": "Finance service company"
+            },
+            "value": "12",
+            "extracted_value": 12,
+            "link": "https://trends.google.com/trends/explore?q=/g/11fz9ztd_v&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11fz9ztd_v&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11fkyy850r",
+                "title": "AU Small Finance Bank",
+                "type": "Topic"
+            },
+            "value": "10",
+            "extracted_value": 10,
+            "link": "https://trends.google.com/trends/explore?q=/g/11fkyy850r&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11fkyy850r&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01dnzs",
+                "title": "Loan",
+                "type": "Topic"
+            },
+            "value": "9",
+            "extracted_value": 9,
+            "link": "https://trends.google.com/trends/explore?q=/m/01dnzs&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01dnzs&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11f00thlb_",
+                "title": "Jio Financial Services",
+                "type": "Financial services company"
+            },
+            "value": "9",
+            "extracted_value": 9,
+            "link": "https://trends.google.com/trends/explore?q=/g/11f00thlb_&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11f00thlb_&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/025tzgk",
+                "title": "HDFC Bank",
+                "type": "Financial services company"
+            },
+            "value": "8",
+            "extracted_value": 8,
+            "link": "https://trends.google.com/trends/explore?q=/m/025tzgk&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F025tzgk&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11b7rxl53t",
+                "title": "HDFC Bank",
+                "type": "Topic"
+            },
+            "value": "8",
+            "extracted_value": 8,
+            "link": "https://trends.google.com/trends/explore?q=/g/11b7rxl53t&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11b7rxl53t&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bc6p267l",
+                "title": "YES BANK",
+                "type": "Topic"
+            },
+            "value": "8",
+            "extracted_value": 8,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc6p267l&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc6p267l&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/09gml_6",
+                "title": "Yes Bank Limited",
+                "type": "Private banking company"
+            },
+            "value": "7",
+            "extracted_value": 7,
+            "link": "https://trends.google.com/trends/explore?q=/m/09gml_6&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F09gml_6&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01x1q9",
+                "title": "Rate",
+                "type": "Mathematics"
+            },
+            "value": "7",
+            "extracted_value": 7,
+            "link": "https://trends.google.com/trends/explore?q=/m/01x1q9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01x1q9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bc5ls_c7",
+                "title": "Ujjivan Financial Services",
+                "type": "Topic"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc5ls_c7&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc5ls_c7&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0jt5888",
+                "title": "Ujjivan Financial Services",
+                "type": "Company"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/m/0jt5888&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0jt5888&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11gdg_qz8g",
+                "title": "AU Small Finance Bank",
+                "type": "Commercial banking company"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/g/11gdg_qz8g&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11gdg_qz8g&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11dxjwzcxv",
+                "title": "Equitas Small Finance Bank",
+                "type": "Commercial banking company"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/g/11dxjwzcxv&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11dxjwzcxv&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11c2l1c_c9",
+                "title": "Bajaj Finance",
+                "type": "Non-banking financial company company"
+            },
+            "value": "5",
+            "extracted_value": 5,
+            "link": "https://trends.google.com/trends/explore?q=/g/11c2l1c_c9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c2l1c_c9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11csq2f3mc",
+                "title": "Equitas Small Finance Bank",
+                "type": "Topic"
+            },
+            "value": "5",
+            "extracted_value": 5,
+            "link": "https://trends.google.com/trends/explore?q=/g/11csq2f3mc&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11csq2f3mc&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/012qn2",
+                "title": "Interest",
+                "type": "Topic"
+            },
+            "value": "5",
+            "extracted_value": 5,
+            "link": "https://trends.google.com/trends/explore?q=/m/012qn2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F012qn2&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/02kh0r",
+                "title": "NSE",
+                "type": "Stock exchange"
+            },
+            "value": "5",
+            "extracted_value": 5,
+            "link": "https://trends.google.com/trends/explore?q=/m/02kh0r&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02kh0r&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/012zr6y8",
+                "title": "Small finance bank",
+                "type": "Topic"
+            },
+            "value": "4",
+            "extracted_value": 4,
+            "link": "https://trends.google.com/trends/explore?q=/m/012zr6y8&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F012zr6y8&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/05p8s2",
+                "title": "Credit",
+                "type": "Topic"
+            },
+            "value": "4",
+            "extracted_value": 4,
+            "link": "https://trends.google.com/trends/explore?q=/m/05p8s2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05p8s2&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/120z18l3",
+                "title": "Company",
+                "type": "Organization type"
+            },
+            "value": "4",
+            "extracted_value": 4,
+            "link": "https://trends.google.com/trends/explore?q=/g/120z18l3&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F120z18l3&tz=420"
+        }
+    ]
+}

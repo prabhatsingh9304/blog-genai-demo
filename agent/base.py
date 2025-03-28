@@ -10,6 +10,7 @@ from rag.rag import RAGSystem
 from dotenv import load_dotenv
 import json
 from blog.process import Process
+import asyncio
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -52,7 +53,8 @@ class BlogAgent:
             self.llm = ChatOpenAI(
                 model_name=self.model_name,
                 temperature=self.temperature,
-                openai_api_key=api_key
+                openai_api_key=api_key,
+                streaming=True  # Enable streaming
             )
             
             # Test the model
@@ -329,6 +331,58 @@ This is a sample blog post about {topic}. Due to technical limitations, we're pr
 ## Conclusion
 As we've seen, {topic} presents both challenges and opportunities. This placeholder content is provided because of a technical error during content generation.
 """
+
+    async def generate_blog_stream(self, topic, user_input):
+        """
+        Generate a blog based on the given topic with streaming support.
+        
+        Args:
+            topic: The topic to generate a blog about
+            user_input: Original user input
+            
+        Yields:
+            str: Chunks of the generated blog content
+        """
+        start_time = time.time()
+        logger.info(f"Generating blog on topic: {topic}")
+        
+        try:
+            # Process the topic to find related queries
+            process = Process(topic)
+            top_related_topics = process.find_top_queries()
+            logger.info(f"Found {len(top_related_topics)} related topics")
+            
+            # Find the most relevant keyword
+            relevant_keyword = self.find_relevant_keyword(top_related_topics)
+            logger.info(f"Selected relevant keyword: {relevant_keyword}")
+            
+            # Fetch blog content using the relevant keyword
+            logger.info(f"Fetching content for keyword: {relevant_keyword}")
+            crawled_content = process.fetch_blog_content(relevant_keyword)
+            logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
+            
+            # Create system prompt with RAG content
+            system_prompt = self.create_system_prompt(topic, crawled_content)
+            
+            # Create message objects
+            system_message = SystemMessage(content=system_prompt)
+            human_message = HumanMessage(content=user_input)
+            
+            # Stream the response
+            async for chunk in self.llm.astream([system_message, human_message]):
+                if hasattr(chunk, 'content'):
+                    yield chunk.content
+                elif isinstance(chunk, str):
+                    yield chunk
+                else:
+                    yield str(chunk)
+            
+            generation_time = time.time() - start_time
+            logger.info(f"Blog generated in {generation_time:.2f}s")
+            
+        except Exception as e:
+            logger.error(f"Error generating blog: {e}")
+            yield f"Error generating blog: {str(e)}"
 
 # Instantiate a default agent for backward compatibility
 default_agent = BlogAgent(temperature=0.7)

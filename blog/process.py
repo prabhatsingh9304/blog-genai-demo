@@ -8,7 +8,7 @@ import logging
 from dotenv import load_dotenv
 
 load_dotenv()
-# Configure logging
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger('process')
 
@@ -26,6 +26,7 @@ class Process:
             fetcher = BlogLinkFetcher(api_key=google_api_key, cx=google_cx, num_of_res=NumberOfResutsPerTopic)
             blogs = fetcher.fetch_all_blogs(query)
             fetcher.save_results(blogs, "./blog/link.json")
+            
         
             # Get the URLs from the fetched blogs
             urls = []
@@ -60,11 +61,4 @@ class Process:
         return top_topics
     
 
-# def main():
-#     process = Process("machine learning")
-
-#     process.fetch_blog_content("machine learning")
-
-# if __name__ == "__main__":
-#     main()
         

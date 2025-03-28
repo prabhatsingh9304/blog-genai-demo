@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SEO Blog Generator",
+  title: "Terra AI",
   description: "Optimize your staking rewards with AI-powered strategies",
   keywords: [
     "blog-generator",

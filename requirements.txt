@@ -1,4 +1,4 @@
-fastapi>=0.110.0
+setuptools==68.2.2
 uvicorn>=0.27.0
 pydantic>=2.0.0
 python-dotenv>=1.0.0
@@ -10,8 +10,9 @@ openai>=1.12.0
 faiss-cpu>=1.7.4
 requests==2.31.0
 beautifulsoup4==4.12.2
-numpy>=1.23.0
+numpy<2
 tiktoken>=0.3.3
-numpy==1.24.3
-tiktoken==0.5.2
 playwright==1.42.0
+serpapi
+google-search-results 
+fastapi 

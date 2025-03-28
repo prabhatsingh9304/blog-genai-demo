@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { StakingService } from "@/services/staking";
+import { useState, useEffect, useRef } from "react";
+import { BlogService } from "@/services/generate";
 import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 import { ApiError } from "@/components/error/ApiError";
+
 
 interface Message {
   role: "user" | "assistant";
@@ -11,20 +12,23 @@ interface Message {
   data?: any;
 }
 
-export function StakingAgentWrapper() {
+export function BlogAgentWrapper() {
   return (
     <ErrorBoundary>
-      <StakingAgent />
+      <BlogAgent />
     </ErrorBoundary>
   );
 }
 
-function StakingAgent() {
+function BlogAgent() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const stakingService = new StakingService();
+  const [currentStreamingMessage, setCurrentStreamingMessage] = useState("");
+  const streamingMessageRef = useRef("");
+  const previousChunkRef = useRef("");
+  const blogService = new BlogService();
 
   // Initial greeting
   useEffect(() => {
@@ -45,25 +49,48 @@ function StakingAgent() {
     setInput("");
     setIsLoading(true);
     setError(null);
+    setCurrentStreamingMessage("");
+    streamingMessageRef.current = "";
+    previousChunkRef.current = "";
 
     // Add user message
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
 
     try {
-      // Get response from agent
-      const response = await stakingService.chat(userMessage);
+      // Get streaming response from agent
+      const response = await blogService.chat(userMessage, (chunk) => {
+        // Only process the new part of the chunk
+        const newContent = chunk.slice(previousChunkRef.current.length);
+        if (newContent) {
+          streamingMessageRef.current += newContent;
+          previousChunkRef.current = chunk;
+          
+          // Update the state less frequently to avoid React re-render issues
+          requestAnimationFrame(() => {
+            setCurrentStreamingMessage(streamingMessageRef.current);
+          });
+        }
+      });
 
-      // Add agent response
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: response.message,
-          data: response.data,
-        },
-      ]);
+      console.log('[BlogAgent] Final response received:', response);
+      
+      // Add final agent response
+      if (response.message) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant" as const,
+            content: response.message,
+            data: response.data,
+          }
+        ]);
+      }
+      
+      // Clear streaming message
+      setCurrentStreamingMessage("");
+      streamingMessageRef.current = "";
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error in chat:", error);
       setError(
         "Failed to get response from blog generating agent. Please try again."
       );
@@ -72,10 +99,20 @@ function StakingAgent() {
     }
   }
 
+  // Simplify the streaming message display
+  const StreamingMessage = () => {
+    // Don't split and map, just render directly to avoid React reconciliation issues
+    return (
+      <div className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">
+        {currentStreamingMessage}
+      </div>
+    );
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-xl overflow-hidden border border-gray-100">
       {/* Chat Messages */}
-      <div className="h-[600px] overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-gray-50 to-white">
+      <div className="h-[65vh] overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-gray-50 to-white">
         {messages.map((message, index) => (
           <div
             key={index}
@@ -91,14 +128,7 @@ function StakingAgent() {
               }`}
             >
               <div className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">
-                {message.content.split("\n").map((line, i) => (
-                  <div
-                    key={i}
-                    className={`${line.trim().startsWith("-") ? "pl-4" : ""}`}
-                  >
-                    {line}
-                  </div>
-                ))}
+                {message.content}
               </div>
               {message.data && (
                 <div className="mt-3 pt-3 border-t border-gray-200 text-sm space-y-1 opacity-90">
@@ -113,7 +143,16 @@ function StakingAgent() {
             </div>
           </div>
         ))}
-        {isLoading && (
+        
+        {isLoading && currentStreamingMessage && (
+          <div className="flex justify-start animate-fade-in">
+            <div className="bg-white border border-gray-100 rounded-2xl px-6 py-4 shadow-sm">
+              <StreamingMessage />
+            </div>
+          </div>
+        )}
+        
+        {isLoading && !currentStreamingMessage && (
           <div className="flex justify-start animate-fade-in">
             <div className="bg-white border border-gray-100 rounded-2xl px-6 py-4 text-gray-500 shadow-sm">
               <div className="flex items-center gap-2">
@@ -160,4 +199,4 @@ function StakingAgent() {
   );
 }
 
-export default StakingAgentWrapper;
+export default BlogAgentWrapper;
