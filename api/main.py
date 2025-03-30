@@ -6,7 +6,11 @@ import os
 import sys
 import time
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from dotenv import load_dotenv
+import uvicorn
+import json
+import asyncio
 
 # Add project root to path to import modules
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -56,14 +60,11 @@ class BlogResponse(BaseModel):
     file_path: Optional[str] = None
     generation_time: float
 
-@app.get("/")
-async def root():
-    return {"message": "Welcome to Blog Generation"}
 
-@app.post("/generate", response_model=BlogResponse)
+@app.post("/generate")
 async def generate_blog(request: BlogRequest):
     """
-    Generate a blog post based on the provided topic
+    Generate a blog post based on the provided topic with streaming response
     """
     try:
         # Record start time
@@ -78,26 +79,34 @@ async def generate_blog(request: BlogRequest):
         # Generate the blog
         topic = agent.User_input(request.topic)
         print(f"Extracted topic: {topic}")
-        blog_data = agent.generate_blog(topic, request.topic)
         
-        # Calculate generation time
-        generation_time = time.time() - start_time
+        async def generate_stream():
+            # Initialize list to collect chunks
+            collected_chunks = []
+            
+            # Generate blog content with streaming
+            async for chunk in agent.generate_blog_stream(topic, request.topic):
+                collected_chunks.append(chunk)
+                yield f"data: {json.dumps({'chunk': chunk})}\n\n"
+            
+            # Calculate generation time
+            generation_time = time.time() - start_time
+            
+            # Save to file if requested
+            file_path = None
+            if request.save_to_file:
+                file_path = blog_tools.save_blog({
+                    "topic": topic,
+                    "content": "".join(collected_chunks),
+                }, request.output_dir)
+            
+            # Send final metadata
+            yield f"data: {json.dumps({'done': True, 'metadata': {'generation_time': round(generation_time, 2), 'file_path': file_path}})}\n\n"
         
-        # Save to file if requested
-        file_path = None
-        if request.save_to_file:
-            file_path = blog_tools.save_blog(blog_data, request.output_dir)
-        
-        # Prepare response
-        response = {
-            "topic": blog_data["topic"],
-            "content": blog_data["content"],
-            "generated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "file_path": file_path,
-            "generation_time": round(generation_time, 2)
-        }
-        
-        return response
+        return StreamingResponse(
+            generate_stream(),
+            media_type="text/event-stream"
+        )
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Blog generation failed: {str(e)}")
@@ -115,7 +124,6 @@ async def list_blogs(output_dir: Optional[str] = "generated_blogs"):
         raise HTTPException(status_code=500, detail=f"Failed to list blogs: {str(e)}")
 
 if __name__ == "__main__":
-    import uvicorn
     # Check if API key is set
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     
