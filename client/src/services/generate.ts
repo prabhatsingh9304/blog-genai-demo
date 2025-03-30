@@ -49,8 +49,8 @@ export class BlogService {
               const data = JSON.parse(jsonStr);
 
               if (data.chunk) {
-                // Only process the new part of the chunk
-                const newContent = data.chunk.slice(previousChunk.length);
+                // Use the utility function to handle potential duplicates
+                const newContent = removeDuplicateStart(previousChunk, data.chunk);
                 if (newContent) {
                   accumulatedMessage += newContent;
                   onChunk(newContent);
@@ -61,6 +61,8 @@ export class BlogService {
           } catch (e) {
             console.error("[BlogService] Error parsing chunk:", e);
             console.error("[BlogService] Raw chunk that failed:", chunk);
+            // Continue processing even if one chunk fails
+            continue;
           }
         }
 

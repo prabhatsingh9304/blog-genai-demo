@@ -27,8 +27,13 @@ function BlogAgent() {
   const [error, setError] = useState<string | null>(null);
   const [currentStreamingMessage, setCurrentStreamingMessage] = useState("");
   const streamingMessageRef = useRef("");
-  const previousChunkRef = useRef("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const blogService = new BlogService();
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, currentStreamingMessage]);
 
   // Initial greeting
   useEffect(() => {
@@ -51,7 +56,6 @@ function BlogAgent() {
     setError(null);
     setCurrentStreamingMessage("");
     streamingMessageRef.current = "";
-    previousChunkRef.current = "";
 
     // Add user message
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
@@ -59,17 +63,15 @@ function BlogAgent() {
     try {
       // Get streaming response from agent
       const response = await blogService.chat(userMessage, (chunk) => {
-        // Only process the new part of the chunk
-        const newContent = chunk.slice(previousChunkRef.current.length);
-        if (newContent) {
-          streamingMessageRef.current += newContent;
-          previousChunkRef.current = chunk;
-          
-          // Update the state less frequently to avoid React re-render issues
-          requestAnimationFrame(() => {
-            setCurrentStreamingMessage(streamingMessageRef.current);
-          });
-        }
+        // Use ref to track the current message without relying on state
+        streamingMessageRef.current += chunk;
+        
+        // Update the state less frequently to avoid React re-render issues
+        // This debouncing technique helps with small token-by-token chunks
+        // Use a timeout to batch updates
+        requestAnimationFrame(() => {
+          setCurrentStreamingMessage(streamingMessageRef.current);
+        });
       });
 
       console.log('[BlogAgent] Final response received:', response);
@@ -163,6 +165,7 @@ function BlogAgent() {
             </div>
           </div>
         )}
+        <div ref={messagesEndRef} />
       </div>
 
       {/* Error Message */}
