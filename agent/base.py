@@ -121,10 +121,12 @@ class BlogAgent:
         """
         try:
             prompt = f"""
-            Based on the following user input, identify and extract the main blog topic:
-            "{user_input}"
-            
-            Return only the extracted topic name, nothing else.
+            Extract the main blog topic from the following user input:  
+            "{user_input}"  
+
+            Ensure the extracted topic is concise, relevant, and properly formatted for a blog title.  
+            Return only the topic name—no explanations.  
+
             """
             
             topic = self.llm.predict(prompt).strip()
@@ -135,7 +137,7 @@ class BlogAgent:
             # Return original input as fallback
             return user_input
     
-    def find_relevant_keyword(self, top_related_topics):
+    def find_relevant_keyword(self, topic, top_related_topics):
         """
         Extract the most relevant keyword from a list of topics.
         
@@ -151,10 +153,10 @@ class BlogAgent:
             
         try:
             # Use LLM to select the most relevant topic
-            prompt = f"""
-            Given these trending topics: {', '.join(top_related_topics)},
-            which ONE would be the most relevant and engaging for a blog post?
-            Return only the selected topic name, nothing else.
+            prompt = f"""            
+            From these trending topics: {', '.join(top_related_topics)},  
+            select the **most relevant and engaging** one for a blog on "{topic}".  
+            Return only the topic name—no explanations.  
             """
             
             response = self.llm.predict(prompt)
@@ -199,25 +201,49 @@ class BlogAgent:
         
         # Build the prompt
         system_prompt = f"""
-        You are a world-class blog writer with deep expertise in {topic}. Your mission is to craft an exceptional, share-worthy blog post that readers can't help but bookmark and share.
-        
-        Use these valuable research insights to enrich your content:
-        
-        {rag_content}
-        
-        Captivate your audience with:
-        - A magnetic introduction that hooks readers instantly and establishes your authority (1-2 punchy paragraphs)
-        - 4-6 compelling key sections with rich, nuanced explanations that demonstrate genuine expertise (2-3 paragraphs each)
-        - Vivid real-world examples, fascinating case studies, or surprising data points that bring your arguments to life
-        - Game-changing actionable insights that readers can implement immediately for tangible results
-        - A powerful conclusion that reinforces your main points and leaves readers feeling enlightened (1-2 impactful paragraphs)
-        
-        Create a substantial piece of AT LEAST 1,000 words. Use strategic headings and subheadings to guide readers through your narrative.
-        
-        Strike the perfect balance between intellectual depth and conversational accessibility. Use industry terminology naturally to demonstrate expertise without alienating newcomers to the topic.
-        
-        Remember: Your goal is to create content so valuable that readers consider it the definitive resource on {topic}.
+        Write a high-quality, SEO-optimized blog post on **{topic}** that is engaging, informative, and designed to rank well on search engines. The blog should be structured for readability and user engagement while demonstrating deep expertise.  
+
+        ### **Requirements:**  
+        ✔ **Word Count:** At least **1,000 words**  
+        ✔ **Readability:** Aim for a Flesch Reading Ease score of **50+** (clear and accessible writing)  
+        ✔ **Structure:** Use clear **H2 & H3 subheadings** for better organization and SEO  
+        ✔ **Paragraph Length:** Keep paragraphs under **150 words** for easy reading  
+        ✔ **Sentence Length:** Ensure **75%+ of sentences have 20 words or fewer**  
+        ✔ **Transition Words:** Use transition words in at least **30% of sentences** to improve flow  
+        ✔ **Passive Voice:** Keep passive voice below **10%** for clarity  
+
+        ### **Blog Structure:**  
+
+        #### **1. Engaging Introduction (1-2 Short Paragraphs)**  
+        - Hook the reader with a **compelling fact, question, or bold statement**  
+        - Establish **authority and relevance**—explain why this topic matters  
+        - Briefly outline what readers will learn  
+
+        #### **2. Well-Structured Key Sections (4-6 H2 Subheadings)**  
+        - Each section should provide **valuable insights, expert analysis, and real-world examples**  
+        - Use **bullet points and lists** for better readability  
+        - Keep content **concise, actionable, and engaging**  
+
+        #### **3. Data, Case Studies, and Examples**  
+        - Incorporate **statistics, case studies, or real-world applications** to enhance credibility  
+        - Use **quotes from experts** or industry references if applicable  
+
+        #### **4. Actionable Takeaways & Conclusion (1-2 Paragraphs)**  
+        - Summarize key points and insights  
+        - Provide **actionable recommendations** that readers can implement immediately  
+        - End with a **call to action** (e.g., comment, share, explore related content)  
+
+        ### **SEO Best Practices:**  
+            **Use Primary & Secondary Keywords Naturally**—avoid keyword stuffing  
+            **Include Internal & External Links** for credibility and engagement  
+            **Write in a Conversational Yet Professional Tone**  
+            **Ensure Mobile-Friendliness**—short paragraphs, scannable text, and engaging formatting  
+
+        This blog should be **so valuable that readers consider it the ultimate resource on {topic} and feel compelled to share it.**"  
+
+        Use these valuable research insights to enrich your content: {rag_content} 
         """
+        
         
         logger.info(f"System prompt created in {time.time() - start_time:.2f}s")
         return system_prompt
@@ -353,7 +379,7 @@ As we've seen, {topic} presents both challenges and opportunities. This placehol
             logger.info(f"Found {len(top_related_topics)} related topics")
             
             # Find the most relevant keyword
-            relevant_keyword = self.find_relevant_keyword(top_related_topics)
+            relevant_keyword = self.find_relevant_keyword(topic, top_related_topics)
             logger.info(f"Selected relevant keyword: {relevant_keyword}")
             
             # Fetch blog content using the relevant keyword
