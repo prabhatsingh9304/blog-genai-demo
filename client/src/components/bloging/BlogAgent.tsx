@@ -10,6 +10,7 @@ interface Message {
   role: "user" | "assistant";
   content: string;
   data?: any;
+  imageUrl?: string;
 }
 
 export function BlogAgentWrapper() {
@@ -24,6 +25,7 @@ function BlogAgent() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentStreamingMessage, setCurrentStreamingMessage] = useState("");
   const streamingMessageRef = useRef("");
@@ -63,19 +65,12 @@ function BlogAgent() {
     try {
       // Get streaming response from agent
       const response = await blogService.chat(userMessage, (chunk) => {
-        // Use ref to track the current message without relying on state
         streamingMessageRef.current += chunk;
-        
-        // Update the state less frequently to avoid React re-render issues
-        // This debouncing technique helps with small token-by-token chunks
-        // Use a timeout to batch updates
         requestAnimationFrame(() => {
           setCurrentStreamingMessage(streamingMessageRef.current);
         });
       });
 
-      console.log('[BlogAgent] Final response received:', response);
-      
       // Add final agent response
       if (response.message) {
         setMessages((prev) => [
@@ -86,6 +81,35 @@ function BlogAgent() {
             data: response.data,
           }
         ]);
+
+        // Generate banner image
+        if (response.data?.title) {
+          setIsGeneratingImage(true);
+          try {
+            const imageResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/generate-image`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+
+            if (imageResponse.ok) {
+              const imageData = await imageResponse.json();
+              setMessages((prev) => {
+                const newMessages = [...prev];
+                const lastMessage = newMessages[newMessages.length - 1];
+                if (lastMessage.role === "assistant") {
+                  lastMessage.imageUrl = imageData.imageUrl;
+                }
+                return newMessages;
+              });
+            }
+          } catch (error) {
+            console.error("Error generating image:", error);
+          } finally {
+            setIsGeneratingImage(false);
+          }
+        }
       }
       
       // Clear streaming message
@@ -142,6 +166,16 @@ function BlogAgent() {
                   ))}
                 </div>
               )}
+              {message.imageUrl && (
+                <div className="mt-4">
+                  <h3 className="text-lg font-semibold mb-2">Banner Image</h3>
+                  <img 
+                    src={message.imageUrl} 
+                    alt="Blog Banner" 
+                    className="w-full rounded-lg shadow-md"
+                  />
+                </div>
+              )}
             </div>
           </div>
         ))}
@@ -165,6 +199,20 @@ function BlogAgent() {
             </div>
           </div>
         )}
+
+        {isGeneratingImage && (
+          <div className="flex justify-start animate-fade-in">
+            <div className="bg-white border border-gray-100 rounded-2xl px-6 py-4 text-gray-500 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span>Generating banner image...</span>
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <div ref={messagesEndRef} />
       </div>
 

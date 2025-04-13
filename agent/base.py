@@ -177,12 +177,13 @@ class BlogAgent:
             logger.info(f"Using fallback topic: {fallback}")
             return fallback
 
-    def create_system_prompt(self, topic, crawled_content=None):
+    def create_system_prompt(self, topic, keywords, tone="Helpful & Value-Driven", target_audience="general", crawled_content=None):
         """
         Create a system prompt with RAG content for blog generation.
         
         Args:
             topic: The main blog topic
+            keywords: The keywords to incorporate
             crawled_content: Optional crawled content to add to RAG
             
         Returns:
@@ -199,48 +200,27 @@ class BlogAgent:
         logger.info(f"Retrieving content relevant to: {topic}")
         rag_content = self.rag_system.retrieve_relevant_content(topic)
         
-        # Build the prompt
+        logger.info(f"RAG content: {rag_content}")
+        
+        # Build a more concise prompt
         system_prompt = f"""
-        Write a high-quality, SEO-optimized blog post on **{topic}** that is engaging, informative, and designed to rank well on search engines. The blog should be structured for readability and user engagement while demonstrating deep expertise.  
-
-        ### **Requirements:**  
-        ✔ **Word Count:** At least **1,000 words**  
-        ✔ **Readability:** Aim for a Flesch Reading Ease score of **50+** (clear and accessible writing)  
-        ✔ **Structure:** Use clear **H2 & H3 subheadings** for better organization and SEO  
-        ✔ **Paragraph Length:** Keep paragraphs under **150 words** for easy reading  
-        ✔ **Sentence Length:** Ensure **75%+ of sentences have 20 words or fewer**  
-        ✔ **Transition Words:** Use transition words in at least **30% of sentences** to improve flow  
-        ✔ **Passive Voice:** Keep passive voice below **10%** for clarity  
-
-        ### **Blog Structure:**  
-
-        #### **1. Engaging Introduction (1-2 Short Paragraphs)**  
-        - Hook the reader with a **compelling fact, question, or bold statement**  
-        - Establish **authority and relevance**—explain why this topic matters  
-        - Briefly outline what readers will learn  
-
-        #### **2. Well-Structured Key Sections (4-6 H2 Subheadings)**  
-        - Each section should provide **valuable insights, expert analysis, and real-world examples**  
-        - Use **bullet points and lists** for better readability  
-        - Keep content **concise, actionable, and engaging**  
-
-        #### **3. Data, Case Studies, and Examples**  
-        - Incorporate **statistics, case studies, or real-world applications** to enhance credibility  
-        - Use **quotes from experts** or industry references if applicable  
-
-        #### **4. Actionable Takeaways & Conclusion (1-2 Paragraphs)**  
-        - Summarize key points and insights  
-        - Provide **actionable recommendations** that readers can implement immediately  
-        - End with a **call to action** (e.g., comment, share, explore related content)  
-
-        ### **SEO Best Practices:**  
-            **Use Primary & Secondary Keywords Naturally**—avoid keyword stuffing  
-            **Include Internal & External Links** for credibility and engagement  
-            **Write in a Conversational Yet Professional Tone**  
-            **Ensure Mobile-Friendliness**—short paragraphs, scannable text, and engaging formatting  
-
-        This blog should be **so valuable that readers consider it the ultimate resource on {topic} and feel compelled to share it.**"  
-
+        Write an SEO-optimized blog post on topic: **{topic}**. 
+        
+        Constraints:
+        - Ensure that the following keywords are naturally incorporated: {keywords}. 
+        - Maintain a {tone} tone suitable for {target_audience}. 
+        - The content should be detailed, structured with headings (H2, H3), and optimized for search engines. 
+        - Use engaging introductions, clear explanations, bullet points, and actionable takeaways. 
+        - The word count should be around 1500-2000 words. Conclude with a compelling Call to Action: '[CTA]'.
+        - Ensure proper formatting, readability, and keyword distribution without stuffing. 
+        - Add meta description (150-160 characters) summarizing the article.
+        
+        Additional requirements:
+        - Provide a meta tags for SEO optimization in new line.
+        - Provide a alt text for the banner image in new line, use the keyword in alt text.
+        - Provide a name for the banner image in new line, use the keyword in name.
+        - Provide a url alias for the blog in new line, use the keyword in url alias.
+        
         Use these valuable research insights to enrich your content: {rag_content} 
         """
         
@@ -300,7 +280,7 @@ class BlogAgent:
             }
             
     def _generate_blog_content(self, topic, system_prompt, user_input):
-        """Generate blog content using the LLM."""
+        """Generate blog content using the LLM in multiple rounds to avoid token limits."""
         try:
             logger.info("Generating blog with LLM")
             
@@ -324,7 +304,7 @@ class BlogAgent:
             return blog_content
             
         except Exception as e:
-            logger.error(f"Error in primary generation: {e}")
+            logger.error(f"Error in multi-round generation: {e}")
             return self._fallback_generation(topic, system_prompt)
     
     def _fallback_generation(self, topic, system_prompt):
@@ -382,17 +362,22 @@ As we've seen, {topic} presents both challenges and opportunities. This placehol
             relevant_keyword = self.find_relevant_keyword(topic, top_related_topics)
             logger.info(f"Selected relevant keyword: {relevant_keyword}")
             
+            
             # Fetch blog content using the relevant keyword
             logger.info(f"Fetching content for keyword: {relevant_keyword}")
             crawled_content = process.fetch_blog_content(relevant_keyword)
             logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
             
             # Create system prompt with RAG content
-            system_prompt = self.create_system_prompt(topic, crawled_content)
+            system_prompt = self.create_system_prompt(topic, top_related_topics, crawled_content)
             
             # Create message objects
             system_message = SystemMessage(content=system_prompt)
             human_message = HumanMessage(content=user_input)
+            
+            # #Generate Image
+            # image_gen = ImageGenerator().generate_image(relevant_keyword)
+            # print(image_gen)
             
             # Stream the response
             async for chunk in self.llm.astream([system_message, human_message]):

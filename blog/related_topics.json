@@ -6,8 +6,8 @@
                 "title": "Service",
                 "type": "Topic"
             },
-            "value": "+400%",
-            "extracted_value": 400,
+            "value": "+350%",
+            "extracted_value": 350,
             "link": "https://trends.google.com/trends/explore?q=/g/121cxq83&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121cxq83&tz=420"
         },
@@ -24,36 +24,14 @@
         },
         {
             "topic": {
-                "value": "/m/0d9cbr",
-                "title": "Evidence",
+                "value": "/m/0mkz",
+                "title": "Artificial intelligence",
                 "type": "Topic"
             },
             "value": "+80%",
             "extracted_value": 80,
-            "link": "https://trends.google.com/trends/explore?q=/m/0d9cbr&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0d9cbr&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11rpvmw86k",
-                "title": "primary",
-                "type": "Topic"
-            },
-            "value": "+80%",
-            "extracted_value": 80,
-            "link": "https://trends.google.com/trends/explore?q=/g/11rpvmw86k&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11rpvmw86k&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11spgz6myk",
-                "title": "multiple",
-                "type": "Topic"
-            },
-            "value": "+80%",
-            "extracted_value": 80,
-            "link": "https://trends.google.com/trends/explore?q=/g/11spgz6myk&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11spgz6myk&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/0mkz&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0mkz&tz=420"
         },
         {
             "topic": {
@@ -68,14 +46,25 @@
         },
         {
             "topic": {
-                "value": "/m/0mkz",
-                "title": "Artificial intelligence",
+                "value": "/g/11rpvmw86k",
+                "title": "primary",
                 "type": "Topic"
             },
             "value": "+70%",
             "extracted_value": 70,
-            "link": "https://trends.google.com/trends/explore?q=/m/0mkz&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0mkz&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/g/11rpvmw86k&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11rpvmw86k&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0d9cbr",
+                "title": "Evidence",
+                "type": "Topic"
+            },
+            "value": "+70%",
+            "extracted_value": 70,
+            "link": "https://trends.google.com/trends/explore?q=/m/0d9cbr&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0d9cbr&tz=420"
         },
         {
             "topic": {
@@ -83,10 +72,21 @@
                 "title": "Understanding",
                 "type": "Topic"
             },
-            "value": "+60%",
-            "extracted_value": 60,
+            "value": "+70%",
+            "extracted_value": 70,
             "link": "https://trends.google.com/trends/explore?q=/m/01fndy&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01fndy&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11spgz6myk",
+                "title": "multiple",
+                "type": "Topic"
+            },
+            "value": "+70%",
+            "extracted_value": 70,
+            "link": "https://trends.google.com/trends/explore?q=/g/11spgz6myk&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11spgz6myk&tz=420"
         },
         {
             "topic": {
@@ -112,17 +112,6 @@
         },
         {
             "topic": {
-                "value": "/m/03ws09",
-                "title": "Stakeholder",
-                "type": "Corporate"
-            },
-            "value": "+60%",
-            "extracted_value": 60,
-            "link": "https://trends.google.com/trends/explore?q=/m/03ws09&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03ws09&tz=420"
-        },
-        {
-            "topic": {
                 "value": "/m/01qfr1",
                 "title": "Social",
                 "type": "Topic"
@@ -134,58 +123,14 @@
         },
         {
             "topic": {
-                "value": "/m/019h6j",
-                "title": "Supply chain",
-                "type": "Topic"
+                "value": "/m/03ws09",
+                "title": "Stakeholder",
+                "type": "Corporate"
             },
             "value": "+60%",
             "extracted_value": 60,
-            "link": "https://trends.google.com/trends/explore?q=/m/019h6j&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F019h6j&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/01jqpl",
-                "title": "Strategic management",
-                "type": "Field of study"
-            },
-            "value": "+50%",
-            "extracted_value": 50,
-            "link": "https://trends.google.com/trends/explore?q=/m/01jqpl&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01jqpl&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/06mq7",
-                "title": "Science",
-                "type": "Discipline"
-            },
-            "value": "+50%",
-            "extracted_value": 50,
-            "link": "https://trends.google.com/trends/explore?q=/m/06mq7&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06mq7&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/02x395",
-                "title": "Multiple choice",
-                "type": "Topic"
-            },
-            "value": "+50%",
-            "extracted_value": 50,
-            "link": "https://trends.google.com/trends/explore?q=/m/02x395&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02x395&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/02jhc",
-                "title": "Ethics",
-                "type": "Field of study"
-            },
-            "value": "+50%",
-            "extracted_value": 50,
-            "link": "https://trends.google.com/trends/explore?q=/m/02jhc&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02jhc&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/03ws09&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03ws09&tz=420"
         },
         {
             "topic": {
@@ -193,21 +138,10 @@
                 "title": "Politics",
                 "type": "Field of study"
             },
-            "value": "+50%",
-            "extracted_value": 50,
+            "value": "+60%",
+            "extracted_value": 60,
             "link": "https://trends.google.com/trends/explore?q=/m/05qt0&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05qt0&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/05315n",
-                "title": "Goods and services",
-                "type": "Topic"
-            },
-            "value": "+50%",
-            "extracted_value": 50,
-            "link": "https://trends.google.com/trends/explore?q=/m/05315n&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05315n&tz=420"
         },
         {
             "topic": {
@@ -222,36 +156,36 @@
         },
         {
             "topic": {
-                "value": "/g/11pc53c6gx",
-                "title": "external",
-                "type": "Topic"
+                "value": "/m/01jqpl",
+                "title": "Strategic management",
+                "type": "Field of study"
             },
             "value": "+50%",
             "extracted_value": 50,
-            "link": "https://trends.google.com/trends/explore?q=/g/11pc53c6gx&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11pc53c6gx&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/01jqpl&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01jqpl&tz=420"
         },
         {
             "topic": {
-                "value": "/m/01ws5",
-                "title": "Culture",
-                "type": "Topic"
+                "value": "/m/02jhc",
+                "title": "Ethics",
+                "type": "Field of study"
             },
             "value": "+50%",
             "extracted_value": 50,
-            "link": "https://trends.google.com/trends/explore?q=/m/01ws5&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01ws5&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/02jhc&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02jhc&tz=420"
         },
         {
             "topic": {
-                "value": "/m/01jg6",
-                "title": "Board of directors",
+                "value": "/m/02x395",
+                "title": "Multiple choice",
                 "type": "Topic"
             },
             "value": "+40%",
             "extracted_value": 40,
-            "link": "https://trends.google.com/trends/explore?q=/m/01jg6&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01jg6&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/02x395&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02x395&tz=420"
         },
         {
             "topic": {
@@ -263,6 +197,72 @@
             "extracted_value": 40,
             "link": "https://trends.google.com/trends/explore?q=/g/120qdpxk&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F120qdpxk&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11pc53c6gx",
+                "title": "external",
+                "type": "Topic"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/g/11pc53c6gx&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11pc53c6gx&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/1229dkv6",
+                "title": "Innovation",
+                "type": "Topic"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/g/1229dkv6&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F1229dkv6&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/05315n",
+                "title": "Goods and services",
+                "type": "Topic"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/m/05315n&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05315n&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/06mq7",
+                "title": "Science",
+                "type": "Discipline"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/m/06mq7&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06mq7&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01ws5",
+                "title": "Culture",
+                "type": "Topic"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/m/01ws5&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01ws5&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0dq_5",
+                "title": "Chief Executive Officer",
+                "type": "Project role"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/m/0dq_5&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0dq_5&tz=420"
         }
     ],
     "top": [
@@ -283,8 +283,8 @@
                 "title": "Market",
                 "type": "Economics"
             },
-            "value": "90",
-            "extracted_value": 90,
+            "value": "99",
+            "extracted_value": 99,
             "link": "https://trends.google.com/trends/explore?q=/m/09y4pm&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F09y4pm&tz=420"
         },
@@ -305,8 +305,8 @@
                 "title": "Company",
                 "type": "Organization type"
             },
-            "value": "49",
-            "extracted_value": 49,
+            "value": "48",
+            "extracted_value": 48,
             "link": "https://trends.google.com/trends/explore?q=/g/120z18l3&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F120z18l3&tz=420"
         },
@@ -378,25 +378,36 @@
         },
         {
             "topic": {
-                "value": "/m/01d_1l",
-                "title": "Price",
-                "type": "Topic"
-            },
-            "value": "22",
-            "extracted_value": 22,
-            "link": "https://trends.google.com/trends/explore?q=/m/01d_1l&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01d_1l&tz=420"
-        },
-        {
-            "topic": {
                 "value": "/m/07b7r",
                 "title": "Strategy",
                 "type": "Topic"
             },
-            "value": "21",
-            "extracted_value": 21,
+            "value": "22",
+            "extracted_value": 22,
             "link": "https://trends.google.com/trends/explore?q=/m/07b7r&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07b7r&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0168hv",
+                "title": "Cost",
+                "type": "Topic"
+            },
+            "value": "22",
+            "extracted_value": 22,
+            "link": "https://trends.google.com/trends/explore?q=/m/0168hv&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0168hv&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01d_1l",
+                "title": "Price",
+                "type": "Topic"
+            },
+            "value": "21",
+            "extracted_value": 21,
+            "link": "https://trends.google.com/trends/explore?q=/m/01d_1l&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01d_1l&tz=420"
         },
         {
             "topic": {
@@ -411,17 +422,6 @@
         },
         {
             "topic": {
-                "value": "/m/0168hv",
-                "title": "Cost",
-                "type": "Topic"
-            },
-            "value": "21",
-            "extracted_value": 21,
-            "link": "https://trends.google.com/trends/explore?q=/m/0168hv&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0168hv&tz=420"
-        },
-        {
-            "topic": {
                 "value": "/m/0n82v",
                 "title": "Financial statement",
                 "type": "Topic"
@@ -433,25 +433,25 @@
         },
         {
             "topic": {
-                "value": "/m/014dgf",
-                "title": "Sales",
-                "type": "Topic"
-            },
-            "value": "18",
-            "extracted_value": 18,
-            "link": "https://trends.google.com/trends/explore?q=/m/014dgf&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F014dgf&tz=420"
-        },
-        {
-            "topic": {
                 "value": "/m/01j0mk",
                 "title": "Customer",
                 "type": "Topic"
             },
-            "value": "18",
-            "extracted_value": 18,
+            "value": "19",
+            "extracted_value": 19,
             "link": "https://trends.google.com/trends/explore?q=/m/01j0mk&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01j0mk&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/014dgf",
+                "title": "Sales",
+                "type": "Topic"
+            },
+            "value": "19",
+            "extracted_value": 19,
+            "link": "https://trends.google.com/trends/explore?q=/m/014dgf&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F014dgf&tz=420"
         },
         {
             "topic": {
@@ -470,8 +470,8 @@
                 "title": "used",
                 "type": "Topic"
             },
-            "value": "17",
-            "extracted_value": 17,
+            "value": "18",
+            "extracted_value": 18,
             "link": "https://trends.google.com/trends/explore?q=/g/11nm_6fr9g&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11nm_6fr9g&tz=420"
         },
@@ -510,17 +510,6 @@
         },
         {
             "topic": {
-                "value": "/m/03y39",
-                "title": "Information",
-                "type": "Topic"
-            },
-            "value": "16",
-            "extracted_value": 16,
-            "link": "https://trends.google.com/trends/explore?q=/m/03y39&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03y39&tz=420"
-        },
-        {
-            "topic": {
                 "value": "/m/0qb7t",
                 "title": "Organization",
                 "type": "Topic"
@@ -529,6 +518,17 @@
             "extracted_value": 16,
             "link": "https://trends.google.com/trends/explore?q=/m/0qb7t&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0qb7t&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/03y39",
+                "title": "Information",
+                "type": "Topic"
+            },
+            "value": "16",
+            "extracted_value": 16,
+            "link": "https://trends.google.com/trends/explore?q=/m/03y39&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03y39&tz=420"
         },
         {
             "topic": {
