@@ -23,7 +23,7 @@ class BlogAgent:
     """
     Agent for generating blog content using LLMs and RAG.
     """
-    def __init__(self, model_name="gpt-4", rag_system=None, temperature=0.7):
+    def __init__(self, model_name="gpt-4o", rag_system=None, temperature=0.7):
         """
         Initialize the blog agent.
         
@@ -191,13 +191,18 @@ class BlogAgent:
         """
         start_time = time.time()
         
-        # Add crawled content to RAG if provided
-        if crawled_content and crawled_content.strip():
-            logger.info(f"Adding {len(crawled_content)} chars of crawled content to RAG")
-            self.rag_system.add_documents(crawled_content)
+        # Initialize RAG system if needed
+        if not self.rag_system.db:
+            if crawled_content:
+                logger.info(f"Adding {len(crawled_content)} chars of crawled content to RAG")
+                self.rag_system.add_documents(crawled_content)
+            else:
+                logger.warning("No documents in RAG system and no crawled content provided")
+                # Add a default document to initialize the system
+                default_doc = f"Default document about {topic}"
+                self.rag_system.add_documents(default_doc)
         
         # Retrieve relevant content for the topic
-        logger.info(f"Retrieving content relevant to: {topic}")
         rag_content = self.rag_system.retrieve_relevant_content(topic)
         
         logger.info(f"RAG content: {rag_content}")
@@ -224,119 +229,9 @@ class BlogAgent:
         Use these valuable research insights to enrich your content: {rag_content} 
         """
         
-        
         logger.info(f"System prompt created in {time.time() - start_time:.2f}s")
         return system_prompt
-
-    def generate_blog(self, topic, user_input):
-        """
-        Generate a blog based on the given topic.
-        
-        Args:
-            topic: The topic to generate a blog about
-            
-        Returns:
-            dict: A dictionary containing the topic and generated content
-        """
-        start_time = time.time()
-        logger.info(f"Generating blog on topic: {topic}")
-        
-        try:
-            # Process the topic to find related queries
-            process = Process(topic)
-            top_related_topics = process.find_top_queries()
-            logger.info(f"Found {len(top_related_topics)} related topics")
-            
-            # Find the most relevant keyword
-            relevant_keyword = self.find_relevant_keyword(top_related_topics)
-            logger.info(f"Selected relevant keyword: {relevant_keyword}")
-            
-            # Fetch blog content using the relevant keyword
-            logger.info(f"Fetching content for keyword: {relevant_keyword}")
-            crawled_content = process.fetch_blog_content(relevant_keyword)
-            logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
-            
-            # Create system prompt with RAG content
-            system_prompt = self.create_system_prompt(topic, crawled_content)
-            
-            # Generate blog using LLM
-            blog_content = self._generate_blog_content(topic, system_prompt, user_input)
-            
-            generation_time = time.time() - start_time
-            logger.info(f"Blog generated in {generation_time:.2f}s")
-            
-            return {
-                "topic": topic,
-                "content": blog_content,
-                "generation_time": generation_time
-            }
-            
-        except Exception as e:
-            logger.error(f"Error generating blog: {e}")
-            return {
-                "topic": topic,
-                "content": f"Error generating blog: {str(e)}",
-                "error": True
-            }
-            
-    def _generate_blog_content(self, topic, system_prompt, user_input):
-        """Generate blog content using the LLM in multiple rounds to avoid token limits."""
-        try:
-            logger.info("Generating blog with LLM")
-            
-            # Create message objects
-            system_message = SystemMessage(content=system_prompt)
-            human_message = HumanMessage(content=user_input)
-            
-            # Invoke the LLM
-            result = self.llm.invoke([system_message, human_message])
-            
-            # Extract content from result
-            if hasattr(result, 'content'):
-                blog_content = result.content
-            elif isinstance(result, str):
-                blog_content = result
-            else:
-                # Try to get content from messages
-                blog_content = result.messages[-1].content if hasattr(result, 'messages') else str(result)
-                
-            logger.info(f"Generated blog with {len(blog_content)} chars")
-            return blog_content
-            
-        except Exception as e:
-            logger.error(f"Error in multi-round generation: {e}")
-            return self._fallback_generation(topic, system_prompt)
-    
-    def _fallback_generation(self, topic, system_prompt):
-        """Fallback generation method."""
-        try:
-            logger.info("Using fallback generation method")
-            simple_prompt = f"Write a comprehensive blog post about {topic}. " + system_prompt
-            
-            result = self.llm.invoke(simple_prompt)
-            
-            if hasattr(result, 'content'):
-                return result.content
-            else:
-                return str(result)
-                
-        except Exception as fallback_error:
-            logger.error(f"Fallback generation failed: {fallback_error}")
-            
-            # Last resort - return mock content
-            return f"""# {topic}
-
-## Introduction
-This is a sample blog post about {topic}. Due to technical limitations, we're providing this placeholder content.
-
-## Key Points
-- {topic} is an important area with significant developments
-- Understanding {topic} requires careful consideration of various factors
-- Many experts believe {topic} will continue to evolve in coming years
-
-## Conclusion
-As we've seen, {topic} presents both challenges and opportunities. This placeholder content is provided because of a technical error during content generation.
-"""
+ 
 
     async def generate_blog_stream(self, topic, user_input):
         """
@@ -368,6 +263,8 @@ As we've seen, {topic} presents both challenges and opportunities. This placehol
             crawled_content = process.fetch_blog_content(relevant_keyword)
             logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
             
+            logger.info(f"Crawled content: {crawled_content}")
+            
             # Create system prompt with RAG content
             system_prompt = self.create_system_prompt(topic, top_related_topics, crawled_content)
             
@@ -396,15 +293,15 @@ As we've seen, {topic} presents both challenges and opportunities. This placehol
             yield f"Error generating blog: {str(e)}"
 
 # Instantiate a default agent for backward compatibility
-default_agent = BlogAgent(temperature=0.7)
+# default_agent = BlogAgent(temperature=0.7)
 
-# For backward compatibility - these functions call the default agent's methods
-def find_relevant_keyword(topic):
-    return default_agent.find_relevant_keyword(topic)
+# # For backward compatibility - these functions call the default agent's methods
+# def find_relevant_keyword(topic):
+#     return default_agent.find_relevant_keyword(topic)
 
-def create_system_message(topic, relevant_keyword=None):
-    return default_agent.create_system_prompt(topic)
+# def create_system_message(topic, relevant_keyword=None):
+#     return default_agent.create_system_prompt(topic)
 
-def generate_blog(topic):
-    return default_agent.generate_blog(topic)
+# def generate_blog(topic):
+#     return default_agent.generate_blog(topic)
  

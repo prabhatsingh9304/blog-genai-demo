@@ -40,25 +40,25 @@ app.mount("/static", StaticFiles(directory=os.path.join(os.path.dirname(os.path.
 # Add CORS middleware to allow cross-origin requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Update with specific origins in production
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Initialize the agent and tools
-blog_agent = BlogAgent(temperature=0.7, model_name="gpt-3.5-turbo")  # Using a more reliable model by default
+blog_agent = BlogAgent(temperature=0.7, model_name="gpt-4o")  # Using a more reliable model by default
 blog_tools = BlogTools()
 image_generator = ImageGenerator()
 
 # Global variable to store the current topic
-current_topic = None
+current_topic = "personal loan"
 
 # Define request and response models
 class BlogRequest(BaseModel):
     topic: str
     temperature: Optional[float] = 0.7
-    model: Optional[str] = "gpt-3.5-turbo"
+    model: Optional[str] = "gpt-4o"
     save_to_file: Optional[bool] = False
     output_dir: Optional[str] = "generated_blogs"
 
@@ -143,14 +143,14 @@ async def generate_image(request: dict = None):
         if not current_topic:
             raise HTTPException(status_code=400, detail="No topic available. Please generate a blog first.")
             
-        # Generate the image using the current topic
-        image_path = image_generator.generate_image(current_topic)
+        # Generate the image using the current topic as the title
+        image_url = image_generator.generate_image(title=current_topic)
         
-        if not image_path:
+        if not image_url:
             raise HTTPException(status_code=500, detail="Failed to generate image")
             
         # Convert the local file path to a URL
-        image_url = f"/static/{os.path.basename(image_path)}"
+        # image_url = f"/static/{os.path.basename(image_path)}"
         
         return {"imageUrl": image_url}
         

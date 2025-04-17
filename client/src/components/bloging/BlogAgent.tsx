@@ -83,7 +83,6 @@ function BlogAgent() {
         ]);
 
         // Generate banner image
-        if (response.data?.title) {
           setIsGeneratingImage(true);
           try {
             const imageResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/generate-image`, {
@@ -109,7 +108,6 @@ function BlogAgent() {
           } finally {
             setIsGeneratingImage(false);
           }
-        }
       }
       
       // Clear streaming message
