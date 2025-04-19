@@ -23,7 +23,7 @@ class BlogAgent:
     """
     Agent for generating blog content using LLMs and RAG.
     """
-    def __init__(self, model_name="gpt-4o", rag_system=None, temperature=0.7):
+    def __init__(self, model_name="gpt-4-turbo", rag_system=None, temperature=0.7):
         """
         Initialize the blog agent.
         
@@ -54,7 +54,8 @@ class BlogAgent:
                 model_name=self.model_name,
                 temperature=self.temperature,
                 openai_api_key=api_key,
-                streaming=True  # Enable streaming
+                streaming=True,  # Enable streaming
+                tiktoken_model_name="cl100k_base"  # Explicitly set tokenizer
             )
             
             # Test the model
@@ -177,7 +178,7 @@ class BlogAgent:
             logger.info(f"Using fallback topic: {fallback}")
             return fallback
 
-    def create_system_prompt(self, topic, keywords, tone="Helpful & Value-Driven", target_audience="general", crawled_content=None):
+    def create_system_prompt(self, topic, keywords, tone, target_audience, crawled_content):
         """
         Create a system prompt with RAG content for blog generation.
         
@@ -191,22 +192,37 @@ class BlogAgent:
         """
         start_time = time.time()
         
-        # Initialize RAG system if needed
-        if not self.rag_system.db:
-            if crawled_content:
-                logger.info(f"Adding {len(crawled_content)} chars of crawled content to RAG")
-                self.rag_system.add_documents(crawled_content)
-            else:
-                logger.warning("No documents in RAG system and no crawled content provided")
-                # Add a default document to initialize the system
-                default_doc = f"Default document about {topic}"
-                self.rag_system.add_documents(default_doc)
+        # Add crawled content to RAG system
+        self.rag_system.add_documents(crawled_content)
         
-        # Retrieve relevant content for the topic
-        rag_content = self.rag_system.retrieve_relevant_content(topic)
+        # Create an expanded query using the topic and keywords
+        expanded_query = f"{topic}"
+        
+        # Use LLM to refine the search query
+        query_refinement_prompt = f"""
+        Given the blog topic '{topic}', 
+        generate a comprehensive similarity search query that would help find relevant content for writing a blog post from a rag system.
+        Focus on finding authoritative sources, expert opinions, and practical examples that would be valuable for blog readers.
+        Consider aspects like best practices, case studies, and current trends in the field.
+        Return only the refined query, no explanations.
+        """
+        
+        try:
+            refined_query = self.llm.predict(query_refinement_prompt).strip()
+            logger.info(f"Refined search query: {refined_query}")
+            
+            # Retrieve relevant content using the refined query
+            rag_content = self.rag_system.retrieve_relevant_content(refined_query, k=5)
+            logger.info(f"Retrieved {len(rag_content.split())} words of relevant content")
+            
+        except Exception as e:
+            logger.error(f"Error in query refinement: {e}")
+            # Fallback to original query if refinement fails
+            rag_content = self.rag_system.retrieve_relevant_content(expanded_query)
         
         logger.info(f"RAG content: {rag_content}")
         
+        logger.info(f"refined query: {refined_query}")
         # Build a more concise prompt
         system_prompt = f"""
         Write an SEO-optimized blog post on topic: **{topic}**. 
@@ -225,8 +241,7 @@ class BlogAgent:
         - Provide a alt text for the banner image in new line, use the keyword in alt text.
         - Provide a name for the banner image in new line, use the keyword in name.
         - Provide a url alias for the blog in new line, use the keyword in url alias.
-        
-        Use these valuable research insights to enrich your content: {rag_content} 
+    
         """
         
         logger.info(f"System prompt created in {time.time() - start_time:.2f}s")
@@ -262,11 +277,10 @@ class BlogAgent:
             logger.info(f"Fetching content for keyword: {relevant_keyword}")
             crawled_content = process.fetch_blog_content(relevant_keyword)
             logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
-            
-            logger.info(f"Crawled content: {crawled_content}")
-            
             # Create system prompt with RAG content
-            system_prompt = self.create_system_prompt(topic, top_related_topics, crawled_content)
+            tone = "Helpful & Value-Driven"
+            target_audience = "general"
+            system_prompt = self.create_system_prompt(topic, top_related_topics, tone, target_audience, crawled_content)
             
             # Create message objects
             system_message = SystemMessage(content=system_prompt)

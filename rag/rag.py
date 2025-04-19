@@ -49,7 +49,6 @@ class RAGSystem:
         
         # Initialize OpenAI embeddings if API key is available
         api_key = os.getenv("OPENAI_API_KEY", "").strip()
-        self._initialize_db()
         if not api_key:
             raise ValueError("OPENAI_API_KEY environment variable is not set")
             
@@ -58,7 +57,8 @@ class RAGSystem:
                 model=embedding_model,
                 openai_api_key=api_key,
                 dimensions=1536,  # For compatibility
-                headers={"Content-Type": "application/json"}
+                headers={"Content-Type": "application/json"},
+                tiktoken_model_name="cl100k_base"  # Explicitly set tokenizer
             )
             
             # Text splitter for processing documents
@@ -211,7 +211,8 @@ class RAGSystem:
             raise ValueError("Empty query provided")
         
         try:
-            relevant_docs = self.similarity_search(query, k=k)
+            # Increase k to get more diverse results
+            relevant_docs = self.similarity_search(query, k=k*2)
             if not relevant_docs:
                 return "No relevant content found for the query."
                 
@@ -221,20 +222,20 @@ class RAGSystem:
             logger.error(f"Error retrieving content: {e}")
             raise
 
-# Instantiate a global instance for backward compatibility
-_default_rag_system = RAGSystem()
+# # Instantiate a global instance for backward compatibility
+# _default_rag_system = RAGSystem()
 
-# For backward compatibility
-def retrieve_relevant_content(query, k=3):
-    """
-    Retrieve relevant content based on the query (wrapper for backward compatibility)
+# # For backward compatibility
+# def retrieve_relevant_content(query, k=3):
+#     """
+#     Retrieve relevant content based on the query (wrapper for backward compatibility)
     
-    Args:
-        query: The query to search for
-        k: Number of results to return
+#     Args:
+#         query: The query to search for
+#         k: Number of results to return
         
-    Returns:
-        str: Formatted content from relevant documents
-    """
-    return _default_rag_system.retrieve_relevant_content(query, k=k)
+#     Returns:
+#         str: Formatted content from relevant documents
+#     """
+#     return _default_rag_system.retrieve_relevant_content(query, k=k)
 
