@@ -16,3 +16,4 @@ playwright==1.42.0
 serpapi
 google-search-results 
 fastapi 
+google-ads==21.3.0

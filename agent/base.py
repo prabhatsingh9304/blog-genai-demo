@@ -9,8 +9,13 @@ import logging
 from rag.rag import RAGSystem
 from dotenv import load_dotenv
 import json
-from blog.process import Process
+from blog.blog_extractor import BlogContentExtractor
 import asyncio
+from characters.blog_character import BlogCharacter
+from characters.topic_character import TopicCharacter
+from characters.keywords_character import KeywordsCharacter
+from characters.refine_query_character import RefineQueryCharacter
+from blog.keywords_finder import KeywordsFinder
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -121,21 +126,13 @@ class BlogAgent:
             str: Extracted blog topic from user input
         """
         try:
-            prompt = f"""
-            Extract the main blog topic from the following user input:  
-            "{user_input}"  
-
-            Ensure the extracted topic is concise, relevant, and properly formatted for a blog title.  
-            Return only the topic name—no explanations.  
-
-            """
+            prompt = TopicCharacter(user_input).get_character()
             
             topic = self.llm.predict(prompt).strip()
             logger.info(f"Extracted topic from user input: {topic}")
             return topic
         except Exception as e:
             logger.error(f"Error extracting topic from user input: {e}")
-            # Return original input as fallback
             return user_input
     
     def find_relevant_keyword(self, topic, top_related_topics):
@@ -154,11 +151,7 @@ class BlogAgent:
             
         try:
             # Use LLM to select the most relevant topic
-            prompt = f"""            
-            From these trending topics: {', '.join(top_related_topics)},  
-            select the **most relevant and engaging** one for a blog on "{topic}".  
-            Return only the topic name—no explanations.  
-            """
+            prompt = KeywordsCharacter(topic, top_related_topics).get_character()
             
             response = self.llm.predict(prompt)
             relevant_topic = response.strip()
@@ -199,13 +192,7 @@ class BlogAgent:
         expanded_query = f"{topic}"
         
         # Use LLM to refine the search query
-        query_refinement_prompt = f"""
-        Given the blog topic '{topic}', 
-        generate a comprehensive similarity search query that would help find relevant content for writing a blog post from a rag system.
-        Focus on finding authoritative sources, expert opinions, and practical examples that would be valuable for blog readers.
-        Consider aspects like best practices, case studies, and current trends in the field.
-        Return only the refined query, no explanations.
-        """
+        query_refinement_prompt = RefineQueryCharacter(topic).get_character()
         
         try:
             refined_query = self.llm.predict(query_refinement_prompt).strip()
@@ -224,25 +211,7 @@ class BlogAgent:
         
         logger.info(f"refined query: {refined_query}")
         # Build a more concise prompt
-        system_prompt = f"""
-        Write an SEO-optimized blog post on topic: **{topic}**. 
-        
-        Constraints:
-        - Ensure that the following keywords are naturally incorporated: {keywords}. 
-        - Maintain a {tone} tone suitable for {target_audience}. 
-        - The content should be detailed, structured with headings (H2, H3), and optimized for search engines. 
-        - Use engaging introductions, clear explanations, bullet points, and actionable takeaways. 
-        - The word count should be around 1500-2000 words. Conclude with a compelling Call to Action: '[CTA]'.
-        - Ensure proper formatting, readability, and keyword distribution without stuffing. 
-        - Add meta description (150-160 characters) summarizing the article.
-        
-        Additional requirements:
-        - Provide a meta tags for SEO optimization in new line.
-        - Provide a alt text for the banner image in new line, use the keyword in alt text.
-        - Provide a name for the banner image in new line, use the keyword in name.
-        - Provide a url alias for the blog in new line, use the keyword in url alias.
-    
-        """
+        system_prompt = BlogCharacter(topic, keywords, tone, target_audience, rag_content).get_character()
         
         logger.info(f"System prompt created in {time.time() - start_time:.2f}s")
         return system_prompt
@@ -264,8 +233,8 @@ class BlogAgent:
         
         try:
             # Process the topic to find related queries
-            process = Process(topic)
-            top_related_topics = process.find_top_queries()
+            blogContentExtractor = BlogContentExtractor(topic)
+            top_related_topics = KeywordsFinder().find_keywords(topic)
             logger.info(f"Found {len(top_related_topics)} related topics")
             
             # Find the most relevant keyword
@@ -275,7 +244,7 @@ class BlogAgent:
             
             # Fetch blog content using the relevant keyword
             logger.info(f"Fetching content for keyword: {relevant_keyword}")
-            crawled_content = process.fetch_blog_content(relevant_keyword)
+            crawled_content = blogContentExtractor.fetch_blog_content(relevant_keyword) 
             logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
             # Create system prompt with RAG content
             tone = "Helpful & Value-Driven"
@@ -286,9 +255,6 @@ class BlogAgent:
             system_message = SystemMessage(content=system_prompt)
             human_message = HumanMessage(content=user_input)
             
-            # #Generate Image
-            # image_gen = ImageGenerator().generate_image(relevant_keyword)
-            # print(image_gen)
             
             # Stream the response
             async for chunk in self.llm.astream([system_message, human_message]):

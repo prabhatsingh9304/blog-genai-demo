@@ -13,7 +13,11 @@ class TopicExtractor:
         topics = []
         for item in self.data.get("top", []):
             topics.append(item["topic"]["title"])
-        return topics[:limit]
+            
+        if not topics:
+            raise ValueError("No topics found in the data")
+            
+        return topics[:min(limit, len(topics))]
 
 # Example usage:
 # extractor = TrendExtractor("related_topics.json")

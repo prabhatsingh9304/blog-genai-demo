@@ -4,6 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { BlogService } from "@/services/generate";
 import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 import { ApiError } from "@/components/error/ApiError";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm';
+import { Prism } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 
 interface Message {
@@ -125,10 +129,9 @@ function BlogAgent() {
 
   // Simplify the streaming message display
   const StreamingMessage = () => {
-    // Don't split and map, just render directly to avoid React reconciliation issues
     return (
       <div className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">
-        {currentStreamingMessage}
+        <ReactMarkdown>{currentStreamingMessage}</ReactMarkdown>
       </div>
     );
   };
@@ -152,7 +155,25 @@ function BlogAgent() {
               }`}
             >
               <div className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">
-                {message.content}
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mt-6 mb-4" {...props} />,
+                    h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mt-5 mb-3" {...props} />,
+                    code: ({ node, className, children, ...props }) => {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return (
+                        <pre className={`bg-gray-100 rounded-lg p-4 overflow-x-auto ${match ? 'language-' + match[1] : ''}`}>
+                          <code className="font-mono text-sm" {...props}>
+                            {children}
+                          </code>
+                        </pre>
+                      );
+                    },
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
               </div>
               {message.data && (
                 <div className="mt-3 pt-3 border-t border-gray-200 text-sm space-y-1 opacity-90">
