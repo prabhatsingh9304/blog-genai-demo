@@ -16,6 +16,7 @@ from characters.topic_character import TopicCharacter
 from characters.keywords_character import KeywordsCharacter
 from characters.refine_query_character import RefineQueryCharacter
 from blog.keywords_finder import KeywordsFinder
+from agent.agent_memory import AgentMemory
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -28,7 +29,7 @@ class BlogAgent:
     """
     Agent for generating blog content using LLMs and RAG.
     """
-    def __init__(self, model_name="gpt-4-turbo", rag_system=None, temperature=0.7):
+    def __init__(self, model_name="gpt-4-turbo", rag_system=None, temperature=0.7, session_id=None):
         """
         Initialize the blog agent.
         
@@ -36,10 +37,14 @@ class BlogAgent:
             model_name: LLM model to use
             rag_system: Optional RAG system instance
             temperature: Temperature for LLM responses
+            session_id: Optional session ID for memory persistence
         """
         self.model_name = model_name
         self.temperature = temperature
         self.rag_system = rag_system or RAGSystem()
+        
+        # Initialize memory
+        self.memory = AgentMemory(session_id=session_id)
         
         # Initialize LLM
         api_key = os.getenv("OPENAI_API_KEY", "").strip()
@@ -126,6 +131,9 @@ class BlogAgent:
             str: Extracted blog topic from user input
         """
         try:
+            # Store user input in memory
+            self.memory.add_user_message(user_input)
+            
             prompt = TopicCharacter(user_input).get_character()
             
             topic = self.llm.predict(prompt).strip()
@@ -211,7 +219,18 @@ class BlogAgent:
         
         logger.info(f"refined query: {refined_query}")
         # Build a more concise prompt
-        system_prompt = BlogCharacter(topic, keywords, tone, target_audience, rag_content).get_character()
+        
+        # Add memory context if available
+        memory_context = ""
+        if self.memory.conversation_history:
+            # Get up to the last 5 messages for context
+            recent_messages = self.memory.get_recent_messages(5)
+            memory_context = "Previous conversation context:\n"
+            for msg in recent_messages:
+                memory_context += f"- {msg['role']}: {msg['content']}\n"
+        
+        # Include memory context in the character prompt
+        system_prompt = BlogCharacter(topic, keywords, tone, target_audience, rag_content, memory_context).get_character()
         
         logger.info(f"System prompt created in {time.time() - start_time:.2f}s")
         return system_prompt
@@ -255,16 +274,22 @@ class BlogAgent:
             system_message = SystemMessage(content=system_prompt)
             human_message = HumanMessage(content=user_input)
             
-            
+            AI_message = []
             # Stream the response
             async for chunk in self.llm.astream([system_message, human_message]):
                 if hasattr(chunk, 'content'):
                     yield chunk.content
+                    AI_message.append(chunk.content)
                 elif isinstance(chunk, str):
                     yield chunk
+                    AI_message.append(chunk)
                 else:
                     yield str(chunk)
+                    AI_message.append(str(chunk))
             
+            collected_chunks = "".join(AI_message)
+
+            self.memory.add_ai_message(collected_chunks)
             generation_time = time.time() - start_time
             logger.info(f"Blog generated in {generation_time:.2f}s")
             

@@ -1,10 +1,11 @@
 class BlogCharacter:
-    def __init__(self, topic, keywords, tone, target_audience, rag_content):
+    def __init__(self, topic, keywords, tone, target_audience, rag_content, memory_context=""):
         self.topic = topic
         self.keywords = keywords
         self.tone = tone
         self.target_audience = target_audience
         self.rag_content = rag_content
+        self.memory_context = memory_context
         
     def get_character(self):
         character = f"""
@@ -31,5 +32,6 @@ class BlogCharacter:
         
         Use the following RAG content to improve the blog post: {self.rag_content}
 
+        {self.memory_context if self.memory_context else ""}
         """
         return character
