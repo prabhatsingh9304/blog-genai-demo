@@ -35,6 +35,7 @@ function BlogAgent() {
   const streamingMessageRef = useRef("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const blogService = new BlogService();
+  const [copySuccess, setCopySuccess] = useState<number | null>(null);
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -132,7 +133,44 @@ function BlogAgent() {
     return (
       <div className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">
         <ReactMarkdown>{currentStreamingMessage}</ReactMarkdown>
+        {currentStreamingMessage && (
+          <button
+            onClick={() => copyToClipboard(currentStreamingMessage, -1)}
+            className="mt-2 text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md transition-colors flex items-center gap-1"
+            title="Copy to clipboard"
+          >
+            {copySuccess === -1 ? (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                Copied!
+              </>
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                  <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                </svg>
+                Copy
+              </>
+            )}
+          </button>
+        )}
       </div>
+    );
+  };
+
+  // Function to copy message content to clipboard
+  const copyToClipboard = (text: string, index: number) => {
+    navigator.clipboard.writeText(text).then(
+      () => {
+        setCopySuccess(index);
+        setTimeout(() => setCopySuccess(null), 2000);
+      },
+      (err) => {
+        console.error('Could not copy text: ', err);
+      }
     );
   };
 
@@ -148,7 +186,7 @@ function BlogAgent() {
             } animate-fade-in`}
           >
             <div
-              className={`max-w-[85%] rounded-2xl px-6 py-4 shadow-sm ${
+              className={`max-w-[85%] rounded-2xl px-6 py-4 shadow-sm relative ${
                 message.role === "user"
                   ? "bg-purple-100 text-black"
                   : "bg-white border border-gray-100 text-black"
@@ -195,6 +233,28 @@ function BlogAgent() {
                   />
                 </div>
               )}
+              <button
+                onClick={() => copyToClipboard(message.content, index)}
+                className="mt-2 text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md transition-colors flex items-center gap-1"
+                title="Copy to clipboard"
+              >
+                {copySuccess === index ? (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                      <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                    </svg>
+                    Copy
+                  </>
+                )}
+              </button>
             </div>
           </div>
         ))}
