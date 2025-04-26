@@ -13,16 +13,11 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger('BlogContentExtractor')
 
 class BlogContentExtractor:
-    def __init__(self, blog_topic):
-        self.topic = blog_topic
-        self.fetcher = BlogLinkFetcher()
-        
-    def fetch_blog_content(self,query):  
+    def __init__(self):
+        pass
+    def fetch_blog_content(self,blogs_urls):  
         #Fetching Link
         try:
-            blogs_urls = self.fetcher.fetch_all_blogs(query)
-            self.fetcher.save_results(blogs_urls, "./blog/link.json")
-            
             logger.info(f"Found {len(blogs_urls)} URLs to crawl")
             
             # Do crawling and return content
@@ -39,15 +34,6 @@ class BlogContentExtractor:
             logger.error(f"Error in fetch_blog_content: {e}")
             return ""
         
-    # def find_top_queries(self):
-    #     #Import and call trend.py
-    #     #Keep it commented to save api call limit
-    #     scraper = GoogleTrendsScraper()
-    #     scraper.fetch_related_topics(self.topic)
-        
-    #     extractor = TopicExtractor("./blog/related_topics.json")
-    #     top_topics = extractor.get_top_topics()
-    #     return top_topics
     
 
         

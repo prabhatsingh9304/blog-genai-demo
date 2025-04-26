@@ -37,7 +37,7 @@ class ImageGenerator:
             raise ValueError("Title is required for image generation")
             
         system_prompt = f"""
-            Create illustration for my blog on {final_title}. The image should contain text like {final_title}
+            Create illustration for my blog on title: {final_title}. The image should contain text: {final_title}. Image should be simple contains less objects.
         """
         
         try:

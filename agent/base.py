@@ -14,9 +14,12 @@ import asyncio
 from characters.blog_character import BlogCharacter
 from characters.topic_character import TopicCharacter
 from characters.keywords_character import KeywordsCharacter
+from characters.keywords_list_character import KeywordListCharacter
 from characters.refine_query_character import RefineQueryCharacter
 from blog.keywords_finder import KeywordsFinder
 from agent.agent_memory import AgentMemory
+from blog.get_link import BlogLinkFetcher
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -160,9 +163,12 @@ class BlogAgent:
         try:
             # Use LLM to select the most relevant topic
             prompt = KeywordsCharacter(topic, top_related_topics).get_character()
+            keywords_prompt = KeywordListCharacter(topic,top_related_topics).get_character();
             
             response = self.llm.predict(prompt)
+            keywordListResponse = self.llm.predict(keywords_prompt)
             relevant_topic = response.strip()
+            relevantKeywords = keywordListResponse.strip()
             
             # Validate the response
             if relevant_topic not in top_related_topics:
@@ -170,7 +176,7 @@ class BlogAgent:
                 relevant_topic = top_related_topics[0]
                 
             logger.info(f"Selected relevant topic: {relevant_topic}")
-            return relevant_topic
+            return relevant_topic, relevantKeywords
             
         except Exception as e:
             logger.error(f"Error selecting relevant topic: {e}")
@@ -179,7 +185,7 @@ class BlogAgent:
             logger.info(f"Using fallback topic: {fallback}")
             return fallback
 
-    def create_system_prompt(self, topic, keywords, tone, target_audience, crawled_content):
+    def create_system_prompt(self, topic, blogs_urls, keywords, tone, target_audience, crawled_content):
         """
         Create a system prompt with RAG content for blog generation.
         
@@ -202,6 +208,10 @@ class BlogAgent:
         # Use LLM to refine the search query
         query_refinement_prompt = RefineQueryCharacter(topic).get_character()
         
+        # Extract list of relavent keywords
+        
+        logger.info(f"Keywords: {keywords}")
+        
         try:
             refined_query = self.llm.predict(query_refinement_prompt).strip()
             logger.info(f"Refined search query: {refined_query}")
@@ -215,9 +225,6 @@ class BlogAgent:
             # Fallback to original query if refinement fails
             rag_content = self.rag_system.retrieve_relevant_content(expanded_query)
         
-        logger.info(f"RAG content: {rag_content}")
-        
-        logger.info(f"refined query: {refined_query}")
         # Build a more concise prompt
         
         # Add memory context if available
@@ -230,7 +237,7 @@ class BlogAgent:
                 memory_context += f"- {msg['role']}: {msg['content']}\n"
         
         # Include memory context in the character prompt
-        system_prompt = BlogCharacter(topic, keywords, tone, target_audience, rag_content, memory_context).get_character()
+        system_prompt = BlogCharacter(topic, blogs_urls, keywords, tone, target_audience, rag_content, memory_context).get_character()
         
         logger.info(f"System prompt created in {time.time() - start_time:.2f}s")
         return system_prompt
@@ -252,23 +259,26 @@ class BlogAgent:
         
         try:
             # Process the topic to find related queries
-            blogContentExtractor = BlogContentExtractor(topic)
             top_related_topics = KeywordsFinder().find_keywords(topic)
             logger.info(f"Found {len(top_related_topics)} related topics")
             
             # Find the most relevant keyword
-            relevant_keyword = self.find_relevant_keyword(topic, top_related_topics)
+            relevant_keyword, keyword_list = self.find_relevant_keyword(topic, top_related_topics)
             logger.info(f"Selected relevant keyword: {relevant_keyword}")
             
-            
-            # Fetch blog content using the relevant keyword
+            # Fetch blogs urls
             logger.info(f"Fetching content for keyword: {relevant_keyword}")
-            crawled_content = blogContentExtractor.fetch_blog_content(relevant_keyword) 
+            blogs_urls = BlogLinkFetcher().fetch_all_blogs(relevant_keyword)
+            BlogLinkFetcher().save_results(blogs_urls, "blog/link.json")
+            
+            # Fetch blog content
+            crawled_content = BlogContentExtractor().fetch_blog_content(blogs_urls)
+            
             logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
             # Create system prompt with RAG content
             tone = "Helpful & Value-Driven"
             target_audience = "general"
-            system_prompt = self.create_system_prompt(topic, top_related_topics, tone, target_audience, crawled_content)
+            system_prompt = self.create_system_prompt(topic, blogs_urls, keyword_list, tone, target_audience, crawled_content)
             
             # Create message objects
             system_message = SystemMessage(content=system_prompt)
