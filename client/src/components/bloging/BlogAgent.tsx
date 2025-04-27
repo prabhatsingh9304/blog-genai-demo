@@ -32,6 +32,7 @@ function BlogAgent() {
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentStreamingMessage, setCurrentStreamingMessage] = useState("");
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const streamingMessageRef = useRef("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const blogService = new BlogService();
@@ -127,6 +128,15 @@ function BlogAgent() {
     }
   }
 
+  const handleCopy = (text: string, index: number) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        setCopiedIndex(index);
+        setTimeout(() => setCopiedIndex(null), 2000);
+      })
+      .catch(err => console.error('Failed to copy text: ', err));
+  };
+
   // Simplify the streaming message display
   const StreamingMessage = () => {
     return (
@@ -148,12 +158,28 @@ function BlogAgent() {
             } animate-fade-in`}
           >
             <div
-              className={`max-w-[85%] rounded-2xl px-6 py-4 shadow-sm ${
+              className={`max-w-[85%] rounded-2xl px-6 py-4 shadow-sm relative group ${
                 message.role === "user"
                   ? "bg-purple-100 text-black"
                   : "bg-white border border-gray-100 text-black"
               }`}
             >
+              <button 
+                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white p-1 rounded-md hover:bg-gray-100"
+                onClick={() => handleCopy(message.content, index)}
+                aria-label="Copy message"
+              >
+                {copiedIndex === index ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-600">
+                    <path d="M20 6L9 17l-5-5"></path>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                )}
+              </button>
               <div className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
@@ -201,7 +227,17 @@ function BlogAgent() {
         
         {isLoading && currentStreamingMessage && (
           <div className="flex justify-start animate-fade-in">
-            <div className="bg-white border border-gray-100 rounded-2xl px-6 py-4 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl px-6 py-4 shadow-sm relative group">
+              <button 
+                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white p-1 rounded-md hover:bg-gray-100"
+                onClick={() => handleCopy(currentStreamingMessage, -1)}
+                aria-label="Copy message"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
               <StreamingMessage />
             </div>
           </div>
