@@ -4,12 +4,17 @@ import { useState, useEffect, useRef } from "react";
 import { BlogService } from "@/services/generate";
 import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 import { ApiError } from "@/components/error/ApiError";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm';
+import { Prism } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 
 interface Message {
   role: "user" | "assistant";
   content: string;
   data?: any;
+  imageUrl?: string;
 }
 
 export function BlogAgentWrapper() {
@@ -24,6 +29,7 @@ function BlogAgent() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentStreamingMessage, setCurrentStreamingMessage] = useState("");
   const streamingMessageRef = useRef("");
@@ -63,19 +69,12 @@ function BlogAgent() {
     try {
       // Get streaming response from agent
       const response = await blogService.chat(userMessage, (chunk) => {
-        // Use ref to track the current message without relying on state
         streamingMessageRef.current += chunk;
-        
-        // Update the state less frequently to avoid React re-render issues
-        // This debouncing technique helps with small token-by-token chunks
-        // Use a timeout to batch updates
         requestAnimationFrame(() => {
           setCurrentStreamingMessage(streamingMessageRef.current);
         });
       });
 
-      console.log('[BlogAgent] Final response received:', response);
-      
       // Add final agent response
       if (response.message) {
         setMessages((prev) => [
@@ -86,6 +85,33 @@ function BlogAgent() {
             data: response.data,
           }
         ]);
+
+        // Generate banner image
+          setIsGeneratingImage(true);
+          try {
+            const imageResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/generate-image`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+
+            if (imageResponse.ok) {
+              const imageData = await imageResponse.json();
+              setMessages((prev) => {
+                const newMessages = [...prev];
+                const lastMessage = newMessages[newMessages.length - 1];
+                if (lastMessage.role === "assistant") {
+                  lastMessage.imageUrl = imageData.imageUrl;
+                }
+                return newMessages;
+              });
+            }
+          } catch (error) {
+            console.error("Error generating image:", error);
+          } finally {
+            setIsGeneratingImage(false);
+          }
       }
       
       // Clear streaming message
@@ -103,10 +129,9 @@ function BlogAgent() {
 
   // Simplify the streaming message display
   const StreamingMessage = () => {
-    // Don't split and map, just render directly to avoid React reconciliation issues
     return (
       <div className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">
-        {currentStreamingMessage}
+        <ReactMarkdown>{currentStreamingMessage}</ReactMarkdown>
       </div>
     );
   };
@@ -130,7 +155,25 @@ function BlogAgent() {
               }`}
             >
               <div className="whitespace-pre-wrap break-words text-[15px] leading-relaxed">
-                {message.content}
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    h1: ({ node, ...props }) => <h1 className="text-3xl font-bold mt-6 mb-4" {...props} />,
+                    h2: ({ node, ...props }) => <h2 className="text-2xl font-bold mt-5 mb-3" {...props} />,
+                    code: ({ node, className, children, ...props }) => {
+                      const match = /language-(\w+)/.exec(className || '');
+                      return (
+                        <pre className={`bg-gray-100 rounded-lg p-4 overflow-x-auto ${match ? 'language-' + match[1] : ''}`}>
+                          <code className="font-mono text-sm" {...props}>
+                            {children}
+                          </code>
+                        </pre>
+                      );
+                    },
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
               </div>
               {message.data && (
                 <div className="mt-3 pt-3 border-t border-gray-200 text-sm space-y-1 opacity-90">
@@ -140,6 +183,16 @@ function BlogAgent() {
                       <span>{String(value)}</span>
                     </div>
                   ))}
+                </div>
+              )}
+              {message.imageUrl && (
+                <div className="mt-4">
+                  <h3 className="text-lg font-semibold mb-2">Banner Image</h3>
+                  <img 
+                    src={message.imageUrl} 
+                    alt="Blog Banner" 
+                    className="w-full rounded-lg shadow-md"
+                  />
                 </div>
               )}
             </div>
@@ -165,6 +218,20 @@ function BlogAgent() {
             </div>
           </div>
         )}
+
+        {isGeneratingImage && (
+          <div className="flex justify-start animate-fade-in">
+            <div className="bg-white border border-gray-100 rounded-2xl px-6 py-4 text-gray-500 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span>Generating banner image...</span>
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
+              </div>
+            </div>
+          </div>
+        )}
+        
         <div ref={messagesEndRef} />
       </div>
 
