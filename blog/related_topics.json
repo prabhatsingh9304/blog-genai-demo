@@ -1,28 +1,26 @@
 {
-<<<<<<< HEAD
-=======
     "rising": [
         {
             "topic": {
-                "value": "/g/11h6yrzyc5",
-                "title": "Commercial Bank of Ethiopia",
-                "type": "Topic"
+                "value": "/g/1q64b38kq",
+                "title": "HDFC BANK PERSONAL LOAN CHENNAI",
+                "type": "Bank in Chennai, India"
             },
-            "value": "+2,800%",
-            "extracted_value": 2800,
-            "link": "https://trends.google.com/trends/explore?q=/g/11h6yrzyc5&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11h6yrzyc5&tz=420"
+            "value": "Breakout",
+            "extracted_value": 13050,
+            "link": "https://trends.google.com/trends/explore?q=/g/1q64b38kq&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F1q64b38kq&tz=420"
         },
         {
             "topic": {
-                "value": "/m/0113gvzd",
-                "title": "Stanbic IBTC Holdings",
-                "type": "Financial services company"
+                "value": "/g/121s4jy4",
+                "title": "Car loans",
+                "type": "Topic"
             },
-            "value": "+1,900%",
-            "extracted_value": 1900,
-            "link": "https://trends.google.com/trends/explore?q=/m/0113gvzd&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0113gvzd&tz=420"
+            "value": "+4,900%",
+            "extracted_value": 4900,
+            "link": "https://trends.google.com/trends/explore?q=/g/121s4jy4&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121s4jy4&tz=420"
         },
         {
             "topic": {
@@ -30,43 +28,32 @@
                 "title": "ICICI Bank",
                 "type": "Topic"
             },
-            "value": "+1,150%",
-            "extracted_value": 1150,
+            "value": "+1,850%",
+            "extracted_value": 1850,
             "link": "https://trends.google.com/trends/explore?q=/g/11sb88wbqt&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11sb88wbqt&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11c1tk2g7c",
-                "title": "System of Credit Unions of Brazil",
-                "type": "Financial services company"
-            },
-            "value": "+1,100%",
-            "extracted_value": 1100,
-            "link": "https://trends.google.com/trends/explore?q=/g/11c1tk2g7c&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c1tk2g7c&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11k0mf309_",
-                "title": "SBM Mobile Banking",
-                "type": "Software"
-            },
-            "value": "+1,100%",
-            "extracted_value": 1100,
-            "link": "https://trends.google.com/trends/explore?q=/g/11k0mf309_&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11k0mf309_&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11c3pt_cg4",
-                "title": "CIB",
+                "value": "/g/11g4bsjlhz",
+                "title": "IndusInd Bank",
                 "type": "Topic"
             },
-            "value": "+850%",
-            "extracted_value": 850,
-            "link": "https://trends.google.com/trends/explore?q=/g/11c3pt_cg4&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c3pt_cg4&tz=420"
+            "value": "+1,750%",
+            "extracted_value": 1750,
+            "link": "https://trends.google.com/trends/explore?q=/g/11g4bsjlhz&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11g4bsjlhz&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11rq1gyfzx",
+                "title": "Emi Calculator",
+                "type": "Software"
+            },
+            "value": "+650%",
+            "extracted_value": 650,
+            "link": "https://trends.google.com/trends/explore?q=/g/11rq1gyfzx&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11rq1gyfzx&tz=420"
         },
         {
             "topic": {
@@ -74,213 +61,342 @@
                 "title": "HSBC",
                 "type": "Financial services company"
             },
-            "value": "+600%",
-            "extracted_value": 600,
+            "value": "+500%",
+            "extracted_value": 500,
             "link": "https://trends.google.com/trends/explore?q=/m/01vq1f&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01vq1f&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11f9wgqvj4",
-                "title": "NAB",
+                "value": "/g/121bdfn8",
+                "title": "Personal loan",
                 "type": "Topic"
             },
             "value": "+500%",
             "extracted_value": 500,
-            "link": "https://trends.google.com/trends/explore?q=/g/11f9wgqvj4&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11f9wgqvj4&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/g/121bdfn8&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121bdfn8&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11c3pt_3pl",
-                "title": "Agência Santander",
-                "type": "Topic"
-            },
-            "value": "+450%",
-            "extracted_value": 450,
-            "link": "https://trends.google.com/trends/explore?q=/g/11c3pt_3pl&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c3pt_3pl&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/07k4bzz",
-                "title": "Santander Brasil",
+                "value": "/g/11dyls007f",
+                "title": "Aditya Birla Cap",
                 "type": "Financial services company"
-            },
-            "value": "+450%",
-            "extracted_value": 450,
-            "link": "https://trends.google.com/trends/explore?q=/m/07k4bzz&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07k4bzz&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11gm6xb1br",
-                "title": "LLOYDS BANK",
-                "type": "Topic"
             },
             "value": "+250%",
             "extracted_value": 250,
-            "link": "https://trends.google.com/trends/explore?q=/g/11gm6xb1br&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11gm6xb1br&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/g/11dyls007f&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11dyls007f&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11bwddwcly",
-                "title": "Nedbank",
-                "type": "Bank"
+                "value": "/g/11c2l1c_c9",
+                "title": "Bajaj Finance",
+                "type": "Non-banking financial company company"
             },
             "value": "+180%",
             "extracted_value": 180,
-            "link": "https://trends.google.com/trends/explore?q=/g/11bwddwcly&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bwddwcly&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/g/11c2l1c_c9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c2l1c_c9&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11bc68v43x",
-                "title": "Commercial International Bank",
-                "type": "Private banking company"
-            },
-            "value": "+180%",
-            "extracted_value": 180,
-            "link": "https://trends.google.com/trends/explore?q=/g/11bc68v43x&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc68v43x&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/0j9kmhx",
-                "title": "NCBA Group",
-                "type": "Financial company"
-            },
-            "value": "+160%",
-            "extracted_value": 160,
-            "link": "https://trends.google.com/trends/explore?q=/m/0j9kmhx&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0j9kmhx&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11h717d5hn",
-                "title": "TymeBank",
-                "type": "Retail banking chain"
-            },
-            "value": "+140%",
-            "extracted_value": 140,
-            "link": "https://trends.google.com/trends/explore?q=/g/11h717d5hn&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11h717d5hn&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/02rqknz",
-                "title": "BSP Financial Group Limited",
+                "value": "/m/01hlwv",
+                "title": "JPMorgan Chase & Co",
                 "type": "Financial services company"
             },
-            "value": "+110%",
-            "extracted_value": 110,
-            "link": "https://trends.google.com/trends/explore?q=/m/02rqknz&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02rqknz&tz=420"
+            "value": "+120%",
+            "extracted_value": 120,
+            "link": "https://trends.google.com/trends/explore?q=/m/01hlwv&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01hlwv&tz=420"
         },
         {
             "topic": {
-                "value": "/m/0dgp85z",
-                "title": "NMB Bank Tanzania",
+                "value": "/m/07zppb",
+                "title": "UnionBank",
                 "type": "Commercial banking company"
             },
             "value": "+100%",
             "extracted_value": 100,
-            "link": "https://trends.google.com/trends/explore?q=/m/0dgp85z&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0dgp85z&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/07zppb&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07zppb&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11cs5dp3c9",
-                "title": "NMB",
+                "value": "/g/11bc5qvst9",
+                "title": "Unionbank",
                 "type": "Topic"
-            },
-            "value": "+100%",
-            "extracted_value": 100,
-            "link": "https://trends.google.com/trends/explore?q=/g/11cs5dp3c9&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11cs5dp3c9&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/09v4dsn",
-                "title": "Itaú Unibanco",
-                "type": "Financial services company"
-            },
-            "value": "+90%",
-            "extracted_value": 90,
-            "link": "https://trends.google.com/trends/explore?q=/m/09v4dsn&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F09v4dsn&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/0d3gmn",
-                "title": "Commercial Bank of Ethiopia",
-                "type": "Banking company"
             },
             "value": "+80%",
             "extracted_value": 80,
-            "link": "https://trends.google.com/trends/explore?q=/m/0d3gmn&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0d3gmn&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc5qvst9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc5qvst9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0dfm1w",
+                "title": "Mortgage calculator",
+                "type": "Topic"
+            },
+            "value": "+70%",
+            "extracted_value": 70,
+            "link": "https://trends.google.com/trends/explore?q=/m/0dfm1w&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0dfm1w&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11dylwpbbv",
+                "title": "Shriram Finance",
+                "type": "Insurance commercial company"
+            },
+            "value": "+60%",
+            "extracted_value": 60,
+            "link": "https://trends.google.com/trends/explore?q=/g/11dylwpbbv&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11dylwpbbv&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0d5cpx",
+                "title": "EastWest Bank",
+                "type": "Banking company"
+            },
+            "value": "+50%",
+            "extracted_value": 50,
+            "link": "https://trends.google.com/trends/explore?q=/m/0d5cpx&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0d5cpx&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11bc63b_7k",
+                "title": "EastWest Bank",
+                "type": "Topic"
+            },
+            "value": "+50%",
+            "extracted_value": 50,
+            "link": "https://trends.google.com/trends/explore?q=/g/11bc63b_7k&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc63b_7k&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/02vc2h",
+                "title": "Creditor",
+                "type": "Topic"
+            },
+            "value": "+50%",
+            "extracted_value": 50,
+            "link": "https://trends.google.com/trends/explore?q=/m/02vc2h&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02vc2h&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0qfq11w",
+                "title": "Muthoot Finance",
+                "type": "Finance and insurance corporation"
+            },
+            "value": "+50%",
+            "extracted_value": 50,
+            "link": "https://trends.google.com/trends/explore?q=/m/0qfq11w&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0qfq11w&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11c3ptzjtw",
+                "title": "Muthoot Finance",
+                "type": "Topic"
+            },
+            "value": "+50%",
+            "extracted_value": 50,
+            "link": "https://trends.google.com/trends/explore?q=/g/11c3ptzjtw&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c3ptzjtw&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11sh29c0xj",
+                "title": "monthly",
+                "type": "Topic"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/g/11sh29c0xj&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11sh29c0xj&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0hz8s",
+                "title": "Equity",
+                "type": "Finance"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/m/0hz8s&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0hz8s&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/02p7q_9",
+                "title": "Credit score",
+                "type": "Topic"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/m/02p7q_9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02p7q_9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0n5x3j4",
+                "title": "Upstart Holdings",
+                "type": "Consumer lending company"
+            },
+            "value": "+40%",
+            "extracted_value": 40,
+            "link": "https://trends.google.com/trends/explore?q=/m/0n5x3j4&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0n5x3j4&tz=420"
         }
     ],
->>>>>>> bf8c960 (updated blog prompt)
     "top": [
         {
             "topic": {
-                "value": "/m/01mw2x",
-                "title": "Health care",
-                "type": "Professional field"
+                "value": "/m/01dnzs",
+                "title": "Loan",
+                "type": "Topic"
             },
             "value": "100",
             "extracted_value": 100,
-            "link": "https://trends.google.com/trends/explore?q=/m/01mw2x&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01mw2x&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/01dnzs&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01dnzs&tz=420"
         },
         {
             "topic": {
-                "value": "/m/0mkz",
-                "title": "Artificial intelligence",
+                "value": "/g/121bdfn8",
+                "title": "Personal loan",
                 "type": "Topic"
             },
-<<<<<<< HEAD
-            "value": "96",
-            "extracted_value": 96,
-            "link": "https://trends.google.com/trends/explore?q=/m/0mkz&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0mkz&tz=420"
-=======
-            "value": "98",
-            "extracted_value": 98,
-            "link": "https://trends.google.com/trends/explore?q=/m/03rlt&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03rlt&tz=420"
->>>>>>> bf8c960 (updated blog prompt)
+            "value": "91",
+            "extracted_value": 91,
+            "link": "https://trends.google.com/trends/explore?q=/g/121bdfn8&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F121bdfn8&tz=420"
         },
         {
             "topic": {
-                "value": "/m/02kwz2",
-                "title": "Intelligence",
+                "value": "/m/024d2",
+                "title": "Calculator",
                 "type": "Topic"
             },
-<<<<<<< HEAD
-            "value": "94",
-            "extracted_value": 94,
-            "link": "https://trends.google.com/trends/explore?q=/m/02kwz2&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02kwz2&tz=420"
-=======
-            "value": "97",
-            "extracted_value": 97,
-            "link": "https://trends.google.com/trends/explore?q=/m/0352k1&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0352k1&tz=420"
+            "value": "16",
+            "extracted_value": 16,
+            "link": "https://trends.google.com/trends/explore?q=/m/024d2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F024d2&tz=420"
         },
         {
             "topic": {
-                "value": "/m/0242kb",
-                "title": "State Bank of India",
+                "value": "/m/017ql",
+                "title": "Bank",
+                "type": "Building function"
+            },
+            "value": "15",
+            "extracted_value": 15,
+            "link": "https://trends.google.com/trends/explore?q=/m/017ql&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F017ql&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/01x1q9",
+                "title": "Rate",
+                "type": "Mathematics"
+            },
+            "value": "14",
+            "extracted_value": 14,
+            "link": "https://trends.google.com/trends/explore?q=/m/01x1q9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01x1q9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/012qn2",
+                "title": "Interest",
+                "type": "Topic"
+            },
+            "value": "13",
+            "extracted_value": 13,
+            "link": "https://trends.google.com/trends/explore?q=/m/012qn2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F012qn2&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/04n7dpf",
+                "title": "Interest rate",
+                "type": "Topic"
+            },
+            "value": "11",
+            "extracted_value": 11,
+            "link": "https://trends.google.com/trends/explore?q=/m/04n7dpf&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F04n7dpf&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/05p8s2",
+                "title": "Credit",
+                "type": "Topic"
+            },
+            "value": "10",
+            "extracted_value": 10,
+            "link": "https://trends.google.com/trends/explore?q=/m/05p8s2&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05p8s2&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/025tzgk",
+                "title": "HDFC Bank",
                 "type": "Financial services company"
+            },
+            "value": "7",
+            "extracted_value": 7,
+            "link": "https://trends.google.com/trends/explore?q=/m/025tzgk&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F025tzgk&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/0m0ps97",
+                "title": "Equated monthly installment",
+                "type": "Topic"
+            },
+            "value": "7",
+            "extracted_value": 7,
+            "link": "https://trends.google.com/trends/explore?q=/m/0m0ps97&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0m0ps97&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/g/11b7rxl53t",
+                "title": "HDFC Bank",
+                "type": "Topic"
+            },
+            "value": "6",
+            "extracted_value": 6,
+            "link": "https://trends.google.com/trends/explore?q=/g/11b7rxl53t&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11b7rxl53t&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/02_7t",
+                "title": "Finance",
+                "type": "Discipline"
             },
             "value": "5",
             "extracted_value": 5,
-            "link": "https://trends.google.com/trends/explore?q=/m/0242kb&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0242kb&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/02_7t&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02_7t&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/09s5j9",
+                "title": "Payment",
+                "type": "Topic"
+            },
+            "value": "5",
+            "extracted_value": 5,
+            "link": "https://trends.google.com/trends/explore?q=/m/09s5j9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F09s5j9&tz=420"
         },
         {
             "topic": {
@@ -295,80 +411,69 @@
         },
         {
             "topic": {
-                "value": "/g/11b7rxl53t",
-                "title": "HDFC Bank",
+                "value": "/m/0242kb",
+                "title": "State Bank of India",
+                "type": "Financial services company"
+            },
+            "value": "5",
+            "extracted_value": 5,
+            "link": "https://trends.google.com/trends/explore?q=/m/0242kb&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0242kb&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/04vhfs",
+                "title": "Unsecured debt",
                 "type": "Topic"
             },
             "value": "4",
             "extracted_value": 4,
-            "link": "https://trends.google.com/trends/explore?q=/g/11b7rxl53t&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11b7rxl53t&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/04vhfs&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F04vhfs&tz=420"
         },
         {
             "topic": {
-                "value": "/m/025tzgk",
-                "title": "HDFC Bank",
-                "type": "Financial services company"
-            },
-            "value": "4",
-            "extracted_value": 4,
-            "link": "https://trends.google.com/trends/explore?q=/m/025tzgk&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F025tzgk&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11b7qbm9jx",
-                "title": "ANZ",
-                "type": "Topic"
-            },
-            "value": "4",
-            "extracted_value": 4,
-            "link": "https://trends.google.com/trends/explore?q=/g/11b7qbm9jx&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11b7qbm9jx&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/03s14w",
-                "title": "ANZ",
-                "type": "Financial services company"
-            },
-            "value": "4",
-            "extracted_value": 4,
-            "link": "https://trends.google.com/trends/explore?q=/m/03s14w&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03s14w&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/04__kw",
-                "title": "Standard Bank",
-                "type": "Commercial banking company"
-            },
-            "value": "3",
-            "extracted_value": 3,
-            "link": "https://trends.google.com/trends/explore?q=/m/04__kw&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F04__kw&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11bw1yprz8",
-                "title": "Standard Bank",
+                "value": "/m/0d7pp",
+                "title": "Credit card",
                 "type": "Topic"
             },
             "value": "3",
             "extracted_value": 3,
-            "link": "https://trends.google.com/trends/explore?q=/g/11bw1yprz8&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bw1yprz8&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/0d7pp&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0d7pp&tz=420"
         },
         {
             "topic": {
-                "value": "/m/03h6q6",
-                "title": "ICICI Bank",
-                "type": "Financial services company"
+                "value": "/m/0273t5w",
+                "title": "Mortgage loan",
+                "type": "Topic"
             },
             "value": "3",
             "extracted_value": 3,
-            "link": "https://trends.google.com/trends/explore?q=/m/03h6q6&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03h6q6&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/0273t5w&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0273t5w&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/02p7q_9",
+                "title": "Credit score",
+                "type": "Topic"
+            },
+            "value": "3",
+            "extracted_value": 3,
+            "link": "https://trends.google.com/trends/explore?q=/m/02p7q_9&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02p7q_9&tz=420"
+        },
+        {
+            "topic": {
+                "value": "/m/013y7y",
+                "title": "Debt",
+                "type": "Topic"
+            },
+            "value": "2",
+            "extracted_value": 2,
+            "link": "https://trends.google.com/trends/explore?q=/m/013y7y&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F013y7y&tz=420"
         },
         {
             "topic": {
@@ -376,32 +481,10 @@
                 "title": "Axis Bank",
                 "type": "Topic"
             },
-            "value": "3",
-            "extracted_value": 3,
+            "value": "2",
+            "extracted_value": 2,
             "link": "https://trends.google.com/trends/explore?q=/g/11bw21b8dy&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bw21b8dy&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/0812_9",
-                "title": "Caixa Econômica Federal",
-                "type": "Financial services company"
-            },
-            "value": "3",
-            "extracted_value": 3,
-            "link": "https://trends.google.com/trends/explore?q=/m/0812_9&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0812_9&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11bc5y8syg",
-                "title": "Bank of Baroda",
-                "type": "Topic"
-            },
-            "value": "3",
-            "extracted_value": 3,
-            "link": "https://trends.google.com/trends/explore?q=/g/11bc5y8syg&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc5y8syg&tz=420"
         },
         {
             "topic": {
@@ -409,99 +492,43 @@
                 "title": "Axis Bank",
                 "type": "Banking company"
             },
-            "value": "3",
-            "extracted_value": 3,
+            "value": "2",
+            "extracted_value": 2,
             "link": "https://trends.google.com/trends/explore?q=/m/02wchwx&date=today+12-m",
             "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02wchwx&tz=420"
         },
         {
             "topic": {
-                "value": "/g/11bc6r5r_f",
-                "title": "Caixa Econômica Federal",
-                "type": "Topic"
-            },
-            "value": "3",
-            "extracted_value": 3,
-            "link": "https://trends.google.com/trends/explore?q=/g/11bc6r5r_f&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc6r5r_f&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/028hsg",
-                "title": "Bank of Baroda",
-                "type": "Commercial banking company"
-            },
-            "value": "3",
-            "extracted_value": 3,
-            "link": "https://trends.google.com/trends/explore?q=/m/028hsg&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F028hsg&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11bc5vdsgl",
-                "title": "NAB",
+                "value": "/m/01j0mk",
+                "title": "Customer",
                 "type": "Topic"
             },
             "value": "2",
             "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/g/11bc5vdsgl&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bc5vdsgl&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/01j0mk&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01j0mk&tz=420"
         },
         {
             "topic": {
-                "value": "/m/02p3r4",
-                "title": "National Australia Bank",
+                "value": "/m/03h6q6",
+                "title": "ICICI Bank",
                 "type": "Financial services company"
             },
             "value": "2",
             "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/02p3r4&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02p3r4&tz=420"
+            "link": "https://trends.google.com/trends/explore?q=/m/03h6q6&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03h6q6&tz=420"
         },
         {
             "topic": {
-                "value": "/m/0d2q3j",
-                "title": "Bank Central Asia",
-                "type": "Private banking company"
-            },
-            "value": "2",
-            "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/0d2q3j&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0d2q3j&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11c3pt_82n",
-                "title": "Punjab National Bank",
+                "value": "/m/0cc6w26",
+                "title": "Car finance",
                 "type": "Topic"
             },
             "value": "2",
             "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/g/11c3pt_82n&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11c3pt_82n&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/m/029r2y",
-                "title": "Punjab National Bank",
-                "type": "Financial services company"
-            },
-            "value": "2",
-            "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/m/029r2y&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F029r2y&tz=420"
-        },
-        {
-            "topic": {
-                "value": "/g/11bw1zty6m",
-                "title": "Bank Of India",
-                "type": "Topic"
-            },
-            "value": "2",
-            "extracted_value": 2,
-            "link": "https://trends.google.com/trends/explore?q=/g/11bw1zty6m&date=today+12-m",
-            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bw1zty6m&tz=420"
->>>>>>> bf8c960 (updated blog prompt)
+            "link": "https://trends.google.com/trends/explore?q=/m/0cc6w26&date=today+12-m",
+            "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0cc6w26&tz=420"
         }
     ]
 }

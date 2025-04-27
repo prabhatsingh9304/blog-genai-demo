@@ -54,7 +54,7 @@ class BlogAgent:
         self._initialize_llm(api_key)
         
     def _initialize_llm(self, api_key):
-        """Initialize the LLM with appropriate fallbacks."""
+        """Initialize the LLM."""
         if not api_key:
             logger.warning("No API key found. Using demo mode with mock responses")
             self._use_mock_llm()
@@ -78,39 +78,7 @@ class BlogAgent:
         except Exception as e:
             error_msg = str(e)
             logger.error(f"Error initializing OpenAI ChatModel: {error_msg}")
-            
-            # Analyze the error and respond appropriately
-            if self._is_model_access_error(error_msg):
-                self._try_fallback_model(api_key)
-            elif self._is_quota_error(error_msg):
-                logger.warning("OpenAI API quota exceeded.")
-                self._use_mock_llm()
-            else:
-                logger.warning(f"Unknown error: {error_msg}")
-                self._use_mock_llm()
-    
-    def _is_model_access_error(self, error_msg):
-        """Check if error is related to model access."""
-        return any(phrase in error_msg for phrase in ["does not exist", "not found", "not available"])
-    
-    def _is_quota_error(self, error_msg):
-        """Check if error is related to quota limits."""
-        return any(phrase in error_msg.lower() for phrase in ["quota", "rate limit", "429"])
-    
-    def _try_fallback_model(self, api_key):
-        """Try to use a fallback model."""
-        fallback_model = "gpt-3.5-turbo"
-        logger.info(f"Model {self.model_name} not found, falling back to {fallback_model}")
-        
-        try:
-            self.llm = ChatOpenAI(
-                model_name=fallback_model,
-                temperature=self.temperature,
-                openai_api_key=api_key
-            )
-            logger.info(f"Successfully initialized fallback model {fallback_model}")
-        except Exception as fallback_error:
-            logger.error(f"Could not initialize fallback model: {fallback_error}")
+            logger.warning("Using demo mode with mock responses due to error")
             self._use_mock_llm()
     
     def _use_mock_llm(self):
@@ -157,33 +125,25 @@ class BlogAgent:
             str: The most relevant keyword
         """
         if not top_related_topics or len(top_related_topics) == 0:
-            logger.warning("No topics provided, using 'general' as fallback")
-            return "general"
+            logger.warning("No topics provided, cannot extract relevant keyword")
+            raise ValueError("No topics provided")
             
-        try:
-            # Use LLM to select the most relevant topic
-            prompt = KeywordsCharacter(topic, top_related_topics).get_character()
-            keywords_prompt = KeywordListCharacter(topic,top_related_topics).get_character();
+        # Use LLM to select the most relevant topic
+        prompt = KeywordsCharacter(topic, top_related_topics).get_character()
+        keywords_prompt = KeywordListCharacter(topic,top_related_topics).get_character();
+        
+        response = self.llm.predict(prompt)
+        keywordListResponse = self.llm.predict(keywords_prompt)
+        relevant_topic = response.strip()
+        relevantKeywords = keywordListResponse.strip()
+        
+        # Validate the response
+        if relevant_topic not in top_related_topics:
+            logger.warning(f"LLM returned '{relevant_topic}' which is not in the provided topics")
+            raise ValueError("Invalid keyword selection")
             
-            response = self.llm.predict(prompt)
-            keywordListResponse = self.llm.predict(keywords_prompt)
-            relevant_topic = response.strip()
-            relevantKeywords = keywordListResponse.strip()
-            
-            # Validate the response
-            if relevant_topic not in top_related_topics:
-                logger.warning(f"LLM returned '{relevant_topic}' which is not in the provided topics. Using first topic instead.")
-                relevant_topic = top_related_topics[0]
-                
-            logger.info(f"Selected relevant topic: {relevant_topic}")
-            return relevant_topic, relevantKeywords
-            
-        except Exception as e:
-            logger.error(f"Error selecting relevant topic: {e}")
-            # Fallback to first topic
-            fallback = top_related_topics[0] if top_related_topics else "general"
-            logger.info(f"Using fallback topic: {fallback}")
-            return fallback
+        logger.info(f"Selected relevant topic: {relevant_topic}")
+        return relevant_topic, relevantKeywords
 
     def create_system_prompt(self, topic, blogs_urls, keywords, tone, target_audience, crawled_content):
         """
@@ -200,7 +160,8 @@ class BlogAgent:
         start_time = time.time()
         
         # Add crawled content to RAG system
-        self.rag_system.add_documents(crawled_content)
+        if crawled_content:
+            self.rag_system.add_documents(crawled_content)
         
         # Create an expanded query using the topic and keywords
         expanded_query = f"{topic}"
@@ -208,24 +169,15 @@ class BlogAgent:
         # Use LLM to refine the search query
         query_refinement_prompt = RefineQueryCharacter(topic).get_character()
         
-        # Extract list of relavent keywords
-        
+        # Extract list of relevant keywords
         logger.info(f"Keywords: {keywords}")
         
-        try:
-            refined_query = self.llm.predict(query_refinement_prompt).strip()
-            logger.info(f"Refined search query: {refined_query}")
-            
-            # Retrieve relevant content using the refined query
-            rag_content = self.rag_system.retrieve_relevant_content(refined_query, k=5)
-            logger.info(f"Retrieved {len(rag_content.split())} words of relevant content")
-            
-        except Exception as e:
-            logger.error(f"Error in query refinement: {e}")
-            # Fallback to original query if refinement fails
-            rag_content = self.rag_system.retrieve_relevant_content(expanded_query)
+        refined_query = self.llm.predict(query_refinement_prompt).strip()
+        logger.info(f"Refined search query: {refined_query}")
         
-        # Build a more concise prompt
+        # Retrieve relevant content using the refined query
+        rag_content = self.rag_system.retrieve_relevant_content(refined_query, k=5)
+        logger.info(f"Retrieved {len(rag_content.split())} words of relevant content")
         
         # Add memory context if available
         memory_context = ""
@@ -257,66 +209,49 @@ class BlogAgent:
         start_time = time.time()
         logger.info(f"Generating blog on topic: {topic}")
         
-        try:
-            # Process the topic to find related queries
-            top_related_topics = KeywordsFinder().find_keywords(topic)
-            logger.info(f"Found {len(top_related_topics)} related topics")
-            
-            # Find the most relevant keyword
-            relevant_keyword, keyword_list = self.find_relevant_keyword(topic, top_related_topics)
-            logger.info(f"Selected relevant keyword: {relevant_keyword}")
-            
-            # Fetch blogs urls
-            logger.info(f"Fetching content for keyword: {relevant_keyword}")
-            blogs_urls = BlogLinkFetcher().fetch_all_blogs(relevant_keyword)
-            BlogLinkFetcher().save_results(blogs_urls, "blog/link.json")
-            
-            # Fetch blog content
-            crawled_content = BlogContentExtractor().fetch_blog_content(blogs_urls)
-            
-            logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
-            # Create system prompt with RAG content
-            tone = "Helpful & Value-Driven"
-            target_audience = "general"
-            system_prompt = self.create_system_prompt(topic, blogs_urls, keyword_list, tone, target_audience, crawled_content)
-            
-            # Create message objects
-            system_message = SystemMessage(content=system_prompt)
-            human_message = HumanMessage(content=user_input)
-            
-            AI_message = []
-            # Stream the response
-            async for chunk in self.llm.astream([system_message, human_message]):
-                if hasattr(chunk, 'content'):
-                    yield chunk.content
-                    AI_message.append(chunk.content)
-                elif isinstance(chunk, str):
-                    yield chunk
-                    AI_message.append(chunk)
-                else:
-                    yield str(chunk)
-                    AI_message.append(str(chunk))
-            
-            collected_chunks = "".join(AI_message)
+        # Process the topic to find related queries
+        top_related_topics = KeywordsFinder().find_keywords(topic)
+        logger.info(f"Found {len(top_related_topics)} related topics")
+        
+        # Find the most relevant keyword
+        relevant_keyword, keyword_list = self.find_relevant_keyword(topic, top_related_topics)
+        logger.info(f"Selected relevant keyword: {relevant_keyword}")
+        
+        # Fetch blogs urls
+        logger.info(f"Fetching content for keyword: {relevant_keyword}")
+        blogs_urls = BlogLinkFetcher().fetch_all_blogs(relevant_keyword)
+        BlogLinkFetcher().save_results(blogs_urls, "blog/link.json")
+        
+        # Fetch blog content
+        crawled_content = BlogContentExtractor().fetch_blog_content(blogs_urls)
+        logger.info(f"Fetched {len(crawled_content) if crawled_content else 0} chars of content")
+        
+        # Create system prompt with RAG content
+        tone = "Helpful & Value-Driven"
+        target_audience = "general"
+        system_prompt = self.create_system_prompt(topic, blogs_urls, keyword_list, tone, target_audience, crawled_content)
+        
+        # Create message objects
+        system_message = SystemMessage(content=system_prompt)
+        human_message = HumanMessage(content=user_input)
+        
+        AI_message = []
+        # Stream the response
+        async for chunk in self.llm.astream([system_message, human_message]):
+            if hasattr(chunk, 'content'):
+                yield chunk.content
+                AI_message.append(chunk.content)
+            elif isinstance(chunk, str):
+                yield chunk
+                AI_message.append(chunk)
+            else:
+                yield str(chunk)
+                AI_message.append(str(chunk))
+        
+        collected_chunks = "".join(AI_message)
+        self.memory.add_ai_message(collected_chunks)
+        
+        generation_time = time.time() - start_time
+        logger.info(f"Blog generated in {generation_time:.2f}s")
 
-            self.memory.add_ai_message(collected_chunks)
-            generation_time = time.time() - start_time
-            logger.info(f"Blog generated in {generation_time:.2f}s")
-            
-        except Exception as e:
-            logger.error(f"Error generating blog: {e}")
-            yield f"Error generating blog: {str(e)}"
-
-# Instantiate a default agent for backward compatibility
-# default_agent = BlogAgent(temperature=0.7)
-
-# # For backward compatibility - these functions call the default agent's methods
-# def find_relevant_keyword(topic):
-#     return default_agent.find_relevant_keyword(topic)
-
-# def create_system_message(topic, relevant_keyword=None):
-#     return default_agent.create_system_prompt(topic)
-
-# def generate_blog(topic):
-#     return default_agent.generate_blog(topic)
  
