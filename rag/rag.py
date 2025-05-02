@@ -1,7 +1,7 @@
 #RAG
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import SKLearnVectorStore
 from langchain.docstore.document import Document
 import os
 import pickle
@@ -9,6 +9,8 @@ import warnings
 import traceback
 import logging
 from dotenv import load_dotenv
+from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -28,7 +30,7 @@ class RAGSystem:
     """
     def __init__(self, 
                  embedding_model="text-embedding-3-small",
-                 db_path="vectorstore.pkl",
+                 db_path="sklearn_vectorstore.parquet",
                  chunk_size=500,
                  chunk_overlap=50,
                  auto_initialize=True):
@@ -42,10 +44,11 @@ class RAGSystem:
             chunk_overlap: Overlap between chunks
             auto_initialize: Whether to automatically initialize the system
         """
-        self.db_path = db_path
+        self.db_path = os.path.join(os.getcwd(), db_path)
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.db = None
+        self.vectorstore = None
         
         # Initialize OpenAI embeddings if API key is available
         api_key = os.getenv("OPENAI_API_KEY", "").strip()
@@ -55,10 +58,7 @@ class RAGSystem:
         try:
             self.embeddings = OpenAIEmbeddings(
                 model=embedding_model,
-                openai_api_key=api_key,
-                dimensions=1536,  # For compatibility
-                headers={"Content-Type": "application/json"},
-                tiktoken_model_name="cl100k_base"  # Explicitly set tokenizer
+                openai_api_key=api_key
             )
             
             # Text splitter for processing documents
@@ -79,10 +79,11 @@ class RAGSystem:
             logger.info(f"Attempting to load database from {self.db_path}")
             if os.path.exists(self.db_path):
                 logger.info(f"Database file exists at {self.db_path}")
-                if self.load_db():
-                    logger.info("Successfully loaded existing vector database")
-                else:
-                    logger.info("No existing database found, will initialize on first use")
+                self.vectorstore = SKLearnVectorStore.load_local(
+                    folder_path=os.path.dirname(self.db_path),
+                    embeddings=self.embeddings
+                )
+                logger.info("Successfully loaded existing vector database")
             else:
                 logger.info(f"No database file found at {self.db_path}, will initialize on first use")
         except Exception as e:
@@ -121,19 +122,21 @@ class RAGSystem:
             if not chunks:
                 raise ValueError("No chunks created from documents")
             
-            # Create or update vector store
-            if self.db is None:
-                logger.info("Creating new vector store as none exists")
-                self.db = FAISS.from_documents(chunks, self.embeddings)
-                logger.info(f"Vector store created with {len(chunks)} chunks")
+            # Create or update vectorstore
+            if self.vectorstore is None:
+                self.vectorstore = SKLearnVectorStore.from_documents(
+                    documents=chunks,
+                    embedding=self.embeddings,
+                    persist_path=self.db_path,
+                    serializer="parquet"
+                )
             else:
-                logger.info(f"Adding {len(chunks)} chunks to existing vector store")
-                self.db.add_documents(chunks)
+                self.vectorstore.add_documents(chunks)
             
-            # Save the updated vector store
-            logger.info("Saving vector store to disk")
-            self._save_db()
-            logger.info("Successfully saved vector store")
+            # Save the updated database
+            logger.info("Saving database to disk")
+            self.vectorstore.persist()
+            logger.info("Successfully saved database")
             return chunks
             
         except Exception as e:
@@ -142,63 +145,8 @@ class RAGSystem:
                 traceback.print_exc()
             raise
     
-    def _save_db(self):
-        """Save the vector database to disk."""
-        if self.db is None:
-            raise ValueError("No vector store to save")
-
-        try:
-            self.db.save_local(folder_path=self.db_path)
-            logger.info(f"Vector store saved to {self.db_path}")
-        except Exception as e:
-            logger.error(f"Error saving vector store: {e}")
-            raise
-
-    
-    def load_db(self):
-        """
-        Load the vector database if it exists
-        Returns:
-            bool: True if loaded successfully, False otherwise
-        """
-        try:
-            if os.path.exists(os.path.join(self.db_path, "index.faiss")):
-                self.db = FAISS.load_local(folder_path=self.db_path, embeddings=self.embeddings)
-                logger.info(f"Loaded vector store from {self.db_path}")
-                return True
-            else:
-                logger.info(f"Vector store folder not found or missing index.faiss: {self.db_path}")
-                return False
-        except Exception as e:
-            logger.error(f"Error loading vector store: {e}")
-            raise
-
-    
-    def similarity_search(self, query, k=3):
-        """
-        Find similar documents to the query
-        
-        Args:
-            query: The query to search for
-            k: Number of results to return
-            
-        Returns:
-            list: List of Document objects similar to the query
-        """
-        if self.db is None:
-            raise ValueError("Vector store not initialized. Please add documents first.")
-        
-        try:
-            docs = self.db.similarity_search(query, k=k)
-            logger.info(f"Found {len(docs)} relevant documents for query")
-            return docs
-        except Exception as e:
-            logger.error(f"Error during similarity search: {e}")
-            raise
-    
     def retrieve_relevant_content(self, query, k=3):
         """
-        Retrieve relevant content based on the query
         
         Args:
             query: The query to search for
@@ -210,9 +158,22 @@ class RAGSystem:
         if not query or query.strip() == "":
             raise ValueError("Empty query provided")
         
+        if self.embeddings_matrix is None or len(self.documents) == 0:
+            return "No documents in the database."
+        
         try:
-            # Increase k to get more diverse results
-            relevant_docs = self.similarity_search(query, k=k*2)
+            # Get query embedding
+            query_embedding = self.embeddings.embed_query(query)
+            
+            # Calculate cosine similarity
+            similarities = cosine_similarity([query_embedding], self.embeddings_matrix)[0]
+            
+            # Get top k indices
+            top_k_indices = np.argsort(similarities)[-k:][::-1]
+            
+            # Get corresponding documents
+            relevant_docs = [self.documents[i] for i in top_k_indices]
+            
             if not relevant_docs:
                 return "No relevant content found for the query."
                 
@@ -222,20 +183,4 @@ class RAGSystem:
             logger.error(f"Error retrieving content: {e}")
             raise
 
-# # Instantiate a global instance for backward compatibility
-# _default_rag_system = RAGSystem()
-
-# # For backward compatibility
-# def retrieve_relevant_content(query, k=3):
-#     """
-#     Retrieve relevant content based on the query (wrapper for backward compatibility)
-    
-#     Args:
-#         query: The query to search for
-#         k: Number of results to return
-        
-#     Returns:
-#         str: Formatted content from relevant documents
-#     """
-#     return _default_rag_system.retrieve_relevant_content(query, k=k)
 
