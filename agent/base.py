@@ -19,7 +19,7 @@ from characters.refine_query_character import RefineQueryCharacter
 from blog.keywords_finder import KeywordsFinder
 from agent.agent_memory import AgentMemory
 from blog.get_link import BlogLinkFetcher
-
+from characters.parse_request_character import ParseRequestCharacter
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -90,6 +90,66 @@ class BlogAgent:
             "Machine Learning"
         ]
         self.llm = FakeListLLM(responses=responses)
+
+    def parse_request(self, request):
+        """
+        Process a blog generation request and determine whether the user wants to
+        generate a new blog or improve an existing one.
+        
+        Args:
+            request: String containing the user's request
+            
+        Returns:
+            dict: A command object with 'action' being either 'generate' or 'improve'
+                  and other relevant parameters
+        """
+        logger.info(f"Processing user request: {request}")
+        
+        # Store request in memory
+        self.memory.add_user_message(request)
+        
+        # Create a prompt for the LLM to determine the user's intent
+        prompt = [
+            SystemMessage(content=ParseRequestCharacter().get_character()),
+            HumanMessage(content=request)
+        ]
+        
+        try:
+            # Get the response from the LLM
+            response = self.llm.invoke(prompt)
+            intent = response.content.strip().lower()
+            
+            # Validate and normalize the response
+            if "generate" in intent:
+                action = "generate"
+            elif "improve" in intent:
+                action = "improve"
+            else:
+                # Default to generate if unclear
+                logger.warning(f"Unclear intent from LLM: {intent}. Defaulting to 'generate'")
+                action = "generate"
+                
+            logger.info(f"Detected user intent: {action}")
+            
+            # Create the command object
+            command = action
+            
+            return command
+            
+        except Exception as e:
+            logger.error(f"Error determining request intent: {e}")
+            # Default to generate in case of errors
+            return {"action": "generate", "request": request}
+        
+    def improve_blog(self, request):
+        """
+        Process an improvement request for an existing blog post.
+        
+        Args:
+            request: String containing the user's request
+        """
+        pass
+
 
     def User_input(self, user_input):
         """

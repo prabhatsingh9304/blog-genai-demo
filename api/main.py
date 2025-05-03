@@ -9,9 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
-import uvicorn
 import json
-import asyncio
 
 # Add project root to path to import modules
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -67,6 +65,33 @@ class BlogResponse(BaseModel):
     generated_at: str
     file_path: Optional[str] = None
     generation_time: float
+
+@app.post("/parse-request")
+async def parse_request(request: BlogRequest):
+    """
+    Process a blog generation request
+    """
+    try:
+        # Initialize the agent with requested parameters
+        agent = BlogAgent(
+            model_name=request.model,
+            temperature=request.temperature
+        )
+        
+        # Process the request
+        response = agent.parse_request(request)
+        
+        # Check if response contains "generate" or "improve" and call the appropriate function
+        if response == "generate":
+            return await generate_blog(request)
+        elif response == "improve":
+            return await improve_blog(request)
+        else:
+            # Default to generate if response is unclear
+            return await generate_blog(request)
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Parsing request failed: {str(e)}")
 
 
 @app.post("/generate")
@@ -132,6 +157,14 @@ async def list_blogs(output_dir: Optional[str] = "generated_blogs"):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to list blogs: {str(e)}")
 
+@app.post("/improve-blog")
+async def improve_blog(request: BlogRequest):
+    """
+    Improve a blog post
+    """
+    pass
+
+
 @app.post("/generate-image")
 async def generate_image(request: dict = None):
     """
@@ -155,18 +188,3 @@ async def generate_image(request: dict = None):
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Image generation failed: {str(e)}")
-
-if __name__ == "__main__":
-    # Check if API key is set
-    api_key = os.getenv("OPENAI_API_KEY", "").strip()
-    
-    if not api_key:
-        print("Warning: OPENAI_API_KEY environment variable is not set.")
-        print("Using fallback content generation mode.")
-    else:
-        # Don't print the actual API key - only that it's available
-        print(f"OpenAI API Key detected: {'*' * 8}...{api_key[-4:] if api_key else 'Not Set'}")
-        print("Using OpenAI API key for both LLM responses and embeddings.")
-    
-    # Run the API server with correct module path
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

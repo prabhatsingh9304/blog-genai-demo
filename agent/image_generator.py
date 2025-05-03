@@ -63,10 +63,3 @@ class ImageGenerator:
         except Exception as e:
             print(f"Error generating blog banner: {str(e)}")
             return None
-
-# def main():
-#     generator = ImageGenerator()
-#     generator.generate_image("Personal Loan")
-
-# if __name__ == "__main__":
-#     main() 
