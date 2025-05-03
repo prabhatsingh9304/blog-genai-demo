@@ -1,8 +1,6 @@
 class ParseRequestCharacter:
     def __init__(self):
-        self.name = "Parse Request Character"
-        self.description = "A character that parses the user's request and determines the action to take."
-        self.tools = []
+        pass
 
     def get_character(self):
         character = f"""
